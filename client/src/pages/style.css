@@ -1,0 +1,9 @@
+#homephoto {
+  background-image: url("../assets/images/patrick-tomasso-GXXYkSwndP4-unsplash.jpg");
+  background-size: cover;
+  height: 100vh;
+  color: white;
+  display: flex;
+  align-items: center;
+  object-fit: cover;
+}
