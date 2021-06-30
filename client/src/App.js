@@ -28,15 +28,12 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div>
-          Nave bar to go here
-          <Switch>
-            <Route exact path="/" component={Home} />
-            {/* <Route exact path="/about" component={About}/> */}
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={Signup} />
-          </Switch>
-        </div>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          {/* <Route exact path="/about" component={About}/> */}
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
+        </Switch>
       </Router>
     </ApolloProvider>
   );

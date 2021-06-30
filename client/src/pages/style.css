@@ -7,3 +7,10 @@
   align-items: center;
   object-fit: cover;
 }
+
+#nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
