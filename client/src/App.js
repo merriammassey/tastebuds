@@ -7,14 +7,22 @@ import {
   useQuery,
   gql,
 } from "@apollo/client";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 const getHeaders = require("./auth");
 const createHttpLink = require("apollo-link-http").createHttpLink;
 const setContext = require("apollo-link-context").setContext;
 
-/* const client = new ApolloClient({
-  uri: "https://48p1r2roz4.sse.codesandbox.io",
-  cache: new InMemoryCache(),
-}); */
+// Start Pages import //
+import Home from "../src/pages/Home";
+import Login from "../src/pages/Login";
+import Signup from "../src/pages/Signup";
+// End Pages import 
+
+
+// const client = new ApolloClient({
+//   uri: "https://48p1r2roz4.sse.codesandbox.io",
+//   cache: new InMemoryCache(),
+// });
 
 const httpLink = createHttpLink({
   uri: "https://api.yelp.com/v3/graphql",
@@ -37,14 +45,14 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-/* const EXCHANGE_RATES = gql`
-  query GetExchangeRates {
-    rates(currency: "USD") {
-      currency
-      rate
-    }
-  }
-`; */
+// /* const EXCHANGE_RATES = gql`
+//   query GetExchangeRates {
+//     rates(currency: "USD") {
+//       currency
+//       rate
+//     }
+//   }
+// `; */
 
 const RESTAURANT_SEARCH = gql`
   {
@@ -58,20 +66,20 @@ const RESTAURANT_SEARCH = gql`
   }
 `;
 
-/* function ExchangeRates() {
-  const { loading, error, data } = useQuery(EXCHANGE_RATES);
+// /* function ExchangeRates() {
+//   const { loading, error, data } = useQuery(EXCHANGE_RATES);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
+  // if (loading) return <p>Loading...</p>;
+  // if (error) return <p>Error :(</p>;
 
-  return data.rates.map(({ currency, rate }) => (
-    <div key={currency}>
-      <p>
-        {currency}: {rate}
-      </p>
-    </div>
-  ));
-} */
+//   return data.rates.map(({ currency, rate }) => (
+//     <div key={currency}>
+//       <p>
+//         {currency}: {rate}
+//       </p>
+//     </div>
+//   ));
+// } */
 
 function RestaurantSearch() {
   console.log("hello yelp");
@@ -89,24 +97,21 @@ function RestaurantSearch() {
   );
 }
 
+
+
 function App() {
   return (
     <ApolloProvider client={client}>
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>Welcome to TasteBuds.</p>
-          <RestaurantSearch />
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <Router>
+      <div>
+        Nave bar to go here 
+        <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
+        </Switch>
       </div>
+      </Router>
     </ApolloProvider>
   );
 }
