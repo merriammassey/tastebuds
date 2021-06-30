@@ -19,6 +19,7 @@ import Home from "../src/pages/Home";
 import Login from "../src/pages/Login";
 import Signup from "../src/pages/Signup";
 // End Pages import
+import SearchRestaurants2 from "../src/pages/SearchRestaurants2";
 
 function App() {
   const yelp = require("yelp-fusion");
