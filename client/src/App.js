@@ -12,6 +12,14 @@ import { getHeaders } from "./auth";
 import { createHttpLink } from "apollo-link-http";
 import { setContext } from "apollo-link-context";
 import SearchRestaurants from "../src/pages/SearchRestaurants";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+// Start Pages import //
+import Home from "../src/pages/Home";
+import Login from "../src/pages/Login";
+import Signup from "../src/pages/Signup";
+// End Pages import
+
 function App() {
   const yelp = require("yelp-fusion");
   const apiKey =
@@ -19,22 +27,17 @@ function App() {
   const client = yelp.client(apiKey);
   return (
     <ApolloProvider client={client}>
-      <div className="App">
-        <header className="App-header">
-          <div id="homephoto">
-            <div id="welcome">
-              <p>Welcome to TasteBuds</p>
-              <SearchRestaurants />
-              <a
-                className="App-link"
-                href="https://reactjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              ></a>
-            </div>
-          </div>
-        </header>
-      </div>
+      <Router>
+        <div>
+          Nave bar to go here
+          <Switch>
+            <Route exact path="/" component={Home} />
+            {/* <Route exact path="/about" component={About}/> */}
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={Signup} />
+          </Switch>
+        </div>
+      </Router>
     </ApolloProvider>
   );
 }
