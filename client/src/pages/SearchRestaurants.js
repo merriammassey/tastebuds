@@ -139,7 +139,7 @@ const SearchRestaurants = () => {
                   onChange={(e) => setTermInput(e.target.value)}
                   type="text"
                   size="lg"
-                  placeholder="Search for a restaurant"
+                  placeholder="Restaurant name or keyword"
                 />
                 <Form.Control
                   name="locationInput"
