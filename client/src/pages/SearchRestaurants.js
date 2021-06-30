@@ -25,8 +25,7 @@ const searchRestaurants = () => {
 
   // Place holder for Yelp Fusion's API Key. Grab them
   // from https://www.yelp.com/developers/v3/manage_app
-  const apiKey =
-    "LhPwa5pQMDo4DVNiUSePZ5L0Ge_Qof4n3cXJNWdfW1kw0-O6PzbebTK78f-nuEcNACakrZSDWLYYBxi-gAj7Yk7zSazSRnIXn7QOtV0KEkV7ca9F2djgWWzF-gjWYHYx";
+  const apiKey = `${process.env.REACT_APP_YELP_KEY}`
 
   const searchRequest = {
     term: "Four Barrel Coffee",
