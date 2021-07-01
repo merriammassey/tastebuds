@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 import decode from 'jwt-decode';
 
+<<<<<<< HEAD
 class AuthService {
 =======
 // use this to decode a token and get the user's information out of it
@@ -10,6 +11,9 @@ import decode from 'jwt-decode';
 class AuthService {
   // get user data
 >>>>>>> mutations
+=======
+class Auth {
+>>>>>>> e5dc598d814fee85bd6bf2cf5cd5296e13fe59a2
   getProfile() {
     return decode(this.getToken());
   }
@@ -66,7 +70,11 @@ class AuthService {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 export default new AuthService();
 =======
 export default new AuthService();
 >>>>>>> mutations
+=======
+export default new Auth();
+>>>>>>> e5dc598d814fee85bd6bf2cf5cd5296e13fe59a2
