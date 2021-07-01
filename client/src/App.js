@@ -15,7 +15,8 @@ import { StoreProvider } from "./utils/GlobalState";
 import Home from "../src/pages/Home";
 import Login from "../src/pages/Login";
 import Signup from "../src/pages/Signup";
-import SearchedRestaurants from "../src/pages/SearchedRestaurants";
+//import SearchedRestaurants from "../src/pages/SearchedRestaurants";
+import AppNavBar from "../src/components/Navbar";
 // import SavedResturants from "../src/pages/SaveResturants";
 import "bootstrap/dist/css/bootstrap.min.css";
 require("dotenv").config({ path: __dirname + "/.env" });
@@ -31,17 +32,17 @@ function App() {
       <Router>
         <div>
           <StoreProvider>
-            Nave bar to go here
+            <AppNavBar />
             <Switch>
               <Route exact path="/" component={Home} />
               {/* <Route exact path="/about" component={About}/> */}
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
-              <Route
+              {/*               <Route
                 exact
                 path="/restaurants"
                 component={SearchedRestaurants}
-              />
+              /> */}
             </Switch>
           </StoreProvider>
         </div>
