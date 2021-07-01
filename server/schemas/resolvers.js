@@ -4,6 +4,6 @@ const resolvers = {
             return 'Hello world';
         }
     }
-}
+};
 
 module.export = resolvers; 

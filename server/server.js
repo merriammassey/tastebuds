@@ -41,3 +41,5 @@ app.get("*", (req, res) => {
     });
   });
   
+  module.exports=db;
+  
