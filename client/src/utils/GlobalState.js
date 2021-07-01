@@ -1,6 +1,6 @@
 //createContext to instantiate a new Context object
 import React, { createContext, useContext } from "react";
-import { useProductReducer } from "./reducers";
+import { useRestaurantReducer } from "./reducers";
 
 //instantiate global state object
 const StoreContext = createContext();
@@ -10,12 +10,12 @@ const { Provider } = StoreContext;
 //create provider function to manage and update state using reducer, bundling it all
 const StoreProvider = ({ value = [], ...props }) => {
   //state is up to date version of global state; dispatch is method used to update state...looks for action object as argument
-  const [state, dispatch] = useProductReducer({
-    products: [],
-    cart: [],
-    cartOpen: false,
-    categories: [],
-    currentCategory: "",
+  const [state, dispatch] = useRestaurantReducer({
+    restaurants: [],
+    event: [],
+    //cartOpen: false,
+    //categories: [],
+    //currentCategory: "",
   });
   //confirm it works
   console.log(state);

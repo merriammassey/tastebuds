@@ -12,14 +12,14 @@ import { getHeaders } from "./auth";
 import { createHttpLink } from "apollo-link-http";
 import { setContext } from "apollo-link-context";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
+import { StoreProvider } from "./utils/GlobalState";
 // Start Pages import //
 import Home from "../src/pages/Home";
 import Login from "../src/pages/Login";
 import Signup from "../src/pages/Signup";
 import SearchedRestaurants from "../src/pages/SearchedRestaurants";
 // import SavedResturants from "../src/pages/SaveResturants";
-
+import "bootstrap/dist/css/bootstrap.min.css";
 require("dotenv").config({ path: __dirname + "/.env" });
 
 // End Pages import
@@ -32,14 +32,20 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <div>
-          Nave bar to go here
-          <Switch>
-            <Route exact path="/" component={Home} />
-            {/* <Route exact path="/about" component={About}/> */}
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={Signup} />
-            <Route exact path="/restaurants" component={SearchedRestaurants} />
-          </Switch>
+          <StoreProvider>
+            Nave bar to go here
+            <Switch>
+              <Route exact path="/" component={Home} />
+              {/* <Route exact path="/about" component={About}/> */}
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/signup" component={Signup} />
+              <Route
+                exact
+                path="/restaurants"
+                component={SearchedRestaurants}
+              />
+            </Switch>
+          </StoreProvider>
         </div>
       </Router>
     </ApolloProvider>
