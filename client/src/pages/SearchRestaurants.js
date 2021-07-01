@@ -9,6 +9,7 @@ import {
   Card,
   CardColumns,
 } from "react-bootstrap";
+import { searchYelp } from "../utils/yelpAPI";
 
 //import Auth from "../utils/auth";
 //import { searchRestaurants } from "../utils/API";
@@ -18,61 +19,36 @@ import {
 //import { useMutation } from "@apollo/client";
 //  const user = data?.me || data?.user || {};
 
-const searchRestaurants = () => {
-  "use strict";
-
-  const yelp = require("yelp-fusion");
-
-  // Place holder for Yelp Fusion's API Key. Grab them
-  // from https://www.yelp.com/developers/v3/manage_app
-  const apiKey = `${process.env.REACT_APP_YELP_KEY}`
-
-  const searchRequest = {
-    term: "Four Barrel Coffee",
-    location: "san francisco, ca",
-  };
-
-  const client = yelp.client(apiKey);
-
-  client
-    .search(searchRequest)
-    .then((response) => {
-      const firstResult = response.jsonBody.businesses[0];
-      const prettyJson = JSON.stringify(firstResult, null, 4);
-      console.log(prettyJson);
-      return prettyJson;
-    })
-    .catch((e) => {
-      console.log(e);
-    });
-};
-
 const SearchRestaurants = () => {
-  // create state for holding returned google api data
+  // create state for holding returned yelp data
   const [searchedRestaurants, setSearchedRestaurants] = useState([]);
   // create state for holding our search field data
   const [termInput, setTermInput] = useState("");
   const [locationInput, setLocationInput] = useState("");
 
-  // create state to hold saved bookId values
-  //const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
+  // create state to hold saved restaurant values
+  //const [savedRestaurants, setSavedRestaurants] = useState(getSavedRestaurants());
 
-  //const [saveBook, { error }] = useMutation(SAVE_BOOK);
+  //const [saveRestaurant, { error }] = useMutation(SAVE_RESTAURANT);
 
-  // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
+  // set up useEffect hook to save `savedRestaurants` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   //useEffect(() => {
-  // return () => saveBookIds(savedBookIds);
+  // return () => saveRestaurants(savedRestaurants);
   //});
 
   // create method to search for books and set state on form submit
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    //console.log(locationInput);
     if (!termInput || !locationInput) {
+      //add modal
+      console.log("please enter a location");
       return false;
     }
     try {
-      const response = await searchRestaurants(termInput, locationInput);
+      const response = await searchYelp(locationInput, termInput);
+      //console.log(response);
       if (!response.ok) {
         throw new Error("something went wrong!");
       }
