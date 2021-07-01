@@ -17,15 +17,14 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "../src/pages/Home";
 import Login from "../src/pages/Login";
 import Signup from "../src/pages/Signup";
-// import SearchRestaurants from "../src/pages/SearchRestaurants";
+import SearchedRestaurants from "../src/pages/SearchedRestaurants";
 // import SavedResturants from "../src/pages/SaveResturants";
 
-require('dotenv').config({path: __dirname + '/.env'})
+require("dotenv").config({ path: __dirname + "/.env" });
 
 // End Pages import
 
 function App() {
- 
   const yelp = require("yelp-fusion");
   const apiKey = `${process.env.REACT_APP_YELP_KEY}`;
   const client = yelp.client(apiKey);
@@ -39,7 +38,7 @@ function App() {
             {/* <Route exact path="/about" component={About}/> */}
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
-            {/* <Route exact path="/ideas" component= {SavedResturants} /> */}
+            <Route exact path="/restaurants" component={SearchedRestaurants} />
           </Switch>
         </div>
       </Router>

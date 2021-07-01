@@ -30,7 +30,7 @@ export const searchYelp = (locationInput, termInput) => {
       }
     )
     .then((res) => {
-      console.log(res.data.businesses);
+      //  console.log(res.data.businesses);
       return res.data.businesses;
       //change the state of App to reflect on the result we are given from the API
       //at the same time, setting the loading state to false

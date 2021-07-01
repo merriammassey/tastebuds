@@ -10,6 +10,7 @@ import {
   CardColumns,
 } from "react-bootstrap";
 import { searchYelp } from "../utils/yelpAPI";
+import { Link } from "react-router-dom";
 
 //import Auth from "../utils/auth";
 //import { searchRestaurants } from "../utils/API";
@@ -41,7 +42,7 @@ const SearchRestaurants = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     //console.log(locationInput);
-    if (!termInput || !locationInput) {
+    if (!locationInput) {
       //add modal
       console.log("please enter a location");
       return false;
@@ -49,11 +50,14 @@ const SearchRestaurants = () => {
     try {
       const response = await searchYelp(locationInput, termInput);
       //console.log(response);
-      if (!response.ok) {
+      /* if (!response.ok) {
         throw new Error("something went wrong!");
-      }
-      const { items } = await response.json();
-      const restaurantData = items.map((restaurant) => ({
+      } */
+
+      //const { items } = await response.json();
+      console.log(response);
+      const restaurantData = response.map((restaurant, index) => ({
+        key: index,
         name: restaurant.name,
         categories: restaurant.categories.title,
         url: restaurant.url,
@@ -126,57 +130,16 @@ const SearchRestaurants = () => {
                 />
               </Col>
               <Col xs={12} md={4}>
-                <Button type="submit" variant="success" size="lg">
-                  Submit Search
-                </Button>
+                <Link to="/restaurants">
+                  <Button type="submit" variant="success" size="lg">
+                    Submit Search
+                  </Button>
+                </Link>
               </Col>
             </Form.Row>
           </Form>
         </Container>
       </Jumbotron>
-
-      <Container>
-        <h2>
-          {searchedRestaurants.length
-            ? `Viewing ${searchedRestaurants.length} results:`
-            : " "}
-        </h2>
-        <CardColumns>
-          {searchedRestaurants.map((restaurant) => {
-            return (
-              <Card key={restaurant.name} border="dark">
-                {restaurant.image_url ? (
-                  <Card.Img
-                    src={restaurant.image_url}
-                    alt={`A picture of ${restaurant.name}`}
-                    variant="top"
-                  />
-                ) : null}
-                <Card.Body>
-                  <Card.Title>{restaurant.name}</Card.Title>
-                  <p className="small">{restaurant.categories} </p>
-                  <Card.Text>{restaurant.rating}</Card.Text>
-                  {/*                  {Auth.loggedIn() && (
-                    <Button
-                      disabled={savedBookIds?.some(
-                        (savedBookId) => savedBookId === book.bookId
-                      )}
-                      className="btn-block btn-info"
-                      onClick={() => handleSaveBook(book.bookId)}
-                    >
-                      {savedBookIds?.some(
-                        (savedBookId) => savedBookId === book.bookId
-                      )
-                        ? "This book has already been saved!"
-                        : "Save this Book!"}
-                    </Button>
-                  )} */}
-                </Card.Body>
-              </Card>
-            );
-          })}
-        </CardColumns>
-      </Container>
     </>
   );
 };
