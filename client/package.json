@@ -21,7 +21,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2",
-    "yelp-fusion": "^3.0.0"
+    "yelp-fusion": "^3.0.0",
+    "bootstrap": "^4.4.1"
   },
   "scripts": {
     "start": "react-scripts start",

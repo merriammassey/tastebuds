@@ -4,11 +4,11 @@ import "../App.css";
 
 const Home = () => {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div>
+      <header>
         <div id="homephoto">
           <div id="welcome">
-            <p>Welcome to TasteBuds</p>
+            <p style={{ color: "white" }}>Welcome to TasteBuds</p>
             <SearchRestaurants />
           </div>
         </div>

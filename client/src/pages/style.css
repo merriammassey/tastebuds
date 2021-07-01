@@ -1,9 +1,9 @@
-#homephoto {
-  background-image: url("../assets/images/patrick-tomasso-GXXYkSwndP4-unsplash.jpg");
-  background-size: cover;
-  height: 100vh;
-  color: white;
+#restaurantCards {
+  padding-top: 5%;
   display: flex;
-  align-items: center;
-  object-fit: cover;
+  flex-direction: column;
+}
+
+.card {
+  flex-direction: row !important;
 }
