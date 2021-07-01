@@ -214,7 +214,7 @@ const SearchRestaurants = () => {
       </div>
       <Container id="restaurantCards">
         <Row>
-          <Col>
+          <Col style={{ alignItems: "center" }}>
             {searchedRestaurants.map((restaurant) => {
               return (
                 <Card key={restaurant.id} style={{ width: "35rem" }}>
