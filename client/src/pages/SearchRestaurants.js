@@ -242,8 +242,7 @@ const SearchRestaurants = () => {
                     <Card.Text>
                       Rating: {restaurant.rating} <br />
                       Price: {restaurant.price} <br />
-                      {restaurant.location.address1}, {restaurant.location.city}{" "}
-                      <br />
+                      {restaurant.location}, {restaurant.city} <br />
                       {restaurant.phone} <br />
                       <a href={restaurant.url}>Website</a>
                     </Card.Text>
