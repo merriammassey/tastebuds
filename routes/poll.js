@@ -21,7 +21,7 @@ router.get("/", (req, res) => {
 //when user votes, make request to poll
 router.post("/", (req, res) => {
   //pusher triggers frontend event to get points and restaurant name
-  pusher.trigger("tastebuds", "tastebudvote", {
+  pusher.trigger("tastebuds", "tastebudsvote", {
     points: 1,
     restaurant: req.body.restaurant,
   });
