@@ -9,17 +9,35 @@ const Footer = () => {
   // set modal display state
   const [showModal, setShowModal] = useState(false);
 
+  //WORK IN PROGRESS
+  //function to handleCreateEvent click
+  const handleSaveEvent = ;
+  //get token
+  const token = Auth.loggedIn() ? Auth.getToken() : null;
+  //if logged in, render event component
+  if (token) {
+//render event page OR REDIRECT TO EVENT PAGE
+}
+  //if not logged in, render modal
+  else {
+      //modal
+      setShowModal(true);
+      //ONCE LOGGED IN RENDER EVENT COMPONENT
+  }
+  //end handlesave event function
+
   return (
     <>
       <Footer>
           <footer>
-        <Button type="submit" variant="success" size="lg">
-          Create Event
+        <Button type="submit" variant="success" size="lg"
+        onClick={() => handleSaveEvent()}> {/*pass saved rest here*/}
+          Invite your friends
         </Button>
         </footer>
       </Footer>
 
-        {/* set modal data up */}
+        {/* modal data */}
       <Modal
         size="lg"
         show={showModal}
