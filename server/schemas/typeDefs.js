@@ -29,7 +29,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     saveRestaurant(
       restaurantId: String
-      authors: [String]
+      location: [String]
       description: String
       title: String!
       image: String
