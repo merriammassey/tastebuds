@@ -2,6 +2,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "materialize-css": "^1.0.0-rc.2",
     "pusher": "^5.0.0"
   }
 }
