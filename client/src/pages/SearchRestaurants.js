@@ -10,19 +10,20 @@ import {
   Card,
   CardColumns,
 } from "react-bootstrap";
-import { searchYelp } from "../utils/yelpAPI";
 import { Link } from "react-router-dom";
+//global state imports
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_SEARCHED_RESTAURANTS } from "../utils/actions";
 import { QUERY_RESTAURANTS } from "../utils/queries";
-import { useQuery } from "@apollo/client";
-//import Auth from "../utils/auth";
-//import { searchRestaurants } from "../utils/API";
-//import { saveBookIds, getSavedBookIds } from "../utils/localStorage";
-//import mutation and useMutation
-//import { SAVE_BOOK } from "../utils/mutations";
-//import { useMutation } from "@apollo/client";
-//  const user = data?.me || data?.user || {};
+import { searchYelp } from "../utils/yelpAPI";
+
+import { useQuery, useMutation } from "@apollo/client";
+import Auth from "../utils/auth";
+import {
+  saveRestaurantIds,
+  getSavedRestaurantIds,
+} from "../utils/localStorage";
+import { SAVE_RESTAURANT } from "../utils/mutations";
 import "./style.css";
 
 const SearchRestaurants = () => {
@@ -39,15 +40,17 @@ const SearchRestaurants = () => {
   const [locationInput, setLocationInput] = useState("");
 
   // create state to hold saved restaurant values
-  //const [savedRestaurants, setSavedRestaurants] = useState(getSavedRestaurants());
+  const [savedRestaurantIds, setSavedRestaurantIds] = useState(
+    getSavedRestaurantIds()
+  );
 
-  //const [saveRestaurant, { error }] = useMutation(SAVE_RESTAURANT);
+  const [saveRestaurant, { error }] = useMutation(SAVE_RESTAURANT);
 
   // set up useEffect hook to save `savedRestaurants` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
-  //useEffect(() => {
-  // return () => saveRestaurants(savedRestaurants);
-  //});
+  useEffect(() => {
+    return () => saveRestaurantIds(savedRestaurantIds);
+  });
 
   // create method to search for books and set state on form submit
   const handleFormSubmit = async (event) => {
@@ -70,20 +73,22 @@ const SearchRestaurants = () => {
       //console.log(response);
       //const results = response.jsonBody.businesses;
       //console.log(results);
-      /* const restaurantData = response.map((restaurant, index) => ({
-        key: index,
+      const mappedRestaurantData = restaurantData.map((restaurant, index) => ({
+        key: restaurant.id,
+        id: restaurant.id,
         name: restaurant.name,
-        categories: restaurant.categories.title,
-        url: restaurant.url,
+        //categories: restaurant.categories.title,
         rating: restaurant.rating,
         price: restaurant.price,
-        location: restaurant.location.display_address,
-        phone: restaurant.display_phone,
+        location: restaurant.location.address1,
+        city: restaurant.location.city,
+        phone: restaurant.phone,
         image_url: restaurant.image_url,
-      })); */
+        url: restaurant.url,
+      }));
 
       console.log(restaurantData);
-      setSearchedRestaurants(restaurantData);
+      setSearchedRestaurants(mappedRestaurantData);
       setTermInput("");
       setLocationInput("");
     } catch (err) {
@@ -91,18 +96,18 @@ const SearchRestaurants = () => {
     }
   };
 
-  /* //SAVE RESTAURANT DATA IN GLOBAL STATE use this funciton instead of click handler in 22.1.6
-  const saveRestaurantData = (restaurantData) => {
+  //SAVE RESTAURANT DATA IN GLOBAL STATE use this funciton instead of click handler in 22.1.6
+  /* const saveRestaurantData = (restaurantData) => {
     dispatch({
       type: UPDATE_SEARCHED_RESTAURANTS,
       currentRestaurants: [restaurantData], //just id in UPDATE_CURRENT_CATEGORY action in 22.1.6
     });
   };
-  saveRestaurantData(restaurantData);
+  saveRestaurantData(restaurantData); */
   //END GLOBAL STATE UPDATE
 
   //restaurantData will be undefined on load, but useEffect will run when state changes in this component
-  useEffect(() => {
+  /* useEffect(() => {
     // if restaurantData exists or has changed from the response of useQuery, then run dispatch()
     if (restaurantData) {
       // execute our dispatch function with our action object indicating the type of action and the data to set our state for categories to
@@ -115,33 +120,41 @@ const SearchRestaurants = () => {
  */
   //updated to use save book mutation instead of api savebook function
   // create function to handle saving a book to our database
-  /*  const handleSaveBook = async (bookId) => {
+  const handleSaveRestaurant = async (restaurantId) => {
     // find the book in `searchedBooks` state by the matching id
-    const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
+    const restaurantToSave = searchedRestaurants.find(
+      (restaurant) => restaurant.restaurantId === restaurantId
+    );
     // get token
+    //MOVE THIS TO ANOTHER PLACE?
     const token = Auth.loggedIn() ? Auth.getToken() : null;
     if (!token) {
       return false;
     }
     try {
       //const response = await saveBook(bookToSave, token);
-      await saveBook({
+      await saveRestaurant({
         variables: {
-          authors: bookToSave.authors,
-          description: bookToSave.description,
-          title: bookToSave.title,
-          bookId: bookToSave.bookId,
-          image: bookToSave.image,
+          id: restaurantToSave.id,
+          name: restaurantToSave.name,
+          //categories: restaurantToSave.categories.title,
+          rating: restaurantToSave.rating,
+          price: restaurantToSave.price,
+          location: restaurantToSave.location,
+          city: restaurantToSave.city,
+          phone: restaurantToSave.phone,
+          image_url: restaurantToSave.image_url,
+          url: restaurantToSave.url,
         },
       });
       //if (!response.ok) {
       //throw new Error("something went wrong!");
       // if book successfully saves to user's account, save book id to state
-      setSavedBookIds([...savedBookIds, bookToSave.bookId]);
+      setSavedRestaurantIds([...savedRestaurantIds, restaurantToSave.id]);
     } catch (err) {
       console.error(err);
     }
-  }; */
+  };
 
   return (
     <>
