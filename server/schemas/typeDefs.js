@@ -10,35 +10,60 @@ const typeDefs = gql`
     _id: ID!
     username: String!
     email: String!
-    event: Int
-    savedRestaurants: [restaurant]
+    event: [event]
   }
-  type restaurant {
+
+  type Event {
+    _id: ID 
+    name: String
+    createdAt: String 
+    username: String
+    restaurant: []
+  }
+  type Restaurant {
+    _id: ID
     restaurantId: String
     price: Float
+    categories: String
     description: String
     title: String!
     image: String
-    link: String
-    category: String
+    url: String
+    rating: String
+    phone" String
   }
   type Auth {
     token: ID!
     user: User
   }
+
   type Mutation {
     login(email: String!, password: String!): Auth
-    saveRestaurant(
-      restaurantId: String
-      location: [String]
-      description: String
-      title: String!
-      image: String
-      link: String
-    ): User
+    
     addUser(username: String!, email: String!, password: String!): Auth
+    
+    addEvent(
+      _id: ID ,
+      name: String,
+      createdAt: String ,
+      username: String,
+      restaurant: []
+    ): User
+    
+    addRestaurant(
+      restaurantId: String,
+      price: Float,
+      categories: String,
+      description: String,
+      title: String!,
+      image: String,
+      url: String,
+      rating: String,
+      phone" String
+    ): Event
      
-   
+    addVote(restaurant: ID!): User 
+
   }
 `;
 
