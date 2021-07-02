@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { gql } from '@apollo/client';
 
 export const QUERY_PRODUCTS = gql`
@@ -57,6 +58,22 @@ export const QUERY_USER = gql`
           image
         }
       }
+=======
+import { gql } from "@apollo/client";
+
+export const QUERY_RESTAURANTS = gql`
+  {
+    restaurants {
+      id
+      name
+      categories
+      url
+      rating
+      price
+      location
+      phone
+      image_url
+>>>>>>> b6c2a3da8e4822274bf5cbe5bad5415212a4aaac
     }
   }
 `;

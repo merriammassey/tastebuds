@@ -1,15 +1,21 @@
 //import React, { useState, useEffect } from "react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Jumbotron,
   Container,
   Col,
+  Row,
   Form,
   Button,
   Card,
   CardColumns,
 } from "react-bootstrap";
-
+import { searchYelp } from "../utils/yelpAPI";
+import { Link } from "react-router-dom";
+import { useStoreContext } from "../utils/GlobalState";
+import { UPDATE_SEARCHED_RESTAURANTS } from "../utils/actions";
+import { QUERY_RESTAURANTS } from "../utils/queries";
+import { useQuery } from "@apollo/client";
 //import Auth from "../utils/auth";
 //import { searchRestaurants } from "../utils/API";
 //import { saveBookIds, getSavedBookIds } from "../utils/localStorage";
@@ -17,67 +23,55 @@ import {
 //import { SAVE_BOOK } from "../utils/mutations";
 //import { useMutation } from "@apollo/client";
 //  const user = data?.me || data?.user || {};
-
-const searchRestaurants = () => {
-  "use strict";
-
-  const yelp = require("yelp-fusion");
-
-  // Place holder for Yelp Fusion's API Key. Grab them
-  // from https://www.yelp.com/developers/v3/manage_app
-  const apiKey = `${process.env.REACT_APP_YELP_KEY}`
-
-  const searchRequest = {
-    term: "Four Barrel Coffee",
-    location: "san francisco, ca",
-  };
-
-  const client = yelp.client(apiKey);
-
-  client
-    .search(searchRequest)
-    .then((response) => {
-      const firstResult = response.jsonBody.businesses[0];
-      const prettyJson = JSON.stringify(firstResult, null, 4);
-      console.log(prettyJson);
-      return prettyJson;
-    })
-    .catch((e) => {
-      console.log(e);
-    });
-};
+import "./style.css";
 
 const SearchRestaurants = () => {
-  // create state for holding returned google api data
+  //GLOBAL STATE VARIABLES
+  /* const [state, dispatch] = useStoreContext;
+  const { restaurants } = state;
+  const { data: restaurantData } = useQuery(QUERY_RESTAURANTS); */
+  //END GLOBAL STATE VARIABLES
+
+  // create state for holding returned yelp data
   const [searchedRestaurants, setSearchedRestaurants] = useState([]);
   // create state for holding our search field data
   const [termInput, setTermInput] = useState("");
   const [locationInput, setLocationInput] = useState("");
 
-  // create state to hold saved bookId values
-  //const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
+  // create state to hold saved restaurant values
+  //const [savedRestaurants, setSavedRestaurants] = useState(getSavedRestaurants());
 
-  //const [saveBook, { error }] = useMutation(SAVE_BOOK);
+  //const [saveRestaurant, { error }] = useMutation(SAVE_RESTAURANT);
 
-  // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
+  // set up useEffect hook to save `savedRestaurants` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   //useEffect(() => {
-  // return () => saveBookIds(savedBookIds);
+  // return () => saveRestaurants(savedRestaurants);
   //});
 
   // create method to search for books and set state on form submit
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    if (!termInput || !locationInput) {
+
+    //console.log(locationInput);
+    if (!locationInput) {
+      //add modal
+      console.log("please enter a location");
       return false;
     }
     try {
-      const response = await searchRestaurants(termInput, locationInput);
-      if (!response.ok) {
+      const restaurantData = await searchYelp(locationInput, termInput);
+      //console.log(response);
+      /* if (!response.ok) {
         throw new Error("something went wrong!");
-      }
-      const { items } = await response.json();
-      const restaurantData = items.map((restaurant) => ({
+      } */
+
+      //const { items } = await response.json();
+      //console.log(response);
+      //const results = response.jsonBody.businesses;
+      //console.log(results);
+      /* const restaurantData = response.map((restaurant, index) => ({
+        key: index,
         name: restaurant.name,
         categories: restaurant.categories.title,
         url: restaurant.url,
@@ -85,8 +79,10 @@ const SearchRestaurants = () => {
         price: restaurant.price,
         location: restaurant.location.display_address,
         phone: restaurant.display_phone,
-        image_url: restaurant.image_url?.thumbnail || "",
-      }));
+        image_url: restaurant.image_url,
+      })); */
+
+      console.log(restaurantData);
       setSearchedRestaurants(restaurantData);
       setTermInput("");
       setLocationInput("");
@@ -94,6 +90,29 @@ const SearchRestaurants = () => {
       console.error(err);
     }
   };
+
+  /* //SAVE RESTAURANT DATA IN GLOBAL STATE use this funciton instead of click handler in 22.1.6
+  const saveRestaurantData = (restaurantData) => {
+    dispatch({
+      type: UPDATE_SEARCHED_RESTAURANTS,
+      currentRestaurants: [restaurantData], //just id in UPDATE_CURRENT_CATEGORY action in 22.1.6
+    });
+  };
+  saveRestaurantData(restaurantData);
+  //END GLOBAL STATE UPDATE
+
+  //restaurantData will be undefined on load, but useEffect will run when state changes in this component
+  useEffect(() => {
+    // if restaurantData exists or has changed from the response of useQuery, then run dispatch()
+    if (restaurantData) {
+      // execute our dispatch function with our action object indicating the type of action and the data to set our state for categories to
+      dispatch({
+        type: UPDATE_SEARCHED_RESTAURANTS,
+        restaurants: restaurantData.restaurants,
+      });
+    }
+  }, [restaurantData, dispatch]);
+ */
   //updated to use save book mutation instead of api savebook function
   // create function to handle saving a book to our database
   /*  const handleSaveBook = async (bookId) => {
@@ -126,80 +145,113 @@ const SearchRestaurants = () => {
 
   return (
     <>
-      <Jumbotron fluid className="text-light bg-dark">
-        <Container>
-          <h1>Search for a restaurant to begin</h1>
-          <Form onSubmit={handleFormSubmit}>
-            <Form.Row>
-              <Col xs={12} md={8}>
-                <Form.Control
-                  name="termInput"
-                  value={termInput}
-                  onChange={(e) => setTermInput(e.target.value)}
-                  type="text"
-                  size="lg"
-                  placeholder="Restaurant name or keyword"
-                />
-                <Form.Control
-                  name="locationInput"
-                  value={locationInput}
-                  onChange={(e) => setLocationInput(e.target.value)}
-                  type="text"
-                  size="lg"
-                  placeholder="Location"
-                />
-              </Col>
-              <Col xs={12} md={4}>
-                <Button type="submit" variant="success" size="lg">
-                  Submit Search
-                </Button>
-              </Col>
-            </Form.Row>
-          </Form>
-        </Container>
-      </Jumbotron>
+      {/* <Jumbotron fluid className="text-light bg-dark">
+        <Container> */}
+      <div>
+        <h1 style={{ color: "white" }}>Search for a restaurant to begin</h1>
+        <Form onSubmit={handleFormSubmit}>
+          <Form.Row>
+            <Col xs={12} md={8}>
+              <Form.Control
+                name="termInput"
+                value={termInput}
+                onChange={(e) => setTermInput(e.target.value)}
+                type="text"
+                size="lg"
+                placeholder="Restaurant name or keyword"
+              />
+              <Form.Control
+                name="locationInput"
+                value={locationInput}
+                onChange={(e) => setLocationInput(e.target.value)}
+                type="text"
+                size="lg"
+                placeholder="Location"
+              />
+            </Col>
+            <Col xs={12} md={4}>
+              {/* <Link to="/restaurants"> */}
+              <Button type="submit" variant="success" size="lg">
+                Submit Search
+              </Button>
+              {/* </Link> */}
+            </Col>
+          </Form.Row>
+        </Form>
+        {/*   <Container>
+          <h2>
+            {searchedRestaurants.length
+              ? `Viewing ${searchedRestaurants.length} results:`
+              : "Search for a book to begin"}
+          </h2>
+          <CardColumns>
+            {searchedRestaurants.map((restaurant) => {
+              return (
+                <Card key={restaurant.name} border="dark">
+                  {restaurant.image ? (
+                    <Card.Img
+                      src={restaurant.name}
+                      alt={`The cover for ${restaurant.name}`}
+                      variant="top"
+                    />
+                  ) : null}
+                  <Card.Body>
+                    <Card.Title>{restaurant.name}</Card.Title>
+                    <p className="small">Authors:</p>
+                    <Card.Text>{restaurant.name}</Card.Text>
+                    {/* {Auth.loggedIn() && (
+                      
+                    )} *
+                  </Card.Body>
+                </Card>
+              );
+            })}
+          </CardColumns>
+        </Container> */}
 
-      <Container>
-        <h2>
-          {searchedRestaurants.length
-            ? `Viewing ${searchedRestaurants.length} results:`
-            : " "}
-        </h2>
-        <CardColumns>
-          {searchedRestaurants.map((restaurant) => {
-            return (
-              <Card key={restaurant.name} border="dark">
-                {restaurant.image_url ? (
+        {/*      </Container>
+      </Jumbotron> */}
+      </div>
+      <Container id="restaurantCards">
+        <Row>
+          <Col style={{ alignItems: "center" }}>
+            {searchedRestaurants.map((restaurant) => {
+              return (
+                <Card key={restaurant.id} style={{ width: "35rem" }}>
                   <Card.Img
+                    variant="left"
+                    width={"250"}
+                    height={"250"}
                     src={restaurant.image_url}
-                    alt={`A picture of ${restaurant.name}`}
-                    variant="top"
                   />
-                ) : null}
-                <Card.Body>
-                  <Card.Title>{restaurant.name}</Card.Title>
-                  <p className="small">{restaurant.categories} </p>
-                  <Card.Text>{restaurant.rating}</Card.Text>
-                  {/*                  {Auth.loggedIn() && (
-                    <Button
-                      disabled={savedBookIds?.some(
-                        (savedBookId) => savedBookId === book.bookId
-                      )}
-                      className="btn-block btn-info"
-                      onClick={() => handleSaveBook(book.bookId)}
-                    >
-                      {savedBookIds?.some(
-                        (savedBookId) => savedBookId === book.bookId
-                      )
-                        ? "This book has already been saved!"
-                        : "Save this Book!"}
-                    </Button>
-                  )} */}
-                </Card.Body>
-              </Card>
-            );
-          })}
-        </CardColumns>
+                  <Card.Body>
+                    <Card.Title>{restaurant.name}</Card.Title>
+                    <Card.Text>
+                      Rating: {restaurant.rating} <br />
+                      Price: {restaurant.price} <br />
+                      {restaurant.location.address1}, {restaurant.location.city}{" "}
+                      <br />
+                      {restaurant.phone} <br />
+                      <a href={restaurant.url}>Website</a>
+                    </Card.Text>
+                    <Button variant="primary">Add to event</Button>
+                  </Card.Body>
+                </Card>
+                /* const restaurantData = response.map((restaurant, index) => ({
+                  key: index,
+                  name: restaurant.name,
+                  categories: restaurant.categories.title,
+                  url: restaurant.url,
+                  rating: restaurant.rating,
+                  price: restaurant.price,
+                  location: restaurant.location.display_address,
+                  phone: restaurant.display_phone,
+                  image_url: restaurant.image_url?.thumbnail || "",
+                })); */
+              );
+            })}
+          </Col>
+        </Row>
       </Container>
     </>
   );

@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import {
   ApolloClient,
@@ -8,24 +7,27 @@ import {
   useQuery,
   gql,
 } from "@apollo/client";
-import { getHeaders } from "./auth";
+<<<<<<< HEAD
+=======
+// import { getHeaders } from "./auth";
+>>>>>>> imamodel
 import { createHttpLink } from "apollo-link-http";
 import { setContext } from "apollo-link-context";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
+import { StoreProvider } from "./utils/GlobalState";
 // Start Pages import //
 import Home from "../src/pages/Home";
 import Login from "../src/pages/Login";
 import Signup from "../src/pages/Signup";
-// import SearchRestaurants from "../src/pages/SearchRestaurants";
+//import SearchedRestaurants from "../src/pages/SearchedRestaurants";
+import AppNavBar from "../src/components/Navbar";
 // import SavedResturants from "../src/pages/SaveResturants";
-
-require('dotenv').config({path: __dirname + '/.env'})
+import "bootstrap/dist/css/bootstrap.min.css";
+require("dotenv").config({ path: __dirname + "/.env" });
 
 // End Pages import
 
 function App() {
- 
   const yelp = require("yelp-fusion");
   const apiKey = `${process.env.REACT_APP_YELP_KEY}`;
   const client = yelp.client(apiKey);
@@ -33,14 +35,20 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <div>
-          Nave bar to go here
-          <Switch>
-            <Route exact path="/" component={Home} />
-            {/* <Route exact path="/about" component={About}/> */}
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={Signup} />
-            {/* <Route exact path="/ideas" component= {SavedResturants} /> */}
-          </Switch>
+          <StoreProvider>
+            <AppNavBar />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              {/* <Route exact path="/about" component={About}/> */}
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/signup" component={Signup} />
+              {/*               <Route
+                exact
+                path="/restaurants"
+                component={SearchedRestaurants}
+              /> */}
+            </Switch>
+          </StoreProvider>
         </div>
       </Router>
     </ApolloProvider>
