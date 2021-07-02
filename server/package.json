@@ -18,5 +18,10 @@
     "mongoose": "^5.13.0",
     "nodemon": "^2.0.8"
   },
+<<<<<<< HEAD
+=======
+  "devDependencies": {},
+  "keywords": [],
+>>>>>>> testbranch
   "description": ""
 }

@@ -1,31 +1,17 @@
-<<<<<<< HEAD
+
 import decode from 'jwt-decode';
 
-<<<<<<< HEAD
-class AuthService {
-=======
 // use this to decode a token and get the user's information out of it
 import decode from 'jwt-decode';
 
 // create a new class to instantiate for a user
 class AuthService {
-  // get user data
->>>>>>> mutations
-=======
-class Auth {
->>>>>>> b6c2a3da8e4822274bf5cbe5bad5415212a4aaac
+  
+
   getProfile() {
     return decode(this.getToken());
   }
 
-<<<<<<< HEAD
-  loggedIn() {
-    // Checks if there is a saved token and it's still valid
-    const token = this.getToken();
-    return !!token && !this.isTokenExpired(token);
-  }
-
-=======
   // check if user's logged in
   loggedIn() {
     // Checks if there is a saved token and it's still valid
@@ -34,7 +20,6 @@ class Auth {
   }
 
   // check if token is expired
->>>>>>> mutations
   isTokenExpired(token) {
     try {
       const decoded = decode(token);
@@ -54,10 +39,6 @@ class Auth {
   login(idToken) {
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
-<<<<<<< HEAD
-
-=======
->>>>>>> mutations
     window.location.assign('/');
   }
 
@@ -69,12 +50,12 @@ class Auth {
   }
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 export default new AuthService();
-=======
-export default new AuthService();
->>>>>>> mutations
-=======
+
+
+
 export default new Auth();
->>>>>>> b6c2a3da8e4822274bf5cbe5bad5415212a4aaac
+
+
+
