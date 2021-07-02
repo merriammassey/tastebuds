@@ -24,7 +24,7 @@ const typeDefs = gql`
     _id: ID
     restaurantId: String
     price: Float
-    categorie: String
+    categories: String
     description: String
     title: String!
     image: String
