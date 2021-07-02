@@ -8,12 +8,8 @@ const { authMiddleware } = require("./utils/auth");
 //FOR POLL
 const bodyParser = require("body-parser");
 const cors = require("cors");
-//body parser middleware for poll
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors());
 const poll = require("../routes/poll");
-app.use("../routes/poll", poll);
+//body parser middleware for poll
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -37,6 +33,12 @@ if (process.env.NODE_ENV === "production") {
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
+
+//body parser middleware for poll
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
+app.use("../routes/poll", poll);
 
 db.once("open", () => {
   app.listen(PORT, () => {

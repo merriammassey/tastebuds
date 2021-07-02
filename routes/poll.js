@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+const mongoose = require("mongoose");
+const Vote = require("../server/models/Vote");
 //
 const Pusher = require("pusher");
 
@@ -12,20 +14,29 @@ const pusher = new Pusher({
   useTLS: true,
 });
 
-//
+//make request
 router.get("/", (req, res) => {
   //fetch and send polls
-  res.send("POLL");
+  Vote.find().then((votes) => res.json({ success: true, votes: votes }));
 });
 
 //when user votes, make request to poll
 router.post("/", (req, res) => {
-  //pusher triggers frontend event to get points and restaurant name
-  pusher.trigger("tastebuds", "tastebudsvote", {
-    points: 1,
+  //when user votes, save option in db
+  const newVote = {
     restaurant: req.body.restaurant,
+    points: 1,
+  };
+
+  //save new vote and get data, passing in points and restaurant name
+  new Vote(newVote).save().then((vote) => {
+    //pusher triggers frontend event to get points and restaurant name
+    pusher.trigger("tastebuds", "tastebudsvote", {
+      points: parseInt(vote.points),
+      restaurant: vote.restaurant,
+    });
+    return res.json({ success: true, message: "Thank you vor voting!" });
   });
-  return res.json({ success: true, message: "Thank you vor voting!" });
 });
 
 module.exports = router;
