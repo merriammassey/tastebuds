@@ -10,7 +10,7 @@ const typeDefs = gql`
     _id: ID!
     username: String!
     email: String!
-    bookCount: Int
+    event: Int
     savedRestaurants: [restaurant]
   }
   type restaurant {
@@ -20,6 +20,7 @@ const typeDefs = gql`
     title: String!
     image: String
     link: String
+    category: String
   }
   type Auth {
     token: ID!
@@ -35,9 +36,9 @@ const typeDefs = gql`
       image: String
       link: String
     ): User
-    addUser(username: String!, email: String!, password: String!): 
+    addUser(username: String!, email: String!, password: String!): Auth
      
-    User
+   
   }
 `;
 
