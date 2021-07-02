@@ -2,5 +2,5 @@ const Restaurant = ("./Restaurants");
 const Event = ("./Event");
 const User = ("./User");
 
-module.export = { Restaurants, Event, User }; 
+module.export = { Restaurant, Event, User }; 
 

@@ -1,5 +1,6 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Restaurant } = require("../models");
+const { User } = require("../models");
+const { Restaurant } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
@@ -62,7 +63,7 @@ const resolvers = {
             },
           },
           { new: true }
-        ).populate("savedRestaurants");
+        ).populate("savedRestaurant");
         return updatedUser;
       }
       throw new AuthenticationError("You need to be logged in");
