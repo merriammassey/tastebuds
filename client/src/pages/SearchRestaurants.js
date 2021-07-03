@@ -1,7 +1,6 @@
 //import React, { useState, useEffect } from "react";
 import React, { useState, useEffect } from "react";
 import {
-  Jumbotron,
   Container,
   Col,
   Row,
@@ -10,11 +9,11 @@ import {
   Card,
   CardColumns,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 //global state imports
-import { useStoreContext } from "../utils/GlobalState";
-import { UPDATE_SEARCHED_RESTAURANTS } from "../utils/actions";
-import { QUERY_RESTAURANTS } from "../utils/queries";
+//import { useStoreContext } from "../utils/GlobalState";
+//import { UPDATE_SEARCHED_RESTAURANTS } from "../utils/actions";
+//import { QUERY_RESTAURANTS } from "../utils/queries";
 import { searchYelp } from "../utils/yelpAPI";
 
 import { useQuery, useMutation } from "@apollo/client";
@@ -25,7 +24,7 @@ import {
 } from "../utils/localStorage";
 import { SAVE_RESTAURANT } from "../utils/mutations";
 import "./style.css";
-
+import Footer from "../components/Footer";
 const SearchRestaurants = () => {
   //GLOBAL STATE VARIABLES
   /* const [state, dispatch] = useStoreContext;
@@ -249,22 +248,12 @@ const SearchRestaurants = () => {
                     <Button variant="primary">Add to event</Button>
                   </Card.Body>
                 </Card>
-                /* const restaurantData = response.map((restaurant, index) => ({
-                  key: index,
-                  name: restaurant.name,
-                  categories: restaurant.categories.title,
-                  url: restaurant.url,
-                  rating: restaurant.rating,
-                  price: restaurant.price,
-                  location: restaurant.location.display_address,
-                  phone: restaurant.display_phone,
-                  image_url: restaurant.image_url?.thumbnail || "",
-                })); */
               );
             })}
           </Col>
         </Row>
       </Container>
+      <Footer />
     </>
   );
 };
