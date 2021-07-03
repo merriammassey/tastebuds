@@ -1,3 +1,6 @@
-const Resturant = ("./Resturants")
+const Restaurant = ("./Restaurant");
+const Event = ("./Event");
+const User = ("./User");
 
-module.export = { Pizza }; 
+module.export = { Restaurant, Event, User }; 
+

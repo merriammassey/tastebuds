@@ -1,8 +1,8 @@
-const { Resturant } = require("../models")
+const { Restaurant } = require("../models")
 
-const resturantController = {
+const restaurantController = {
     /// functions 
 }
 
-module.exports = resturantController;  
+module.exports = restaurantController;  
 
