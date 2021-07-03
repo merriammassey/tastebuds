@@ -2,6 +2,7 @@ const { Schema, model } = require('mongoose');
 const restaurantSchema = require("./Restaurant")
 const dateFormat = require('../utils/dateFormat');
 const userSchema = require ("./User")
+
 const eventSchema = new Schema (
     {
         eventName: {
@@ -20,7 +21,7 @@ const eventSchema = new Schema (
             required: true
         },
         invites: [userSchema],
-        restaurants: [restaurantSchema]
+        restaurant: [restaurantSchema]
     },
     {
         toJSON: {
@@ -29,7 +30,8 @@ const eventSchema = new Schema (
       }
 );
 
+
 const Event = model ('Event', eventSchema);
 
-module.exports = Events; 
+module.exports = Event; 
 

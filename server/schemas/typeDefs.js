@@ -3,6 +3,7 @@ const { gql } = require("apollo-server-express");
 
 // create our typeDefs
 const typeDefs = gql`
+
   type Query {
     me: User
   }
@@ -17,7 +18,7 @@ const typeDefs = gql`
     name: String
     createdAt: String 
     username: String
-    restaurant: []
+    restaurant: [restaurant]
   }
   type Restaurant {
     _id: ID
@@ -46,7 +47,7 @@ const typeDefs = gql`
       name: String,
       createdAt: String,
       username: String,
-      restaurant: []
+      restaurant: [restaurant]
     ): User
     
     addRestaurant(
