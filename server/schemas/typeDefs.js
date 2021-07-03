@@ -6,12 +6,17 @@ const typeDefs = gql`
 
   type Query {
     me: User
+    users: [User]
+    user: User
+    event: Event
+    events: [Event]
   }
+
   type User {
     _id: ID!
     username: String!
     email: String!
-    event: [event]
+    event: [Event]
   }
 
   type Event {
@@ -19,7 +24,7 @@ const typeDefs = gql`
     name: String
     createdAt: String 
     username: String
-    restaurant: [restaurant]
+    restaurant: [Restaurant]
   }
   type Restaurant {
     _id: ID
@@ -43,14 +48,7 @@ const typeDefs = gql`
     
     addUser(username: String!, email: String!, password: String!): Auth
     
-    addEvent(
-      _id: ID ,
-      name: String,
-      createdAt: String ,
-      username: String,
-      restaurant: [restaurant]
-    ): User
-    
+   
     addRestaurant(
       restaurantId: String,
       price: Float,
@@ -60,7 +58,11 @@ const typeDefs = gql`
       image: String,
       url: String,
       rating: String,
-      phone" String
+      phone: String
+    ): Event
+
+    removeRestaurant(
+      restaurantId: String! 
     ): Event
      
     addVote(restaurant: ID!): User 
@@ -70,3 +72,12 @@ const typeDefs = gql`
 
 // export the typeDefs
 module.exports = typeDefs;
+
+// add back to mutation 
+// addEvent(
+//   _id: ID,
+//   name: String,
+//   createdAt: String,
+//   username: String,
+//   restaurant: [Restaurant]
+// ): User
