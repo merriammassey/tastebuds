@@ -57,7 +57,7 @@ const resolvers = {
         return { token, user };
       },
 
-
+    
  
       saveRestaurant: async (parent, restaurantData, context) => {
         console.log(restaurantData);
@@ -96,8 +96,6 @@ const resolvers = {
         throw new AuthenticationError('You need to be logged in!');
       },
     
-    
-
       removeRestaurant: async (parent, { restaurantId }, context) => {
         if (context.user) {
           const updatedUser = await User.findOneAndUpdate(

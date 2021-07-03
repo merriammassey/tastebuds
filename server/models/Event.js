@@ -20,7 +20,7 @@ const eventSchema = new Schema (
             required: true
         },
         invites: [userSchema],
-        resturants: [resturantSchema]
+        restaurants: [restaurantSchema]
     },
     {
         toJSON: {

@@ -12,7 +12,6 @@ const typeDefs = gql`
     email: String!
     event: [event]
   }
-
   type Event {
     _id: ID 
     name: String
@@ -30,7 +29,7 @@ const typeDefs = gql`
     image: String
     url: String
     rating: String
-    phone" String
+    phone: String
   }
   type Auth {
     token: ID!
@@ -43,9 +42,9 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     
     addEvent(
-      _id: ID ,
+      _id: ID 
       name: String,
-      createdAt: String ,
+      createdAt: String,
       username: String,
       restaurant: []
     ): User
@@ -59,7 +58,7 @@ const typeDefs = gql`
       image: String,
       url: String,
       rating: String,
-      phone" String
+      phone: String,
     ): Event
      
     addVote(restaurant: ID!): User 
