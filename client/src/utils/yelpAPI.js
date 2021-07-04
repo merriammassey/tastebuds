@@ -1,6 +1,6 @@
 //import React, { useState } from "react";
 const axios = require("axios").default;
-
+const react = require("react");
 //** added query
 export const searchYelp = (locationInput, termInput) => {
   //const locationInput = "phoenix";

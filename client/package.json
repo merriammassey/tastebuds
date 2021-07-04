@@ -9,11 +9,9 @@
     "@testing-library/user-event": "^12.8.3",
     "apollo-link-context": "^1.0.20",
     "apollo-link-http": "^1.5.17",
-<<<<<<< HEAD
-    "axios": "^0.21.1",
-=======
     "apollo-server-express": "^2.25.2",
->>>>>>> imamodel
+    "axios": "^0.21.1",
+    "bootstrap": "^4.4.1",
     "dotenv": "^10.0.0",
     "graphql": "^15.5.1",
     "jsonwebtoken": "^8.5.1",
@@ -25,8 +23,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2",
-    "yelp-fusion": "^3.0.0",
-    "bootstrap": "^4.4.1"
+    "yelp-fusion": "^3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

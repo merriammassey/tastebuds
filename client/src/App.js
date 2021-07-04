@@ -7,10 +7,7 @@ import {
   useQuery,
   gql,
 } from "@apollo/client";
-<<<<<<< HEAD
-=======
 // import { getHeaders } from "./auth";
->>>>>>> imamodel
 import { createHttpLink } from "apollo-link-http";
 import { setContext } from "apollo-link-context";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
