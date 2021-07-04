@@ -172,7 +172,7 @@ const SearchRestaurants = () => {
             <Col xs={12} md={4}>
               {/* <Link to="/restaurants"> */}
               <Button type="submit" variant="success" size="lg">
-                Submit Search
+                Search
               </Button>
               {/* </Link> */}
             </Col>

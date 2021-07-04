@@ -7,3 +7,12 @@
 .card {
   flex-direction: row !important;
 }
+
+footer {
+  background: rgba(20, 30, 34, 0.8);
+  width: 100%;
+  opacity: 70%;
+  position: fixed;
+  padding: 20px 20px;
+  bottom: 0;
+}

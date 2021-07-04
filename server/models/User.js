@@ -1,7 +1,8 @@
-const { Schema, models } = require('mongoose');
-const bcrypt = require('bcrypt');
 
-const eventSchema = require('./Event');
+
+const { Schema, model } = require('mongoose');
+const bcrypt = require('bcrypt');
+const Restaurant = require("./Restaurant") 
 
 const userSchema = new Schema(
   {
@@ -22,7 +23,7 @@ const userSchema = new Schema(
       required: true,
     },
     // set savedBooks to be an array of data that adheres to the bookSchema
-    savedRestaurant: [RestaurantSchema],
+    savedRestaurant: [Restaurant],
     
     friends: [
       {
@@ -68,4 +69,5 @@ userSchema.virtual('restaurantCount').get(function () {
 
 const User = model('User', userSchema);
 
-module.exports = User;
+module.exports = User
+
