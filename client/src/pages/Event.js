@@ -27,7 +27,9 @@ import { SAVE_RESTAURANT } from "../utils/mutations";
 import "./style.css";
 
 const Event = (props) => {
-
+  // create state for holding our search field data
+  const [eventNameInput, setEventNameInput] = useState("");
+  const [eventNotesInput, setEventNotesInput] = useState("");
   // create state to hold saved restaurant values
   const [savedRestaurantIds, setSavedRestaurantIds] = useState(
     getSavedRestaurantIds()
@@ -36,44 +38,53 @@ const Event = (props) => {
   // create event and set state on form submit
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
+  };
 
   return (
     <>
       <div>
-        <h1 style={{ color: "white" }}>Create your Event</h1>
-        <Form onSubmit={handleFormSubmit}>
-          <Form.Row>
-            <Col xs={12} md={8}>
-              <Form.Control
-                name="eventNameInput"
-                value={eventNameInput}
-                onChange={(e) => setEventNameInput(e.target.value)}
-                type="text"
-                size="lg"
-                placeholder="Event name"
-              />
+        <header>
+          <div id="homephoto">
+            <div id="welcome">
+              <div id="event">
+                <div id="form">
+                  <Form onSubmit={handleFormSubmit}>
+                    <Form.Row>
+                      <Col xs={12} md={8}>
+                        <Form.Control
+                          name="eventNameInput"
+                          value={eventNameInput}
+                          onChange={(e) => setEventNameInput(e.target.value)}
+                          type="text"
+                          size="lg"
+                          placeholder="Event name"
+                        />
 
-              <SavedRestaurants/>
-              <p> restaurant names or cards will go here</p>
-              <Form.Control
-                name="eventNotesInput"
-                value={eventNotesInput}
-                onChange={(e) => setEventNotesInput(e.target.value)}
-                type="text"
-                size="lg"
-                placeholder="Vote for your preferred location...Add your notes here"
-              />
-            </Col>
-            <Col xs={12} md={4}>
-              <Button type="submit" variant="success" size="lg">
-                Send to friends
-              </Button>
-              {/* </Link> */}
-            </Col>
-          </Form.Row>
-        </Form>
-        
+                        {/* <SavedRestaurants /> */}
+                        <p> restaurant names or cards will go here</p>
+                        <Form.Control
+                          name="eventNotesInput"
+                          value={eventNotesInput}
+                          onChange={(e) => setEventNotesInput(e.target.value)}
+                          type="text"
+                          size="lg"
+                          id="paragraph"
+                          placeholder="Add your notes here"
+                        />
+                      </Col>
+                      <Col xs={12} md={4}>
+                        <Button type="submit" variant="success" size="lg">
+                          Send to friends
+                        </Button>
+                        {/* </Link> */}
+                      </Col>
+                    </Form.Row>
+                  </Form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
       </div>
       {/* <Container id="restaurantCards">
         <Row>

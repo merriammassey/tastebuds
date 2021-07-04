@@ -7,3 +7,25 @@
 .card {
   flex-direction: row !important;
 }
+
+#event {
+  width: 75%;
+  height: 50% !important;
+  background-color: rgba(255, 255, 255, 0.7);
+  justify-content: center;
+  padding-top: 10;
+  border: 10px;
+}
+
+#form {
+  max-width: 99% !important;
+  opacity: 100%;
+  box-sizing: content-box;
+  margin-left: 5%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+#paragraph {
+  height: 10pc;
+}

@@ -4,24 +4,41 @@ import SignUpForm from "./SignupForm";
 import LoginForm from "./LoginForm";
 import Auth from "../utils/auth";
 import "./style.css";
+import Event from "../pages/Event";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   // set modal display state
   const [showModal, setShowModal] = useState(false);
 
+  /*const handleCreateEvent = async (restaurantData) => {
+    get token
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if (!token) {
+      setShowModal(true);
+    } else {
+      console.log("render event");
+      //send props to event
+      return <Event />;
+    } 
+  };*/
+
   return (
     <>
       <div id="footer">
-        <Button
-          type="submit"
-          variant="success"
-          size="lg"
-          /* onClick={() => handleSaveEvent()} */
-        >
-          {" "}
-          {/*pass saved rest here*/}
-          Invite your friends
-        </Button>
+        <Link to="/event">
+          <Button
+            type="submit"
+            variant="success"
+            size="lg"
+            //onClick={handleCreateEvent}
+          >
+            {" "}
+            {/*pass saved rest here*/}
+            Invite your friends
+          </Button>
+        </Link>
       </div>
 
       {/* modal data */}

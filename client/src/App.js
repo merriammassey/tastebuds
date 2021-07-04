@@ -15,6 +15,9 @@ import { StoreProvider } from "./utils/GlobalState";
 import Home from "../src/pages/Home";
 import Login from "../src/pages/Login";
 import Signup from "../src/pages/Signup";
+import Event from "../src/pages/Event";
+import Dashboard from "../src/pages/Dashboard";
+
 //import SearchedRestaurants from "../src/pages/SearchedRestaurants";
 import AppNavBar from "../src/components/Navbar";
 // import SavedResturants from "../src/pages/SaveResturants";
@@ -38,6 +41,9 @@ function App() {
               {/* <Route exact path="/about" component={About}/> */}
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
+              <Route exact path="/dashboard" component={Dashboard} />
+              <Route exact path="/event" component={Event} />
+
               {/*               <Route
                 exact
                 path="/restaurants"
