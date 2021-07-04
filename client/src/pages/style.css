@@ -33,8 +33,13 @@
   margin-bottom: 5%;
 }
 
-#paragraph {
-  height: 5pc;
+#paragraph,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  text-align: center;
 }
 
 #eventheader {

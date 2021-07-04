@@ -245,7 +245,11 @@ const SearchRestaurants = () => {
                       {restaurant.phone} <br />
                       <a href={restaurant.url}>Website</a>
                     </Card.Text>
-                    <Button variant="primary">Add to event</Button>
+                    <Form.Group controlId="formBasicCheckbox">
+                      <Form.Check type="checkbox" label="Add to event" />
+                    </Form.Group>
+                    {/*                     <Button variant="primary">Add to event</Button>
+                     */}{" "}
                   </Card.Body>
                 </Card>
               );

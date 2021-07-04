@@ -17,6 +17,7 @@ import Login from "../src/pages/Login";
 import Signup from "../src/pages/Signup";
 import Event from "../src/pages/Event";
 import Dashboard from "../src/pages/Dashboard";
+import ViewEvent from "../src/pages/ViewEvent";
 
 //import SearchedRestaurants from "../src/pages/SearchedRestaurants";
 import AppNavBar from "../src/components/Navbar";
@@ -43,6 +44,7 @@ function App() {
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/dashboard" component={Dashboard} />
               <Route exact path="/event" component={Event} />
+              <Route exact path="/viewevent" component={ViewEvent} />
 
               {/*               <Route
                 exact

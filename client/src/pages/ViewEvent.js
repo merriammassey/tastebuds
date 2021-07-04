@@ -26,68 +26,69 @@ import {
 import { SAVE_RESTAURANT } from "../utils/mutations";
 import "./style.css";
 
-const Event = (props) => {
-  // create state for holding our search field data
-  const [eventNameInput, setEventNameInput] = useState("");
-  const [eventNotesInput, setEventNotesInput] = useState("");
-  // create state to hold saved restaurant values
-  const [savedRestaurantIds, setSavedRestaurantIds] = useState(
-    getSavedRestaurantIds()
-  );
-
-  // create event and set state on form submit
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-  };
-
+const ViewEvent = (props) => {
   return (
     <>
-      <div>
-        <header>
-          <div id="homephoto">
-            <div id="eventdiv">
-              <div id="event">
-                <h1 id="eventheader" style={{ color: "#212529" }}>
-                  Create your Event
-                </h1>
-                <div id="form">
-                  <Form onSubmit={handleFormSubmit}>
-                    <Form.Row>
-                      <Col xs={12} md={8}>
-                        <Form.Control
-                          name="eventNameInput"
-                          value={eventNameInput}
-                          onChange={(e) => setEventNameInput(e.target.value)}
-                          type="text"
-                          size="lg"
-                          placeholder="Event name"
-                        />
-
-                        {/* <SavedRestaurants /> */}
-                        <p> restaurant names or cards will go here</p>
-                        <Form.Control
-                          name="eventNotesInput"
-                          value={eventNotesInput}
-                          onChange={(e) => setEventNotesInput(e.target.value)}
-                          type="text"
-                          size="lg"
-                          id="paragraph"
-                          placeholder="Add your notes here"
-                        />
-                      </Col>
-                      <Col xs={12} md={4}>
-                        <Button type="submit" variant="success" size="lg">
-                          Send to friends
-                        </Button>
-                        {/* </Link> */}
-                      </Col>
-                    </Form.Row>
-                  </Form>
-                </div>
-              </div>
+      <div id="homephoto">
+        <div id="eventdiv">
+          <div id="event">
+            <h1 id="eventheader" style={{ color: "#212529" }}>
+              Where would you like to eat?
+            </h1>{" "}
+            <br />
+            <h3>Pre-game dinner</h3>
+            <h5>
+              Tom's vegan, so let's pick a place he can <br />
+              eat too for dinner before the game tomorrow night.
+            </h5>
+            <div id="form">
+              <form id="vote-form">
+                <h5>
+                  <input
+                    type="radio"
+                    name="restaurant"
+                    id="maskadores"
+                    value="Maskadores"
+                  />
+                  <label for="maskadores"> Maskadores</label>
+                </h5>
+                <h5>
+                  <input
+                    type="radio"
+                    name="restaurant"
+                    id="munichgyro"
+                    value="MunichGyro"
+                  />
+                  <label for="munichgyro"> MunichGyro</label>
+                </h5>
+                <h5>
+                  <input
+                    type="radio"
+                    name="restaurant"
+                    id="starbucks"
+                    value="Starbucks"
+                  />
+                  <label for="starbucks"> Starbucks</label>
+                </h5>
+                <h5>
+                  <input
+                    type="radio"
+                    name="restaurant"
+                    id="other"
+                    value="Other"
+                  />
+                  <label for="other"> Other</label>
+                </h5>
+                <Button type="submit" variant="success" size="lg">
+                  Vote
+                </Button>
+                {/* <input type="submit" value="Vote" class="btn" /> */}
+              </form>
+              <br />
+              <div id="chartContainer" style={{ height: "300px" }}></div>
             </div>
           </div>
-        </header>
+        </div>
       </div>
       {/* <Container id="restaurantCards">
         <Row>
@@ -123,4 +124,4 @@ const Event = (props) => {
   );
 };
 
-export default Event;
+export default ViewEvent;
