@@ -4,6 +4,13 @@
   flex-direction: column;
 }
 
+#eventdiv {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 5%;
+}
 .card {
   flex-direction: row !important;
 }
@@ -27,5 +34,10 @@
 }
 
 #paragraph {
-  height: 10pc;
+  height: 5pc;
+}
+
+#eventheader {
+  text-align: center;
+  padding-top: 2pc;
 }
