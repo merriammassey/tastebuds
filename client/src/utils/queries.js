@@ -1,6 +1,24 @@
 import { gql } from "@apollo/client";
 
-export const QUERY_RESTAURANTS = gql`
+export const GET_ME = gql`
+  {
+    me {
+      _id
+      username
+      email
+      event {
+        _id
+        name
+        createdAt
+        username
+        notes
+        restaurant
+      }
+    }
+  }
+`;
+
+/* export const QUERY_RESTAURANTS = gql`
   {
     restaurants {
       id
@@ -15,3 +33,4 @@ export const QUERY_RESTAURANTS = gql`
     }
   }
 `;
+ */
