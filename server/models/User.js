@@ -22,8 +22,8 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    // set savedBooks to be an array of data that adheres to the bookSchema
-    savedRestaurant: [Restaurant],
+    // set to be an array of data that adheres to the bookSchema
+    savedEvent: [Restaurant],
     
     friends: [
       {
@@ -63,7 +63,7 @@ userSchema.methods.isCorrectPassword = async function (password) {
 };
 
 // when we query a user, we'll also get another field called `bookCount` with the number of saved books we have
-userSchema.virtual('restaurantCount').get(function () {
+userSchema.virtual('eventCount').get(function () {
   return this.savedRestaurant.length;
 });
 

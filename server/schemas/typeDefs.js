@@ -2,7 +2,13 @@
 const { gql } = require("apollo-server-express");
 
 // create our typeDefs
+
+// queries are how we preform get request and ask for data 
+// mutations are how we preform post put and delete 
+// type defs define the data 
 const typeDefs = gql`
+
+
   type Query {
     me: User
     users: [User]
@@ -48,7 +54,9 @@ const typeDefs = gql`
 
   type Mutation {
     login(email: String!, password: String!): Auth
+
     addUser(username: String!, email: String!, password: String!): Auth
+
     addRestaurant(
       restaurantId: String
       price: Float
@@ -60,9 +68,12 @@ const typeDefs = gql`
       rating: String
       phone: String
     ): Event
+
     removeRestaurant(restaurantId: String!): Event
+
     addVote(restaurant: ID!): User
-    addEvent(name: String, restaurants: [Restaurant], note: String): User
+
+    addEvent(name: String, note: String): User
   }
 `;
 
