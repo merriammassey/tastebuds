@@ -3,7 +3,6 @@ const { gql } = require("apollo-server-express");
 
 // create our typeDefs
 const typeDefs = gql`
-
   type Query {
     me: User
     users: [User]
@@ -19,24 +18,28 @@ const typeDefs = gql`
     event: [Event]
   }
   type Event {
-    _id: ID 
+    _id: ID
     name: String
-    createdAt: String 
+    createdAt: String
     username: String
+    notes: String
     restaurant: [Restaurant]
   }
+
   type Restaurant {
     _id: ID
     restaurantId: String
-    price: Float
-    categories: String
-    description: String
-    title: String!
-    image: String
+    key: Int
+    name: String!
     url: String
+    price: Float
     rating: String
+    address1: String
+    city: String
     phone: String
+    image_url: String
   }
+
   type Auth {
     token: ID!
     user: User
@@ -44,35 +47,28 @@ const typeDefs = gql`
 
   type Mutation {
     login(email: String!, password: String!): Auth
-    
     addUser(username: String!, email: String!, password: String!): Auth
-    
-   
     addRestaurant(
-      restaurantId: String,
-      price: Float,
-      categories: String,
-      description: String,
-      title: String!,
-      image: String,
-      url: String,
-      rating: String,
+      restaurantId: String
+      price: Float
+      categories: String
+      description: String
+      title: String!
+      image: String
+      url: String
+      rating: String
       phone: String
     ): Event
-
-    removeRestaurant(
-      restaurantId: String! 
-    ): Event
-     
-    addVote(restaurant: ID!): User 
-
+    removeRestaurant(restaurantId: String!): Event
+    addVote(restaurant: ID!): User
+    addEvent(name: String, restaurants: [Restaurant], note: String): User
   }
 `;
 
 // export the typeDefs
 module.exports = typeDefs;
 
-// add back to mutation 
+// add back to mutation
 // addEvent(
 //   _id: ID,
 //   name: String,

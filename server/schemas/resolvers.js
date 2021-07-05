@@ -1,7 +1,8 @@
 
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Restaurant } = require("../models"); 
-
+const { Event } = require("../models");
+const { Restaurant } = require("../models");
 const { signToken } = require('../utils/auth'); 
 
 const resolvers = {
@@ -62,57 +63,57 @@ const resolvers = {
         if (context.user) {
           const user = await User.findOneAndUpdate(
             { _id: context.user._id },
-            { $push: { restaurantBooks: restaurantData } },
+            { $push: { restaurant: restaurantData } },
             { new: true }
           );
           return user;
         }
       }, 
 // /// thi
-//       addEvent: async (parents, args) => {
-//           await User.findByIdAndUpdate(
-//             {_id: user._id }, 
-//             { $push: { thoughts: thought._id } },
-//             // without the { new: true } flag Mongo would return the original document instead of the updated document.
-//             { new: true }
-//           );
-//           return Event;
-//         },
-     
-      addVote: async (parent, { restaurantId, restaurantBody }, context) => { 
-        if (context.user){
-          const updatedDate = await date.findOneAndUpdate(
-            {_id: dateId },
-            { $push: { vote: { restaurantBody, username: context.user.username } } },
-            {new: true, runValidators: true }
+      addEvent: async (parent, eventId, eventBody, context => {
+          await User.findByIdAndUpdate(
+            {_id: user._id }, 
+            { $push: { event: event_id } },
+            // without the { new: true } flag Mongo would return the original document instead of the updated document.
+            { new: true }.populate("savedEvent")
           );
+          return UpdateEvent;
+          }),
+     
+      // addVote: async (parent, { restaurantId, restaurantBody }, context) => { 
+      //   if (context.user){
+      //     const updatedDate = await date.findOneAndUpdate(
+      //       {_id: dateId },
+      //       { $push: { vote: { restaurantBody, username: context.user.username } } },
+      //       {new: true, runValidators: true }
+      //     );
   
-          return updatedDate;
+      //     return updatedDate;
           
-        }
-        throw new AuthenticationError('You need to be logged in!');
-      },
+      //   }
+      //   throw new AuthenticationError('You need to be logged in!');
+      // },
     
     
 
-      removeRestaurant: async (parent, { restaurantId }, context) => {
-        if (context.user) {
-          const updatedUser = await User.findOneAndUpdate(
-            { _id: context.user._id },
-            {
-              $pull: {
-                savedBooks: {
-                  bookId: restaurantId,
-                },
-              },
-            },
-            { new: true }
-          ).populate("savedRestaurant");
-          return updatedUser;
-        }
-        throw new AuthenticationError("You need to be logged in");
-      },
-    },
-  };
+  //     removeRestaurant: async (parent, { restaurantId }, context) => {
+  //       if (context.user) {
+  //         const updatedUser = await User.findOneAndUpdate(
+  //           { _id: context.user._id },
+  //           {
+  //             $pull: {
+  //               savedBooks: {
+  //                 bookId: restaurantId,
+  //               },
+  //             },
+  //           },
+  //           { new: true }
+  //         ).populate("savedRestaurant");
+  //         return updatedUser;
+  //       }
+  //       throw new AuthenticationError("You need to be logged in");
+  //     },
+  //   },
+  // };
 
   module.exports = resolvers;
