@@ -1,4 +1,5 @@
 //import React, { useState, useEffect } from "react";
+import { makeChart, getVotes } from "../utils/chartapi";
 import React, { useState, useEffect } from "react";
 import {
   Jumbotron,
@@ -25,8 +26,29 @@ import {
 } from "../utils/localStorage";
 import { SAVE_RESTAURANT } from "../utils/mutations";
 import "./style.css";
+import Chart from "../components/Chart";
+import { propTypes } from "react-bootstrap/esm/Image";
 
-const ViewEvent = () => {
+const ViewEvent = (props) => {
+  const handleVote = async (voteData) => {
+    const choice = await document.querySelector(
+      'input[name="restaurant"]:checked'
+    ).value;
+    const data = { restaurant: choice };
+    //const data = choice;
+    console.log(data);
+
+    const { votes, totalVotes, votesCounts } = await getVotes(voteData);
+
+    let dataPoints = [
+      { y: votesCounts.Maskadores, label: "Maskadores" },
+      { y: votesCounts.MunichGyro, label: "MunichGyro" },
+      { y: votesCounts.Starbucks, label: "Starbucks" },
+      { y: votesCounts.Other, label: "Other" },
+    ];
+    //chart, passing dataPoints and totalVotes
+  };
+
   return (
     <>
       <div id="homephoto">
@@ -38,8 +60,8 @@ const ViewEvent = () => {
             <br />
             <h3>Pre-game dinner</h3>
             <h5>
-              Tom's vegan, so let's pick a place he can <br />
-              eat too for dinner before the game tomorrow night.
+              Here are a few places close to the stadium. <br />
+              Please vote by 3pm today, and I'll make reservations.
             </h5>
             <div id="form">
               <form id="vote-form">
@@ -79,13 +101,19 @@ const ViewEvent = () => {
                   />
                   <label for="other"> Other</label>
                 </h5>
-                <Button type="submit" variant="success" size="lg">
+                <Button
+                  onSubmit={handleVote}
+                  type="submit"
+                  variant="success"
+                  size="lg"
+                >
                   Vote
                 </Button>
                 {/* <input type="submit" value="Vote" class="btn" /> */}
               </form>
               <br />
-              <div id="chartContainer" style={{ height: "300px" }}></div>
+              <Chart {...props} />
+              {/* <div id="chartContainer" style={{ height: "300px" }}></div> */}
             </div>
           </div>
         </div>

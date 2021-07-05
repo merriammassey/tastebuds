@@ -35,9 +35,9 @@ const Event = () => {
     getSavedRestaurantIds()
   );
   //added for restaurant data
-  const [savedRestaurantData, setSavedRestaurantData] = useState(
+  /* const [savedRestaurantData, setSavedRestaurantData] = useState(
     getSavedRestaurantData()
-  );
+  ); */
   // create event and set state on form submit
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -105,9 +105,11 @@ const Event = () => {
                         />
                       </Col>
                       <Col xs={12} md={4}>
-                        <Button type="submit" variant="success" size="lg">
-                          Send to friends
-                        </Button>
+                        <Link to="/viewevent">
+                          <Button type="submit" variant="success" size="lg">
+                            Invite your friends
+                          </Button>
+                        </Link>
                         {/* </Link> */}
                       </Col>
                     </Form.Row>

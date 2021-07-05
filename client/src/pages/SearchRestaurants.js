@@ -51,9 +51,9 @@ const SearchRestaurants = () => {
     return () => saveRestaurantIds(savedRestaurantIds);
   });
   //added for restaurant data
-  useEffect(() => {
+  /* useEffect(() => {
     return () => saveRestaurantData(savedRestaurantData);
-  });
+  }); */
 
   // create method to search for books and set state on form submit
   const handleFormSubmit = async (event) => {
@@ -123,16 +123,11 @@ const SearchRestaurants = () => {
  */
   //updated to use save book mutation instead of api savebook function
   // create function to handle saving a book to our database
-  const handleSaveRestaurant = async (restaurantId) => {
+  /*   const handleSaveRestaurant = async (restaurantId) => {
     const restaurantToSave = searchedRestaurants.find(
       (restaurant) => restaurant.id === id
     );
-    // get token
-    //MOVE THIS TO ANOTHER PLACE?
-    /* const token = Auth.loggedIn() ? Auth.getToken() : null;
-    if (!token) {
-      return false;
-    } */
+
     try {
       //const response = await saveBook(bookToSave, token);
       await saveRestaurant({
@@ -156,7 +151,7 @@ const SearchRestaurants = () => {
     } catch (err) {
       console.error(err);
     }
-  };
+  }; */
 
   return (
     <>
