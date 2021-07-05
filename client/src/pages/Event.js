@@ -27,6 +27,9 @@ import { SAVE_RESTAURANT } from "../utils/mutations";
 import "./style.css";
 
 const Event = () => {
+  const [state, dispatch] = useStoreContext();
+  const { currentRestaurants } = state;
+
   // create state for holding our search field data
   const [eventNameInput, setEventNameInput] = useState("");
   const [eventNotesInput, setEventNotesInput] = useState("");
@@ -53,6 +56,13 @@ const Event = () => {
                 <h1 id="eventheader" style={{ color: "#212529" }}>
                   Create your Event
                 </h1>
+                <br />
+                <h5>
+                  Enter a title and notes about your event.
+                  <br />
+                  Then invite your friends to help choose the restaurant.
+                </h5>
+
                 <div id="form">
                   <Form onSubmit={handleFormSubmit}>
                     <Form.Row>
@@ -66,34 +76,32 @@ const Event = () => {
                           placeholder="Event name"
                         />
                         <p>SAVED RESTAURANTS GO HERE</p>
-                        {/* <SavedRestaurants /> */}
-                        {/* <Card key={restaurant.id} style={{ width: "35rem" }}>
-                          <Card.Img
-                            variant="left"
-                            width={"250"}
-                            height={"250"}
-                            src={restaurant.image_url}
-                          />
-                          <Card.Body>
-                            <Card.Title>{restaurant.name}</Card.Title>
-                            <Card.Text>
-                              Rating: {restaurant.rating} <br />
-                              Price: {restaurant.price} <br />
-                              {restaurant.location}, {restaurant.city} <br />
-                              {restaurant.phone} <br />
-                              <a href={restaurant.url}>Website</a>
-                            </Card.Text> 
-
-                            {/* <Form.Group controlId="formBasicCheckbox">
-                              <Form.Check
-                                type="checkbox"
-                                label="Remove from event"
+                        {currentRestaurants.map((restaurant) => {
+                          return (
+                            <Card
+                              key={restaurant.id}
+                              style={{ width: "35rem" }}
+                            >
+                              <Card.Img
+                                variant="left"
+                                width={"250"}
+                                height={"250"}
+                                src={restaurant.image_url}
                               />
-                            </Form.Group> 
-                             <Button variant="primary">Add to event</Button>
-                             {" "}
-                          </Card.Body>
-                        </Card>{" "}*/}
+                              <Card.Body>
+                                <Card.Title>{restaurant.name}</Card.Title>
+                                <Card.Text>
+                                  Rating: {restaurant.rating} <br />
+                                  Price: {restaurant.price} <br />
+                                  {restaurant.location}, {restaurant.city}{" "}
+                                  <br />
+                                  {restaurant.phone} <br />
+                                  <a href={restaurant.url}>Website</a>
+                                </Card.Text>
+                              </Card.Body>
+                            </Card>
+                          );
+                        })}
                         <Form.Control
                           name="eventNotesInput"
                           value={eventNotesInput}

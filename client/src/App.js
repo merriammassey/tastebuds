@@ -45,12 +45,6 @@ function App() {
               <Route exact path="/dashboard" component={Dashboard} />
               <Route exact path="/event" component={Event} />
               <Route exact path="/viewevent" component={ViewEvent} />
-
-              {/*               <Route
-                exact
-                path="/restaurants"
-                component={SearchedRestaurants}
-              /> */}
             </Switch>
           </StoreProvider>
         </div>

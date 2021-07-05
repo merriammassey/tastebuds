@@ -13,6 +13,7 @@ const StoreProvider = ({ value = [], ...props }) => {
   const [state, dispatch] = useRestaurantReducer({
     restaurants: [],
     event: [],
+    currentRestaurants: [],
     //cartOpen: false,
     //categories: [],
     //currentCategory: "",

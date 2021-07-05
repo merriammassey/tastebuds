@@ -1,5 +1,7 @@
 //import React, { useState, useEffect } from "react";
 import React, { useState, useEffect } from "react";
+import { useStoreContext } from "../utils/GlobalState";
+
 import {
   Container,
   Col,
@@ -9,51 +11,29 @@ import {
   Card,
   CardColumns,
 } from "react-bootstrap";
-//import { Link } from "react-router-dom";
-//global state imports
-//import { useStoreContext } from "../utils/GlobalState";
-//import { UPDATE_SEARCHED_RESTAURANTS } from "../utils/actions";
-//import { QUERY_RESTAURANTS } from "../utils/queries";
 import { searchYelp } from "../utils/yelpAPI";
 
 import { useQuery, useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
-import {
-  saveRestaurantIds,
-  getSavedRestaurantIds,
-} from "../utils/localStorage";
-import { SAVE_RESTAURANT } from "../utils/mutations";
 import "./style.css";
 import Footer from "../components/Footer";
+
 const SearchRestaurants = () => {
-  //GLOBAL STATE VARIABLES
-  /* const [state, dispatch] = useStoreContext;
+  const [state, dispatch] = useStoreContext();
   const { restaurants } = state;
-  const { data: restaurantData } = useQuery(QUERY_RESTAURANTS);  */
-  //END GLOBAL STATE VARIABLES
+  //const { data: restaurantData } = useQuery(QUERY_RESTAURANTS);
 
   // create state for holding returned yelp data
   const [searchedRestaurants, setSearchedRestaurants] = useState([]);
   // create state for holding our search field data
   const [termInput, setTermInput] = useState("");
   const [locationInput, setLocationInput] = useState("");
+  const [eventRestaurants, setEventRestaurants] = useState([]);
 
-  // create state to hold saved restaurant data
+  /* // create state to hold saved restaurant data
   const [savedRestaurantIds, setSavedRestaurantIds] = useState(
     getSavedRestaurantIds()
-  );
-
-  //const [saveRestaurant, { error }] = useMutation(SAVE_RESTAURANT);
-
-  // set up useEffect hook to save `savedRestaurants` data to localStorage on component unmount
-  // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
-  useEffect(() => {
-    return () => saveRestaurantIds(savedRestaurantIds);
-  });
-  //added for restaurant data
-  /* useEffect(() => {
-    return () => saveRestaurantData(savedRestaurantData);
-  }); */
+  ); */
 
   // create method to search for books and set state on form submit
   const handleFormSubmit = async (event) => {
@@ -67,15 +47,8 @@ const SearchRestaurants = () => {
     }
     try {
       const restaurantData = await searchYelp(locationInput, termInput);
-      //console.log(response);
-      /* if (!response.ok) {
-        throw new Error("something went wrong!");
-      } */
+      console.log(restaurantData);
 
-      //const { items } = await response.json();
-      //console.log(response);
-      //const results = response.jsonBody.businesses;
-      //console.log(results);
       const mappedRestaurantData = restaurantData.map((restaurant, index) => ({
         key: restaurant.id,
         id: restaurant.id,
@@ -89,8 +62,6 @@ const SearchRestaurants = () => {
         image_url: restaurant.image_url,
         url: restaurant.url,
       }));
-
-      console.log(restaurantData);
       setSearchedRestaurants(mappedRestaurantData);
       setTermInput("");
       setLocationInput("");
@@ -99,59 +70,23 @@ const SearchRestaurants = () => {
     }
   };
 
-  //SAVE RESTAURANT DATA IN GLOBAL STATE use this funciton instead of click handler in 22.1.6
-  /* const saveRestaurantData = (restaurantData) => {
-    dispatch({
-      type: UPDATE_SEARCHED_RESTAURANTS,
-      currentRestaurants: [restaurantData], //just id in UPDATE_CURRENT_CATEGORY action in 22.1.6
-    });
-  };
-  saveRestaurantData(restaurantData); */
-  //END GLOBAL STATE UPDATE
+  const tempArr = [];
 
-  //restaurantData will be undefined on load, but useEffect will run when state changes in this component
-  /* useEffect(() => {
-    // if restaurantData exists or has changed from the response of useQuery, then run dispatch()
-    if (restaurantData) {
-      // execute our dispatch function with our action object indicating the type of action and the data to set our state for categories to
+  const addRestaurant = (event) => {
+    const index = event.target.getAttribute("value");
+    console.log(event.target.getAttribute("value"));
+
+    tempArr.push(searchedRestaurants[index]);
+    console.log(tempArr);
+    //global state
+    const saveRestaurantData = (restaurantData) => {
       dispatch({
-        type: UPDATE_SEARCHED_RESTAURANTS,
-        restaurants: restaurantData.restaurants,
+        type: "UPDATE_SEARCHED_RESTAURANTS",
+        currentRestaurants: restaurantData, //just id in UPDATE_CURRENT_CATEGORY action in 22.1.6
       });
-    }
-  }, [restaurantData, dispatch]);
- */
-  //updated to use save book mutation instead of api savebook function
-  // create function to handle saving a book to our database
-  /*   const handleSaveRestaurant = async (restaurantId) => {
-    const restaurantToSave = searchedRestaurants.find(
-      (restaurant) => restaurant.id === id
-    );
-
-    try {
-      //const response = await saveBook(bookToSave, token);
-      await saveRestaurant({
-        variables: {
-          id: restaurantToSave.id,
-          name: restaurantToSave.name,
-          //categories: restaurantToSave.categories.title,
-          rating: restaurantToSave.rating,
-          price: restaurantToSave.price,
-          location: restaurantToSave.location,
-          city: restaurantToSave.city,
-          phone: restaurantToSave.phone,
-          image_url: restaurantToSave.image_url,
-          url: restaurantToSave.url,
-        },
-      });
-      //if (!response.ok) {
-      //throw new Error("something went wrong!");
-      // if book successfully saves to user's account, save book id to state
-      setSavedRestaurantIds([...savedRestaurantIds, restaurantToSave.id]);
-    } catch (err) {
-      console.error(err);
-    }
-  }; */
+    };
+    saveRestaurantData(tempArr);
+  };
 
   return (
     <>
@@ -225,9 +160,13 @@ const SearchRestaurants = () => {
       <Container id="restaurantCards">
         <Row>
           <Col style={{ alignItems: "center" }}>
-            {searchedRestaurants.map((restaurant) => {
+            {searchedRestaurants.map((restaurant, index) => {
               return (
-                <Card key={restaurant.id} style={{ width: "35rem" }}>
+                <Card
+                  key={restaurant.id}
+                  index={index}
+                  style={{ width: "35rem" }}
+                >
                   <Card.Img
                     variant="left"
                     width={"250"}
@@ -246,9 +185,18 @@ const SearchRestaurants = () => {
                     <Form.Group controlId="formBasicCheckbox">
                       <Form.Check type="checkbox" label="Add to event" />
                     </Form.Group>
+                    <div
+                      onClick={(event) => addRestaurant(event)}
+                      value={index}
+                      name={restaurant}
+                    >
+                      click to add to event
+                    </div>
                     {/*                     <Button variant="primary">Add to event</Button>
                      */}{" "}
                   </Card.Body>
+                  <br />
+                  <br />
                 </Card>
               );
             })}
