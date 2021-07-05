@@ -26,7 +26,7 @@ import {
 import { SAVE_RESTAURANT } from "../utils/mutations";
 import "./style.css";
 
-const Event = (props) => {
+const Event = () => {
   // create state for holding our search field data
   const [eventNameInput, setEventNameInput] = useState("");
   const [eventNotesInput, setEventNotesInput] = useState("");
@@ -34,7 +34,10 @@ const Event = (props) => {
   const [savedRestaurantIds, setSavedRestaurantIds] = useState(
     getSavedRestaurantIds()
   );
-
+  //added for restaurant data
+  const [savedRestaurantData, setSavedRestaurantData] = useState(
+    getSavedRestaurantData()
+  );
   // create event and set state on form submit
   const handleFormSubmit = async (event) => {
     event.preventDefault();

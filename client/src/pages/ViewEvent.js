@@ -26,7 +26,7 @@ import {
 import { SAVE_RESTAURANT } from "../utils/mutations";
 import "./style.css";
 
-const ViewEvent = (props) => {
+const ViewEvent = () => {
   return (
     <>
       <div id="homephoto">

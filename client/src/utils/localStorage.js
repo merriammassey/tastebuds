@@ -1,3 +1,20 @@
+//added top 2 for all selected restaurant data
+/* export const saveRestaurantData = (restaurantArr) => {
+  if (restaurantArr.length) {
+    localStorage.setItem("saved_restaurants", JSON.stringify(restaurantArr));
+  } else {
+    localStorage.removeItem("saved_restaurants");
+  }
+};
+
+export const getSavedRestaurantData = () => {
+  const savedRestaurantdata = localStorage.getItem("saved_restaurants")
+    ? JSON.parse(localStorage.getItem("saved_restaurants"))
+    : [];
+
+  return savedRestaurantData;
+}; */
+
 export const getSavedRestaurantIds = () => {
   const savedRestaurantIds = localStorage.getItem("saved_restaurants")
     ? JSON.parse(localStorage.getItem("saved_restaurants"))

@@ -29,7 +29,7 @@ const SearchRestaurants = () => {
   //GLOBAL STATE VARIABLES
   /* const [state, dispatch] = useStoreContext;
   const { restaurants } = state;
-  const { data: restaurantData } = useQuery(QUERY_RESTAURANTS); */
+  const { data: restaurantData } = useQuery(QUERY_RESTAURANTS);  */
   //END GLOBAL STATE VARIABLES
 
   // create state for holding returned yelp data
@@ -38,17 +38,21 @@ const SearchRestaurants = () => {
   const [termInput, setTermInput] = useState("");
   const [locationInput, setLocationInput] = useState("");
 
-  // create state to hold saved restaurant values
+  // create state to hold saved restaurant data
   const [savedRestaurantIds, setSavedRestaurantIds] = useState(
     getSavedRestaurantIds()
   );
 
-  const [saveRestaurant, { error }] = useMutation(SAVE_RESTAURANT);
+  //const [saveRestaurant, { error }] = useMutation(SAVE_RESTAURANT);
 
-  // set up useEffect hook to save `savedRestaurants` list to localStorage on component unmount
+  // set up useEffect hook to save `savedRestaurants` data to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
     return () => saveRestaurantIds(savedRestaurantIds);
+  });
+  //added for restaurant data
+  useEffect(() => {
+    return () => saveRestaurantData(savedRestaurantData);
   });
 
   // create method to search for books and set state on form submit
@@ -120,16 +124,15 @@ const SearchRestaurants = () => {
   //updated to use save book mutation instead of api savebook function
   // create function to handle saving a book to our database
   const handleSaveRestaurant = async (restaurantId) => {
-    // find the book in `searchedBooks` state by the matching id
     const restaurantToSave = searchedRestaurants.find(
-      (restaurant) => restaurant.restaurantId === restaurantId
+      (restaurant) => restaurant.id === id
     );
     // get token
     //MOVE THIS TO ANOTHER PLACE?
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    /* const token = Auth.loggedIn() ? Auth.getToken() : null;
     if (!token) {
       return false;
-    }
+    } */
     try {
       //const response = await saveBook(bookToSave, token);
       await saveRestaurant({
