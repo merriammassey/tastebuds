@@ -15,3 +15,12 @@ export const QUERY_RESTAURANTS = gql`
     }
   }
 `;
+
+export const QUERY_USER = gql `
+{
+  user : 
+    fistName
+    lastName
+}
+
+`;
