@@ -36,7 +36,7 @@ const Event = () => {
   const [addEvent, { error }] = useMutation(ADD_EVENT);
 
   const handleAddEvent = async (event) => {
-    event.preventDefault();
+    //event.preventDefault();
     console.log(eventNameInput);
     if (!eventNameInput) {
       //add modal
@@ -146,17 +146,16 @@ const Event = () => {
                         })}
                       </Col>
                       <Col xs={12} md={4}>
-                        {/* <Link to="/viewevent"> */}
-                        <Button
-                          onClick={handleAddEvent}
-                          type="submit"
-                          variant="success"
-                          size="lg"
-                        >
-                          Invite your friends
-                        </Button>
-                        {/* </Link> */}
-                        {/* </Link> */}
+                        <Link to="/viewevent">
+                          <Button
+                            onClick={handleAddEvent}
+                            type="submit"
+                            variant="success"
+                            size="lg"
+                          >
+                            Invite your friends
+                          </Button>
+                        </Link>
                       </Col>
                     </Form.Row>
                   </Form>

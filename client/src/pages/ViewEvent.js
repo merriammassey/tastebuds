@@ -29,7 +29,10 @@ import "./style.css";
 //import Chart from "../components/Chart";
 import { propTypes } from "react-bootstrap/esm/Image";
 
-const ViewEvent = (props) => {
+const ViewEvent = () => {
+  const [state, dispatch] = useStoreContext();
+  const { currentRestaurants, eventTitle, eventNote } = state;
+
   const handleVote = async (voteData) => {
     const choice = await document.querySelector(
       'input[name="restaurant"]:checked'
@@ -58,11 +61,58 @@ const ViewEvent = (props) => {
               Where would you like to eat?
             </h1>{" "}
             <br />
-            <h3>Pre-game dinner</h3>
+            {/* <h3>Pre-game dinner</h3> */}
+            <h3>{eventTitle}</h3>
             <h5>
-              Here are a few places close to the stadium. <br />
-              Please vote by 3pm today, and I'll make reservations.
+              {eventNote}
+              {/* Here are a few places close to the stadium. <br />
+              Please vote by 3pm today, and I'll make reservations. */}
             </h5>
+            {/* MAP CARDS */}
+            <Container id="restaurantCards">
+              <Row>
+                <Col style={{ alignItems: "center" }}>
+                  {currentRestaurants.map((restaurant, index) => {
+                    return (
+                      <Card
+                        key={restaurant.id}
+                        index={index}
+                        style={{ width: "35rem" }}
+                      >
+                        <Card.Img
+                          variant="left"
+                          width={"250"}
+                          height={"250"}
+                          src={restaurant.image_url}
+                        />
+                        <Card.Body>
+                          <Card.Title>{restaurant.name}</Card.Title>
+                          <Card.Text>
+                            Rating: {restaurant.rating} <br />
+                            Price: {restaurant.price} <br />
+                            {restaurant.location}, {restaurant.city} <br />
+                            {restaurant.phone} <br />
+                            <a href={restaurant.url}>Website</a>
+                          </Card.Text>
+                          <Form.Group controlId="formBasicCheckbox">
+                            <Form.Check type="checkbox" label="Add to event" />
+                          </Form.Group>
+                          <div
+                            // onClick={(event) => addRestaurant(event)}
+                            value={index}
+                            name={restaurant}
+                          >
+                            Click to select
+                          </div>
+                          {/*                     <Button variant="primary">Add to event</Button>
+                           */}{" "}
+                        </Card.Body>
+                      </Card>
+                    );
+                  })}
+                </Col>
+              </Row>
+            </Container>
             <div id="form">
               <form id="vote-form">
                 <h5>
