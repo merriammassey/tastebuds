@@ -25,14 +25,9 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_EVENT = gql`
-  mutation addEvent($name: String, $restaurants: [Restaurant], $note: String) {
-    addEvent(name: $name, restaurants: $restaurants, note: $note) {
+  mutation addEvent($title: String, $note: String) {
+    addEvent(title: $title, note: $note) {
       username
-      events {
-        name
-        restaurants
-        note
-      }
     }
   }
 `;

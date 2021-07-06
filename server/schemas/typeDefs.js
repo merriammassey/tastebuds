@@ -19,25 +19,34 @@ const typeDefs = gql`
 
   type Event {
     _id: ID
-    name: String
+    title: String
     createdAt: String
     username: String
     notes: String
-    restaurant: [Restaurant]
   }
 
   type Restaurant {
-    _id: ID
-    restaurantId: String
-    key: Int
-    name: String!
-    url: String
-    price: Float
+    id: String
+    name: String
     rating: String
-    address1: String
+    price: String
+    location: String
     city: String
     phone: String
     image_url: String
+    url: String
+  }
+
+  input RestaurantInput {
+    id: String
+    name: String
+    rating: String
+    price: String
+    location: String
+    city: String
+    phone: String
+    image_url: String
+    url: String
   }
 
   type Vote {
@@ -53,20 +62,9 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    addRestaurant(
-      restaurantId: String
-      price: Float
-      categories: String
-      description: String
-      title: String!
-      image: String
-      url: String
-      rating: String
-      phone: String
-    ): Event
+    addEvent(title: String, notes: String): User
     removeRestaurant(restaurantId: String!): Event
     addVote(restaurant: ID!): User
-    addEvent(name: String, note: String): User
   }
 `;
 

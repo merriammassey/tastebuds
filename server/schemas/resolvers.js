@@ -61,25 +61,27 @@ const resolvers = {
       return { token, user };
     },
     //Only logged-in users should be able to use this mutation, hence why we check for the existence of context.user first
-    addEvent: async (parents, args, context) => {
+    addEvent: async (parents, eventData, context) => {
+      console.log(eventData);
+      console.log(context.user);
       if (context.user) {
         const event = await Event.create({
           ...args,
-          username: context.user.username,
+          _id: context.user._id,
         });
 
-        await User.findByIdAndUpdate(
+        await User.findOneAndUpdate(
           { _id: context.user._id },
           { $push: { events: event._id } },
           // without the { new: true } flag Mongo would return the original document instead of the updated document.
           { new: true }
         );
-        return event;
+        return user;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    addRestaurant: async (parent, { thoughtId, restaurantName }, context) => {
+    /*    addRestaurant: async (parent, { thoughtId, restaurantName }, context) => {
       if (context.user) {
         const updatedEvent = await Event.findOneAndUpdate(
           { _id: eventId },
@@ -96,7 +98,7 @@ const resolvers = {
       }
 
       throw new AuthenticationError("You need to be logged in!");
-    },
+    }, */
 
     // 21.2.6 end of page might need to revisit this
     addVote: async (parent, { restaurantId, restaurantName }, context) => {
@@ -137,3 +139,21 @@ const resolvers = {
 };
 
 module.exports = resolvers;
+
+/* addEvent: async (parents, args, context) => {
+  if (context.user) {
+    const event = await Event.create({
+      ...args,
+      username: context.user.username,
+    });
+
+    await User.findByIdAndUpdate(
+      { _id: context.user._id },
+      { $push: { events: event._id } },
+      // without the { new: true } flag Mongo would return the original document instead of the updated document.
+      { new: true }
+    );
+    return event;
+  }
+  throw new AuthenticationError("You need to be logged in!");
+}, */

@@ -1,27 +1,21 @@
 const { Schema, model } = require("mongoose");
 
 const restaurantSchema = new Schema({
-  restaurantId: {
+  id: {
     type: String,
     required: true,
-  },
-  key: {
-    type: String,
   },
   name: {
     type: String,
     required: true,
   },
-  url: {
+  rating: {
     type: String,
   },
   price: {
     type: String,
   },
-  rating: {
-    type: String,
-  },
-  address1: {
+  location: {
     type: String,
   },
   city: {
@@ -33,9 +27,13 @@ const restaurantSchema = new Schema({
   image_url: {
     type: String,
   },
+  url: {
+    type: String,
+  },
 });
 
 // creating model
 const Restaurant = model("Restaurant", restaurantSchema);
 
-module.export = Restaurant;
+//module.exports = Restaurant;
+module.exports = restaurantSchema;
