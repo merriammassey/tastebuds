@@ -1,8 +1,7 @@
 
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Restaurant } = require("../models"); 
-const { Event } = require("../models");
-const { Restaurant } = require("../models");
+const { User, Event, Restaurant} = require("../models"); 
+
 const { signToken } = require('../utils/auth'); 
 
 const resolvers = {
@@ -18,17 +17,18 @@ const resolvers = {
       throw new AuthenticationError("You're not logged in.");
     },
     users: async () => {
+     // console.log(_id)
       return User.find()
         .select(' -password')
         .populate('event')
     },
-    user: async (parent, { username }) => {
-      return User.findOne({ username })
+    user: async (parent, { user }) => {
+      return User.findOne({ user })
         .select('-__v -password')
         .populate('event')
     },
-    events: async (parent, { username }) => {
-      const params = username ? { username } : {};
+    events: async (parent, { user }) => {
+      const params = username ? { user } : {};
       return Event.find(params).sort({ createdAt: -1 });
     },
     event: async (parent, { _id }) => {
@@ -42,6 +42,9 @@ const resolvers = {
         return { token, user };
       },
       login: async (parent, { email, password, }) => {
+        //console.log(user)
+        console.log(email)
+        console.log(password)
         const user = await User.findOne({ email });
         if (!user) {
           throw new AuthenticationError("Incorrect credentials");
@@ -55,7 +58,7 @@ const resolvers = {
 
         console.log(token);
 
-        return { token, user };
+        return { user, token };
       },
       addRestaurant: async (parent, restaurantData, context) => {
         console.log(restaurantData);
@@ -70,15 +73,15 @@ const resolvers = {
         }
       }, 
 // /// thi
-      addEvent: async (parent, eventId, eventBody, context => {
-          await User.findByIdAndUpdate(
-            {_id: user._id }, 
-            { $push: { event: event_id } },
-            // without the { new: true } flag Mongo would return the original document instead of the updated document.
-            { new: true }.populate("savedEvent")
-          );
-          return UpdateEvent;
-          }),
+      // addEvent: async (parent, eventId, eventBody, context => {
+      //     await User.findByIdAndUpdate(
+      //       {_id: user._id }, 
+      //       { $push: { event: event_id } },
+      //       // without the { new: true } flag Mongo would return the original document instead of the updated document.
+      //       { new: true }.populate("savedEvent")
+      //     );
+      //     return UpdateEvent;
+      //     }),
      
       // addVote: async (parent, { restaurantId, restaurantBody }, context) => { 
       //   if (context.user){
@@ -115,5 +118,6 @@ const resolvers = {
   //     },
   //   },
   // };
+        }}
 
   module.exports = resolvers;

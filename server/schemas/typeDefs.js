@@ -13,7 +13,7 @@ const typeDefs = gql`
 
   type User {
     _id: ID!
-    username: String!
+    user: String!
     email: String!
     event: [Event]
   }
@@ -21,7 +21,7 @@ const typeDefs = gql`
     _id: ID
     name: String
     createdAt: String
-    username: String
+    user: String
     notes: String
     restaurant: [Restaurant]
   }
@@ -47,7 +47,7 @@ const typeDefs = gql`
 
   type Mutation {
     login(email: String!, password: String!): Auth
-    addUser(username: String!, email: String!, password: String!): Auth
+    addUser(user: String!, email: String!, password: String!): Auth
     addRestaurant(
       restaurantId: String
       price: Float
@@ -61,7 +61,7 @@ const typeDefs = gql`
     ): Event
     removeRestaurant(restaurantId: String!): Event
     addVote(restaurant: ID!): User
-    addEvent(name: String, restaurants: [Restaurant], note: String): User
+    addEvent(name: String, restaurant: String, note: String): User
   }
 `;
 

@@ -1,4 +1,5 @@
-const { Schema, model } = require("mongoose");
+const mongoose = require("mongoose");
+const { Schema } = mongoose
 const restaurantSchema = require("./Restaurant");
 const dateFormat = require("../utils/dateFormat");
 const userSchema = require("./User");
@@ -33,6 +34,6 @@ const eventSchema = new Schema(
   }
 );
 
-const Event = model("Event", eventSchema);
+const Event = mongoose.model("Event", eventSchema);
 
 module.exports = Event;

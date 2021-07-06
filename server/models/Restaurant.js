@@ -1,8 +1,6 @@
-<<<<<<< HEAD
-const { Schema, models } = require('mongoose');
-=======
-const { Schema, model } = require("mongoose");
->>>>>>> b5b3a8562f360d10bd21393da58a40cccce2908b
+
+const mongoose = require("mongoose");
+const { Schema } = mongoose
 
 const restaurantSchema = new Schema({
   restaurantId: {
@@ -40,9 +38,6 @@ const restaurantSchema = new Schema({
 });
 
 // creating model
-const Restaurant = model("Restaurant", restaurantSchema);
+const Restaurant = mongoose.model("Restaurant", restaurantSchema);
 
-// creating model
-const Restaurant = model("Restaurant", restaurantSchema);
-
-module.export = Restaurant;
+module.exports = Restaurant;
