@@ -1,36 +1,34 @@
-//Resolvers: Resolvers are simply the functions we connect to each query or 
+//Resolvers: Resolvers are simply the functions we connect to each query or
 //mutation type definition that perform the CRUD actions that each query or mutation is expected to perform.
-const { AuthenticationError } = require('apollo-server-express');
-const { User, Restaurant } = require("../models");
+const { AuthenticationError } = require("apollo-server-express");
+const User = require("../models/User");
+const Event = require("../models/Event");
 
-const { signToken } = require('../utils/auth');
+const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-
     // get a single user - me
     me: async (parent, args, context) => {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
-          .select('-__v -password')
-          .populate('thoughts')
-          .populate('friends');
+          .select("-__v -password")
+          .populate("thoughts")
+          .populate("friends");
 
         return userData;
       }
 
-      throw new AuthenticationError('Not logged in');
+      throw new AuthenticationError("Not logged in");
     },
 
     users: async () => {
-      return User.find()
-        .select(' -password')
-        .populate('event')
+      return User.find().select(" -password").populate("event");
     },
     user: async (parent, { username }) => {
       return User.findOne({ username })
-        .select('-__v -password')
-        .populate('events')
+        .select("-__v -password")
+        .populate("events");
     },
     events: async (parent, { username }) => {
       const params = username ? { username } : {};
@@ -46,7 +44,7 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    login: async (parent, { email, password, }) => {
+    login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
       if (!user) {
         throw new AuthenticationError("Incorrect credentials");
@@ -65,7 +63,10 @@ const resolvers = {
     //Only logged-in users should be able to use this mutation, hence why we check for the existence of context.user first
     addEvent: async (parents, args, context) => {
       if (context.user) {
-        const event = await Event.create({ ...args, username: context.user.username });
+        const event = await Event.create({
+          ...args,
+          username: context.user.username,
+        });
 
         await User.findByIdAndUpdate(
           { _id: context.user._id },
@@ -82,33 +83,38 @@ const resolvers = {
       if (context.user) {
         const updatedEvent = await Event.findOneAndUpdate(
           { _id: eventId },
-          // Mongo $push to update an existing event 
-          { $push: { restaurant: { restaurantName, username: context.user.username } } },
+          // Mongo $push to update an existing event
+          {
+            $push: {
+              restaurant: { restaurantName, username: context.user.username },
+            },
+          },
           { new: true, runValidators: true }
         );
-    
+
         return updatedEvent;
       }
-    
-      throw new AuthenticationError('You need to be logged in!');
+
+      throw new AuthenticationError("You need to be logged in!");
     },
 
-
-    // 21.2.6 end of page might need to revisit this  
-    addVote: async (parent, { restaurantId, restaurantBody }, context) => {
+    // 21.2.6 end of page might need to revisit this
+    addVote: async (parent, { restaurantId, restaurantName }, context) => {
       if (context.user) {
-        const updatedEvent = await event.findOneAndUpdate(
+        const updatedEvent = await Event.findOneAndUpdate(
           { _id: eventId },
-          { $push: { vote: { restaurantBody, username: context.user.username } } },
+          {
+            $push: {
+              vote: { restaurantName, username: context.user.username },
+            },
+          },
           { new: true, runValidators: true }
         );
 
         return updatedEvent;
-
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError("You need to be logged in!");
     },
-
 
     //   removeRestaurant: async (parent, { restaurantId }, context) => {
     //     if (context.user) {
@@ -127,8 +133,6 @@ const resolvers = {
     //     }
     //     throw new AuthenticationError("You need to be logged in");
     //   },
-
-
   },
 };
 
