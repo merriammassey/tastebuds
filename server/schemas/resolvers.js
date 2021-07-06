@@ -78,17 +78,23 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    addRestaurant: async (parent, eventId, context) => {
-      if (context.event) {
+    addRestaurant: async (parent, { thoughtId, restaurantName }, context) => {
+      if (context.user) {
         const updatedEvent = await Event.findOneAndUpdate(
-          { _id: eventID },
-          { $push: { restaurant: restaurantData } },
-          { new: true }
+          { _id: eventId },
+          // Mongo $push to update an existing event 
+          { $push: { restaurant: { restaurantName, username: context.user.username } } },
+          { new: true, runValidators: true }
         );
+    
         return updatedEvent;
       }
+    
+      throw new AuthenticationError('You need to be logged in!');
     },
 
+
+    // 21.2.6 end of page might need to revisit this  
     addVote: async (parent, { restaurantId, restaurantBody }, context) => {
       if (context.user) {
         const updatedEvent = await event.findOneAndUpdate(
