@@ -4,11 +4,12 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
+  createHttpLink,
   useQuery,
   gql,
 } from "@apollo/client";
-import { createHttpLink } from "apollo-link-http";
-import { setContext } from "apollo-link-context";
+//import { createHttpLink } from "apollo-link-http";
+import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { StoreProvider } from "./utils/GlobalState";
 // Start Pages import //
@@ -47,9 +48,9 @@ const client = new ApolloClient({
 });
 
 function App() {
-  const yelp = require("yelp-fusion");
+  /* const yelp = require("yelp-fusion");
   const apiKey = `${process.env.REACT_APP_YELP_KEY}`;
-  const yelpclient = yelp.client(apiKey);
+  const yelpclient = yelp.client(apiKey); */
   return (
     <ApolloProvider client={client}>
       <Router>

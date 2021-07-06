@@ -3,13 +3,11 @@ const Restaurant = require("./Restaurant");
 const dateFormat = require("../utils/dateFormat");
 const User = require("./User");
 
-const eventSchema = new (
+const eventSchema = new Schema(
   {
     name: {
       type: String,
       required: "You need to name your event",
-      minlength: 1,
-      maxlength: 30,
     },
     createdAt: {
       type: Date,
@@ -23,8 +21,7 @@ const eventSchema = new (
     notes: {
       type: String,
     },
-    invites: [User],
-    savedRestaurant: [Restaurant],
+    restaurants: [Restaurant],
   },
   {
     toJSON: {
