@@ -19,7 +19,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    events: [eventSchema],
+    //events: [eventSchema],
     /* // set to be an array of data that adheres to the bookSchema
     savedEvent: [Restaurant],
 
