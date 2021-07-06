@@ -1,3 +1,6 @@
+:root {
+  background-color: #343a40;
+}
 #restaurantCards {
   padding-top: 5%;
   display: flex;
@@ -11,8 +14,12 @@
   justify-content: center;
   padding-top: 5%;
 }
+.card-body {
+  padding-bottom: 0 !important;
+}
 .card {
   flex-direction: row !important;
+  margin-bottom: 5px;
 }
 
 #event {

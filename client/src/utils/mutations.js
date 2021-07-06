@@ -70,3 +70,33 @@ export const SAVE_RESTAURANT = gql`
     }
   }
 `;
+
+/* export const SAVE_EVENT = gql`
+  mutation saveEvent(
+    $id: String!
+    $name: String!
+    $restaurants: [Restaurant]
+    $notes: String
+  ) {
+    saveEvent(
+      id: $id
+      name: $name
+      restaurants: $[Restaurants]
+      notes: $notes
+    ) {
+      user
+      event
+      savedRestaurants {
+        id
+        name
+        rating
+        price
+        location
+        city
+        phone
+        image_url
+        url
+      }
+    }
+  }
+`; */

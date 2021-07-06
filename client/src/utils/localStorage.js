@@ -13,7 +13,7 @@ export const getSavedRestaurantData = () => {
     : [];
 
   return savedRestaurantData;
-}; */
+};
 
 export const getSavedRestaurantIds = () => {
   const savedRestaurantIds = localStorage.getItem("saved_restaurants")
@@ -50,3 +50,4 @@ export const removeRestaurantId = (id) => {
 
   return true;
 };
+ */

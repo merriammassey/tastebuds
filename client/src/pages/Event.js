@@ -23,7 +23,7 @@ import {
   saveRestaurantIds,
   getSavedRestaurantIds,
 } from "../utils/localStorage";
-import { SAVE_RESTAURANT } from "../utils/mutations";
+//import { SAVE_EVENT } from "../utils/mutations";
 import "./style.css";
 
 const Event = () => {
@@ -34,18 +34,43 @@ const Event = () => {
   const [eventNameInput, setEventNameInput] = useState("");
   const [eventNotesInput, setEventNotesInput] = useState("");
   // create state to hold saved restaurant values
-  const [savedRestaurantIds, setSavedRestaurantIds] = useState(
+  /* const [savedRestaurantIds, setSavedRestaurantIds] = useState(
     getSavedRestaurantIds()
-  );
+  ); */
+  //const [saveEvent, { error }] = useMutation(SAVE_EVENT);
+
   //added for restaurant data
   /* const [savedRestaurantData, setSavedRestaurantData] = useState(
     getSavedRestaurantData()
   ); */
-  // create event and set state on form submit
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-  };
+  // create event to save event in db and set state on form submit
+  /* const handleSaveEvent = async (eventData) => {
+    // find the restaurants in state / global state?
+    const restaurantsToSave = currentRestaurants;
+    //and get the other data from the form?
+    const noteToSave = eventNotesInput;
+    const nameToSave = eventNameInput;
 
+    //searchedBooks.find((book) => book.bookId === bookId);
+    if (!token) {
+      return false;
+    }
+
+    try {
+      await saveEvent({
+        variables: {
+          name: eventNameInput,
+          restaurants: currentRestaurants,
+          notes: eventNotesInput,
+        },
+      });
+
+      setEventData([...eventData, otherthings]);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+ */
   return (
     <>
       <div>
@@ -58,13 +83,13 @@ const Event = () => {
                 </h1>
                 <br />
                 <h5>
-                  Enter a title and notes about your event.
+                  Add details about your event.
                   <br />
-                  Then invite your friends to help choose the restaurant.
+                  Then invite your friends to help choose the restaurant!
                 </h5>
 
                 <div id="form">
-                  <Form onSubmit={handleFormSubmit}>
+                  <Form>
                     <Form.Row>
                       <Col xs={12} md={8}>
                         <Form.Control
@@ -73,9 +98,19 @@ const Event = () => {
                           onChange={(e) => setEventNameInput(e.target.value)}
                           type="text"
                           size="lg"
-                          placeholder="Event name"
+                          placeholder="Give your event a name"
                         />
-                        <p>SAVED RESTAURANTS GO HERE</p>
+                        <br />
+                        <Form.Control
+                          name="eventNotesInput"
+                          value={eventNotesInput}
+                          onChange={(e) => setEventNotesInput(e.target.value)}
+                          type="text"
+                          size="lg"
+                          id="paragraph"
+                          placeholder="Add a note to your friends"
+                        />
+                        <br />
                         {currentRestaurants.map((restaurant) => {
                           return (
                             <Card
@@ -102,15 +137,6 @@ const Event = () => {
                             </Card>
                           );
                         })}
-                        <Form.Control
-                          name="eventNotesInput"
-                          value={eventNotesInput}
-                          onChange={(e) => setEventNotesInput(e.target.value)}
-                          type="text"
-                          size="lg"
-                          id="paragraph"
-                          placeholder="Add your notes here"
-                        />
                       </Col>
                       <Col xs={12} md={4}>
                         <Link to="/viewevent">

@@ -1,12 +1,12 @@
 import CanvasJSReact from "../assets/canvasjs.react";
 import React, { Component } from "react";
 //import "pusher-js/node";
-
+//const Pusher = require("pusher");
 //import { CanvasJSChart } from "canvasjs-react-charts";
 //var CanvasJSReact = require('./canvasjs.react');
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
-const Pusher = require("pusher");
+/* const Pusher = require("pusher");
 
 var pusher = new Pusher({
   appId: "1228744",
@@ -14,7 +14,7 @@ var pusher = new Pusher({
   secret: "18a0f8a7e8854f574cc5",
   cluster: "us3",
   useTLS: true,
-});
+}); */
 
 class Chart extends Component {
   render(dataPoints, totalVotes) {
@@ -33,11 +33,11 @@ class Chart extends Component {
         },
       ],
     };
-    Pusher.logToConsole = true;
+    //Pusher.logToConsole = true;
 
-    var pusher = new Pusher("3cb02dbd0c542bff3bd5", {
+    /*  var pusher = new Pusher("3cb02dbd0c542bff3bd5", {
       cluster: "us3",
-    });
+    }); */
 
     /* var channel = pusher.subscribe("tastebuds");
     channel.bind("tastebudsvote", function (data) {
@@ -50,8 +50,8 @@ class Chart extends Component {
         }
       });
       //rerender
-      Chart.render(); 
-    });*/
+      Chart.render();
+    }); */
 
     return (
       <div>

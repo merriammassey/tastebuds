@@ -1,14 +1,14 @@
 import React from "react";
 import "./App.css";
 import {
-  //ApolloClient,
-  //InMemoryCache,
+  ApolloClient,
+  InMemoryCache,
   ApolloProvider,
-  //useQuery,
-  //gql,
+  useQuery,
+  gql,
 } from "@apollo/client";
-//import { createHttpLink } from "apollo-link-http";
-//import { setContext } from "apollo-link-context";
+import { createHttpLink } from "apollo-link-http";
+import { setContext } from "apollo-link-context";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { StoreProvider } from "./utils/GlobalState";
 // Start Pages import //
@@ -18,19 +18,38 @@ import Signup from "../src/pages/Signup";
 import Event from "../src/pages/Event";
 import Dashboard from "../src/pages/Dashboard";
 import ViewEvent from "../src/pages/ViewEvent";
-
-//import SearchedRestaurants from "../src/pages/SearchedRestaurants";
 import AppNavBar from "../src/components/Navbar";
-// import SavedResturants from "../src/pages/SaveResturants";
 import "bootstrap/dist/css/bootstrap.min.css";
 require("dotenv").config({ path: __dirname + "/.env" });
-
 // End Pages import
+
+const httpLink = createHttpLink({
+  uri: "/graphql",
+});
+
+//function to add token to httpLink
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem("id_token");
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  };
+});
+
+//establish connection to back end servier's graphql endpoint
+const client = new ApolloClient({
+  //establish new link to gql server...combine autLink and httpLink so every request retrieves token and sets request headers before amking the request to API
+  link: authLink.concat(httpLink),
+  //instantiate a new cache object
+  cache: new InMemoryCache(),
+});
 
 function App() {
   const yelp = require("yelp-fusion");
   const apiKey = `${process.env.REACT_APP_YELP_KEY}`;
-  const client = yelp.client(apiKey);
+  const yelpclient = yelp.client(apiKey);
   return (
     <ApolloProvider client={client}>
       <Router>

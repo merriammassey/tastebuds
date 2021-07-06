@@ -195,8 +195,6 @@ const SearchRestaurants = () => {
                     {/*                     <Button variant="primary">Add to event</Button>
                      */}{" "}
                   </Card.Body>
-                  <br />
-                  <br />
                 </Card>
               );
             })}
