@@ -26,7 +26,7 @@ import {
 } from "../utils/localStorage";
 import { SAVE_RESTAURANT } from "../utils/mutations";
 import "./style.css";
-//import Chart from "../components/Chart";
+import VoteChart from "../components/Chart";
 import { propTypes } from "react-bootstrap/esm/Image";
 
 const ViewEvent = () => {
@@ -119,6 +119,7 @@ const ViewEvent = () => {
                 </Col>
               </Row>
             </Container>
+            <VoteChart />
             <div id="form">
               <form id="vote-form">
                 <h5>
