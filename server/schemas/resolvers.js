@@ -44,10 +44,22 @@ const resolvers = {
       return { token, user };
     },
     //Only logged-in users should be able to use this mutation, hence why we check for the existence of context.user first
-    addEvent: async (parent, args) => {
-      console.log(args.title);
-      const event = await Event.create(args);
-      return { title, note };
+    addEvent: async (parents, eventData, context) => {
+      if (context.user) {
+        const event = await Event.create({
+          ...eventData,
+          username: context.user.username,
+        });
+
+        const user = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $push: { events: eventData } },
+          // without the { new: true } flag Mongo would return the original document instead of the updated document.
+          { new: true }
+        );
+        return user;
+      }
+      throw new AuthenticationError("You need to be logged in!");
     },
   },
 };
