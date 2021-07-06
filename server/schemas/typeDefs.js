@@ -61,7 +61,7 @@ const typeDefs = gql`
     ): Event
     removeRestaurant(restaurantId: String!): Event
     addVote(restaurant: ID!): User
-    addEvent(name: String, restaurants: [Restaurant], note: String): User
+    addEvent(name: String, restaurant: String!, note: String): User
   }
 `;
 

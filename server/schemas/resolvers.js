@@ -1,8 +1,6 @@
 
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Restaurant } = require("../models"); 
-const { Event } = require("../models");
-const { Restaurant } = require("../models");
+const { User, Restaurant, Event } = require("../models"); 
 const { signToken } = require('../utils/auth'); 
 
 const resolvers = {
@@ -41,8 +39,9 @@ const resolvers = {
         const token = signToken(user);
         return { token, user };
       },
-      login: async (parent, { email, password, }) => {
-        const user = await User.findOne({ email });
+      login: async (parent, { email, password }) => {
+        console.log(email)
+        const user = await User.find({ email });
         if (!user) {
           throw new AuthenticationError("Incorrect credentials");
         }
@@ -70,7 +69,7 @@ const resolvers = {
         }
       }, 
 // /// thi
-      addEvent: async (parent, eventId, eventBody, context => {
+      addEvent: async (parent, eventId, eventBody, context) => {
           await User.findByIdAndUpdate(
             {_id: user._id }, 
             { $push: { event: event_id } },
@@ -78,7 +77,7 @@ const resolvers = {
             { new: true }.populate("savedEvent")
           );
           return UpdateEvent;
-          }),
+          },
      
       // addVote: async (parent, { restaurantId, restaurantBody }, context) => { 
       //   if (context.user){
@@ -115,5 +114,6 @@ const resolvers = {
   //     },
   //   },
   // };
+        }}
 
   module.exports = resolvers;
