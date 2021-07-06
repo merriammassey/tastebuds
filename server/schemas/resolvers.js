@@ -95,11 +95,11 @@ const resolvers = {
 
 
     // 21.2.6 end of page might need to revisit this  
-    addVote: async (parent, { restaurantId, restaurantBody }, context) => {
+    addVote: async (parent, { restaurantId, restaurantName }, context) => {
       if (context.user) {
-        const updatedEvent = await event.findOneAndUpdate(
+        const updatedEvent = await Event.findOneAndUpdate(
           { _id: eventId },
-          { $push: { vote: { restaurantBody, username: context.user.username } } },
+          { $push: { vote: { restaurantName, username: context.user.username } } },
           { new: true, runValidators: true }
         );
 
