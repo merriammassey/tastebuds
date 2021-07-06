@@ -26,7 +26,7 @@ import {
 } from "../utils/localStorage";
 import { SAVE_RESTAURANT } from "../utils/mutations";
 import "./style.css";
-import Chart from "../components/Chart";
+//import Chart from "../components/Chart";
 import { propTypes } from "react-bootstrap/esm/Image";
 
 const ViewEvent = (props) => {
@@ -112,7 +112,7 @@ const ViewEvent = (props) => {
                 {/* <input type="submit" value="Vote" class="btn" /> */}
               </form>
               <br />
-              <Chart {...props} />
+              {/* <Chart {...props} /> */}
               {/* <div id="chartContainer" style={{ height: "300px" }}></div> */}
             </div>
           </div>
