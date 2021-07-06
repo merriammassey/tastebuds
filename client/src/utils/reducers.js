@@ -1,5 +1,10 @@
 //import possible actions
-import { UPDATE_SEARCHED_RESTAURANTS, UPDATE_EVENT } from "./actions";
+import {
+  UPDATE_SEARCHED_RESTAURANTS,
+  UPDATE_EVENT,
+  UPDATE_EVENT_NOTES,
+  UPDATE_EVENT_TITLE,
+} from "./actions";
 import { useReducer } from "react";
 
 //create function called reducer, passing value of action.type into a switch statement
@@ -16,7 +21,17 @@ export const reducer = (state, action) => {
           ...action.currentRestaurants,
         ],
       };
+    case UPDATE_EVENT_NOTES:
+      return {
+        ...state,
+        eventNote: action.eventNote,
+      };
 
+    case UPDATE_EVENT_TITLE:
+      return {
+        ...state,
+        eventTitle: action.eventTitle,
+      };
     //if action type value is update_categories, return a new state object with an updated categories array
     case UPDATE_EVENT:
       return {

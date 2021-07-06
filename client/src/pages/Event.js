@@ -35,11 +35,12 @@ const Event = () => {
   const [eventNotesInput, setEventNotesInput] = useState("");
   const [addEvent, { error }] = useMutation(ADD_EVENT);
 
-  const handleAddEvent = async () => {
+  const handleAddEvent = async (event) => {
+    event.preventDefault();
     console.log(eventNameInput);
     if (!eventNameInput) {
       //add modal
-      console.log("please enter a location");
+      console.log("please enter a name for your event");
       return false;
     }
     try {
@@ -50,12 +51,31 @@ const Event = () => {
           restaurants: [currentRestaurants],
         },
       });
-      setEventNameInput("");
-      setEventNotesInput("");
+
       //setSavedEvents...
     } catch (err) {
       console.error(err);
     }
+    //global state
+    const saveEventNotes = (eventNotesInput) => {
+      dispatch({
+        type: "UPDATE_EVENT_NOTES",
+        eventNote: eventNotesInput,
+      });
+    };
+    saveEventNotes(eventNotesInput);
+
+    const saveEventTitle = (eventNameInput) => {
+      dispatch({
+        type: "UPDATE_EVENT_TITLE",
+        eventTitle: eventNameInput,
+      });
+    };
+    //
+    saveEventTitle(eventNameInput);
+    console.log(state);
+    //setEventNameInput("");
+    //setEventNotesInput("");
   };
 
   return (
