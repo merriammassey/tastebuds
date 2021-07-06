@@ -8,15 +8,7 @@ const { gql } = require("apollo-server-express");
 // type defs define the data 
 const typeDefs = gql`
 
-
-  type Query {
-    me: User
-    users: [User]
-    user: User
-    event: Event
-    events: [Event]
-  }
-
+  
   type User {
     _id: ID!
     username: String!
@@ -51,13 +43,21 @@ const typeDefs = gql`
     token: ID!
     user: User
   }
+  type Query {
+    me: User
+    users: [User]
+    user(username: String!): User
+    events(username: String): [Event]
+    event(_id: ID!): Event
+  }
 
   type Mutation {
     login(email: String!, password: String!): Auth
-
     addUser(username: String!, email: String!, password: String!): Auth
+    addEvent(eventName: String!): User
 
     addRestaurant(
+      EventId: ID!
       restaurantId: String
       price: Float
       categories: String
@@ -73,7 +73,7 @@ const typeDefs = gql`
 
     addVote(restaurant: ID!): User
 
-    addEvent(name: String, note: String): User
+
   }
 `;
 

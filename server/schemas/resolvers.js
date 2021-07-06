@@ -7,18 +7,20 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-   
+
     // get a single user - me
-    me: async (_, __, context) => {
+    me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id }).select(
-          "-__v -password"
-        );
+        const userData = await User.findOne({ _id: context.user._id })
+          .select('-__v -password')
+          .populate('thoughts')
+          .populate('friends');
+
         return userData;
       }
-      throw new AuthenticationError("You're not logged in.");
-    },
 
+      throw new AuthenticationError('Not logged in');
+    },
 
     users: async () => {
       return User.find()
@@ -28,7 +30,7 @@ const resolvers = {
     user: async (parent, { username }) => {
       return User.findOne({ username })
         .select('-__v -password')
-        .populate('event')
+        .populate('events')
     },
     events: async (parent, { username }) => {
       const params = username ? { username } : {};
@@ -56,25 +58,25 @@ const resolvers = {
       }
       const token = signToken(user);
 
-      console.log(token);
+      // console.log(token);
 
       return { token, user };
     },
-   //Only logged-in users should be able to use this mutation, hence why we check for the existence of context.user first
-   addEvent: async (parents, args, context) => {
-    if (context.user) {
-      const event = await Event.create({...args, username: context.user.username});
+    //Only logged-in users should be able to use this mutation, hence why we check for the existence of context.user first
+    addEvent: async (parents, args, context) => {
+      if (context.user) {
+        const event = await Event.create({ ...args, username: context.user.username });
 
-      await User.findByIdAndUpdate(
-        {_id: context.user._id }, 
-        { $push: { events: event._id } },
-        // without the { new: true } flag Mongo would return the original document instead of the updated document.
-        { new: true }
-      );
-      return event;
-    }
-    throw new AuthenticationError("You need to be logged in!");
-  }, 
+        await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { events: event._id } },
+          // without the { new: true } flag Mongo would return the original document instead of the updated document.
+          { new: true }
+        );
+        return event;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
 
     addRestaurant: async (parent, eventId, context) => {
       if (context.event) {
@@ -86,7 +88,7 @@ const resolvers = {
         return updatedEvent;
       }
     },
- 
+
     addVote: async (parent, { restaurantId, restaurantBody }, context) => {
       if (context.user) {
         const updatedEvent = await event.findOneAndUpdate(
@@ -102,25 +104,25 @@ const resolvers = {
     },
 
 
-  //   removeRestaurant: async (parent, { restaurantId }, context) => {
-  //     if (context.user) {
-  //       const updatedUser = await User.findOneAndUpdate(
-  //         { _id: context.user._id },
-  //         {
-  //           $pull: {
-  //             savedRestaurant: {
-  //               bookId: restaurantId,
-  //             },
-  //           },
-  //         },
-  //         { new: true }
-  //       ).populate("savedRestaurant");
-  //       return updatedUser;
-  //     }
-  //     throw new AuthenticationError("You need to be logged in");
-  //   },
+    //   removeRestaurant: async (parent, { restaurantId }, context) => {
+    //     if (context.user) {
+    //       const updatedUser = await User.findOneAndUpdate(
+    //         { _id: context.user._id },
+    //         {
+    //           $pull: {
+    //             savedRestaurant: {
+    //               bookId: restaurantId,
+    //             },
+    //           },
+    //         },
+    //         { new: true }
+    //       ).populate("savedRestaurant");
+    //       return updatedUser;
+    //     }
+    //     throw new AuthenticationError("You need to be logged in");
+    //   },
 
-  
+
   },
 };
 
