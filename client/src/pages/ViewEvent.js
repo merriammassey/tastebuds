@@ -95,15 +95,21 @@ const ViewEvent = () => {
                             <a href={restaurant.url}>Website</a>
                           </Card.Text>
                           <Form.Group controlId="formBasicCheckbox">
-                            <Form.Check type="checkbox" label="Add to event" />
+                            <Form.Check
+                              // onClick={(event) => vote(event)}
+                              type="checkbox"
+                              label="Click to select"
+                              value={index}
+                              name={restaurant}
+                            />
                           </Form.Group>
-                          <div
+                          {/* <div
                             // onClick={(event) => addRestaurant(event)}
                             value={index}
                             name={restaurant}
                           >
                             Click to select
-                          </div>
+                          </div> */}
                           {/*                     <Button variant="primary">Add to event</Button>
                            */}{" "}
                         </Card.Body>

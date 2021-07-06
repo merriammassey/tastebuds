@@ -183,15 +183,21 @@ const SearchRestaurants = () => {
                       <a href={restaurant.url}>Website</a>
                     </Card.Text>
                     <Form.Group controlId="formBasicCheckbox">
-                      <Form.Check type="checkbox" label="Add to event" />
+                      <Form.Check
+                        onClick={(event) => addRestaurant(event)}
+                        value={index}
+                        name={restaurant}
+                        type="checkbox"
+                        label="Add to event"
+                      />
                     </Form.Group>
-                    <div
+                    {/*   <div
                       onClick={(event) => addRestaurant(event)}
                       value={index}
                       name={restaurant}
                     >
                       click to add to event
-                    </div>
+                    </div> */}
                     {/*                     <Button variant="primary">Add to event</Button>
                      */}{" "}
                   </Card.Body>
