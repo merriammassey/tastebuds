@@ -25,17 +25,11 @@
     "seed": "^0.4.4",
     "seeds": "^2.3.1"
   },
-<<<<<<< HEAD
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-=======
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
     "build": "cd client && npm run build"
->>>>>>> createevent
   },
   "repository": {
     "type": "git",
@@ -47,13 +41,8 @@
   "bugs": {
     "url": "https://github.com/merriammassey/project3/issues"
   },
-<<<<<<< HEAD
-  "homepage": "https://github.com/merriammassey/project3#readme"
-}
-=======
   "homepage": "https://github.com/merriammassey/project3#readme",
   "devDependencies": {
     "concurrently": "^5.1.0"
   }
 }
->>>>>>> createevent

@@ -3,19 +3,14 @@ const path = require("path");
 const db = require("./config/connections");
 const { typeDefs, resolvers } = require("./schemas");
 const { ApolloServer } = require("apollo-server-express");
-<<<<<<< HEAD
-const { authMiddleware } = require('./utils/auth');
-
-=======
 const { authMiddleware } = require("./utils/auth");
 const poll = require("./routes/poll");
->>>>>>> createevent
 const app = express();
 const PORT = process.env.PORT || 3001;
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: authMiddleware
+  context: authMiddleware,
 });
 
 server.applyMiddleware({ app });
@@ -38,12 +33,6 @@ db.once("open", () => {
     //log where we can go to test our GQL API // to see built in apolo test npm run watch
     console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
   });
-<<<<<<< HEAD
-  
-  module.exports=db;
-  
-=======
 });
 
 module.exports = db;
->>>>>>> createevent
