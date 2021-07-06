@@ -50,13 +50,14 @@ const resolvers = {
           ...eventData,
           username: context.user.username,
         });
-
+        console.log(event);
         const user = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $push: { events: eventData } },
           // without the { new: true } flag Mongo would return the original document instead of the updated document.
           { new: true }
         );
+        console.log(user);
         return user;
       }
       throw new AuthenticationError("You need to be logged in!");

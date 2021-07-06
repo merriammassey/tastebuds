@@ -72,7 +72,7 @@ const ViewEvent = (props) => {
                     id="maskadores"
                     value="Maskadores"
                   />
-                  <label for="maskadores"> Maskadores</label>
+                  <label htmlFor="maskadores"> Maskadores</label>
                 </h5>
                 <h5>
                   <input
@@ -81,7 +81,7 @@ const ViewEvent = (props) => {
                     id="munichgyro"
                     value="MunichGyro"
                   />
-                  <label for="munichgyro"> MunichGyro</label>
+                  <label htmlFor="munichgyro"> MunichGyro</label>
                 </h5>
                 <h5>
                   <input
@@ -90,7 +90,7 @@ const ViewEvent = (props) => {
                     id="starbucks"
                     value="Starbucks"
                   />
-                  <label for="starbucks"> Starbucks</label>
+                  <label htmlFor="starbucks"> Starbucks</label>
                 </h5>
                 <h5>
                   <input
@@ -99,7 +99,7 @@ const ViewEvent = (props) => {
                     id="other"
                     value="Other"
                   />
-                  <label for="other"> Other</label>
+                  <label htmlFor="other"> Other</label>
                 </h5>
                 <Button
                   onSubmit={handleVote}
