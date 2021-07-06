@@ -53,7 +53,9 @@ const resolvers = {
         console.log(event);
         const user = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $push: { events: eventData } },
+          //{ $push: { events: eventData } },
+          { $push: { events: event } },
+
           // without the { new: true } flag Mongo would return the original document instead of the updated document.
           { new: true }
         );
