@@ -3,15 +3,14 @@ const path = require("path");
 const db = require("./config/connections");
 const { typeDefs, resolvers } = require("./schemas");
 const { ApolloServer } = require("apollo-server-express");
-const { authMiddleware } = require("./utils/auth");
+const { authMiddleware } = require('./utils/auth');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  //make every request perform an auth check; pass updated req object to resolvers as context
-  context: authMiddleware,
+  context: authMiddleware
 });
 
 

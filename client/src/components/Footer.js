@@ -12,22 +12,21 @@ const Footer = () => {
   return (
     <>
       <Footer>
-          <footer>
-        <Button type="submit" variant="success" size="lg">
-          Create Event
-        </Button>
+        <footer>
+          <Button type="submit" variant="success" size="lg">
+            Create Event
+          </Button>
         </footer>
       </Footer>
 
-        {/* set modal data up */}
+      {/* set modal data up */}
       <Modal
         size="lg"
         show={showModal}
         onHide={() => setShowModal(false)}
         aria-labelledby="signup-modal"
       >
-
-      {/* tab container to do either signup or login component */}
+        {/* tab container to do either signup or login component */}
         <Tab.Container defaultActiveKey="login">
           <Modal.Header closeButton>
             <Modal.Title id="signup-modal">
@@ -53,22 +52,19 @@ const Footer = () => {
           </Modal.Body>
         </Tab.Container>
       </Modal>
-    </>
-        
 
-        {/* if user is logged in, direct to events page on button click */}
-        {Auth.loggedIn() ? (
-          <>
-            <Nav.Link as={Link} to="/saved">
-              See Your Events
-            </Nav.Link>
-            <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
-          </>
-        ) : (
+      {/* if user is logged in, direct to events page on button click */}
+      {Auth.loggedIn() ? (
+        <>
+          <Nav.Link as={Link} to="/saved">
+            See Your Events
+          </Nav.Link>
+          <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
+        </>
+      ) : (
+        <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
+      )}
 
-          <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
-        )}
-  
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container fluid>
           <Navbar.Brand as={Link} to="/">
