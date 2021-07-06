@@ -12,11 +12,9 @@ const StoreProvider = ({ value = [], ...props }) => {
   //state is up to date version of global state; dispatch is method used to update state...looks for action object as argument
   const [state, dispatch] = useRestaurantReducer({
     restaurants: [],
-    event: [],
     currentRestaurants: [],
-    //cartOpen: false,
-    //categories: [],
-    //currentCategory: "",
+    eventNote: [],
+    eventTitle: [],
   });
   //confirm it works
   console.log(state);

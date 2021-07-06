@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 //global state imports
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_SEARCHED_RESTAURANTS } from "../utils/actions";
-import { QUERY_RESTAURANTS } from "../utils/queries";
+import { ADD_EVENT } from "../utils/mutations";
 import { searchYelp } from "../utils/yelpAPI";
 
 import { useQuery, useMutation } from "@apollo/client";
@@ -29,15 +29,16 @@ import "./style.css";
 const Event = () => {
   const [state, dispatch] = useStoreContext();
   const { currentRestaurants } = state;
-
+  console.log = "current restaurants include" + currentRestaurants;
   // create state for holding our search field data
   const [eventNameInput, setEventNameInput] = useState("");
   const [eventNotesInput, setEventNotesInput] = useState("");
+  const [addEvent, { error }] = useMutation(ADD_EVENT);
+
   // create state to hold saved restaurant values
   /* const [savedRestaurantIds, setSavedRestaurantIds] = useState(
     getSavedRestaurantIds()
   ); */
-  //const [saveEvent, { error }] = useMutation(SAVE_EVENT);
 
   //added for restaurant data
   /* const [savedRestaurantData, setSavedRestaurantData] = useState(
@@ -71,6 +72,45 @@ const Event = () => {
     }
   };
  */
+  const handleAddEvent = async (eventData) => {
+    if (!eventNameInput) {
+      //add modal
+      console.log("please enter a location");
+      return false;
+    }
+    try {
+      await addEvent({
+        variables: {
+          title: eventNameInput,
+          note: eventNotesInput,
+          restaurants: [currentRestaurants],
+        },
+      });
+      setEventNameInput("");
+      setEventNotesInput("");
+      //setSavedEvents...
+    } catch (err) {
+      console.error(err);
+    }
+
+    //global state
+    const saveEventNotes = (eventNotesInput) => {
+      dispatch({
+        type: "UPDATE_EVENT_NOTES",
+        eventNote: eventNotesInput,
+      });
+    };
+    saveEventNotes(eventNotesInput);
+
+    const saveEventTitle = (eventNameInput) => {
+      dispatch({
+        type: "UPDATE_EVENT_TITLE",
+        eventTitle: eventNameInput,
+      });
+    };
+    saveEventTitle(eventNameInput);
+  };
+
   return (
     <>
       <div>
@@ -85,7 +125,7 @@ const Event = () => {
                 <h5>
                   Add details about your event.
                   <br />
-                  Then invite your friends to help choose the restaurant!
+                  Then invite friends to help choose the restaurant!
                 </h5>
 
                 <div id="form">
@@ -140,7 +180,12 @@ const Event = () => {
                       </Col>
                       <Col xs={12} md={4}>
                         <Link to="/viewevent">
-                          <Button type="submit" variant="success" size="lg">
+                          <Button
+                            onClick={handleAddEvent}
+                            type="submit"
+                            variant="success"
+                            size="lg"
+                          >
                             Invite your friends
                           </Button>
                         </Link>
