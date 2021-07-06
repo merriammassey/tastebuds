@@ -3,6 +3,15 @@ const { gql } = require("apollo-server-express");
 
 // create our typeDefs
 const typeDefs = gql`
+
+  type Query {
+    me: User
+    users: [User]
+    user: User
+    event: Event
+    events: [Event]
+  }
+
   type User {
     _id: ID!
     username: String!
@@ -32,24 +41,26 @@ const typeDefs = gql`
     image_url: String
   }
 
+  type Vote {
+    _id: ID 
+    username: String
+  }
+
   type Auth {
     token: ID!
     user: User
   }
-  type Query {
-    me: User
-    users: [User]
-    user(username: String!): User
-    events(username: String): [Event]
-    event(_id: ID!): Event
-  }
 
   type Mutation {
     login(email: String!, password: String!): Auth
+
     addUser(username: String!, email: String!, password: String!): Auth
+<<<<<<< HEAD
     addEvent(eventName: String!): User
+=======
+
+>>>>>>> d3ab7ca13e853d03e592a73751105f1d16d54cf1
     addRestaurant(
-      EventId: ID!
       restaurantId: String
       price: Float
       categories: String
@@ -62,6 +73,11 @@ const typeDefs = gql`
     ): Event
     removeRestaurant(restaurantId: String!): Event
     addVote(restaurant: ID!): User
+<<<<<<< HEAD
+=======
+
+    addEvent(name: String, note: String): User
+>>>>>>> d3ab7ca13e853d03e592a73751105f1d16d54cf1
   }
 `;
 

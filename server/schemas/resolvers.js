@@ -98,16 +98,24 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
+<<<<<<< HEAD
     // 21.2.6 end of page might need to revisit this
+=======
+    // 21.2.6 end of page might need to revisit this  
+>>>>>>> d3ab7ca13e853d03e592a73751105f1d16d54cf1
     addVote: async (parent, { restaurantId, restaurantName }, context) => {
       if (context.user) {
         const updatedEvent = await Event.findOneAndUpdate(
           { _id: eventId },
+<<<<<<< HEAD
           {
             $push: {
               vote: { restaurantName, username: context.user.username },
             },
           },
+=======
+          { $push: { vote: { restaurantName, username: context.user.username } } },
+>>>>>>> d3ab7ca13e853d03e592a73751105f1d16d54cf1
           { new: true, runValidators: true }
         );
 
