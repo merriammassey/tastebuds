@@ -16,7 +16,7 @@ import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_SEARCHED_RESTAURANTS } from "../utils/actions";
 import { QUERY_RESTAURANTS } from "../utils/queries";
 import { searchYelp } from "../utils/yelpAPI";
-
+import { ADD_EVENT } from "../utils/mutations";
 import { useQuery, useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
 import {
@@ -33,44 +33,31 @@ const Event = () => {
   // create state for holding our search field data
   const [eventNameInput, setEventNameInput] = useState("");
   const [eventNotesInput, setEventNotesInput] = useState("");
-  // create state to hold saved restaurant values
-  /* const [savedRestaurantIds, setSavedRestaurantIds] = useState(
-    getSavedRestaurantIds()
-  ); */
-  //const [saveEvent, { error }] = useMutation(SAVE_EVENT);
+  const [addEvent, { error }] = useMutation(ADD_EVENT);
 
-  //added for restaurant data
-  /* const [savedRestaurantData, setSavedRestaurantData] = useState(
-    getSavedRestaurantData()
-  ); */
-  // create event to save event in db and set state on form submit
-  /* const handleSaveEvent = async (eventData) => {
-    // find the restaurants in state / global state?
-    const restaurantsToSave = currentRestaurants;
-    //and get the other data from the form?
-    const noteToSave = eventNotesInput;
-    const nameToSave = eventNameInput;
-
-    //searchedBooks.find((book) => book.bookId === bookId);
-    if (!token) {
+  const handleAddEvent = async () => {
+    console.log(eventNameInput);
+    if (!eventNameInput) {
+      //add modal
+      console.log("please enter a location");
       return false;
     }
-
     try {
-      await saveEvent({
+      await addEvent({
         variables: {
-          name: eventNameInput,
-          restaurants: currentRestaurants,
-          notes: eventNotesInput,
+          title: eventNameInput,
+          note: eventNotesInput,
+          restaurants: [currentRestaurants],
         },
       });
-
-      setEventData([...eventData, otherthings]);
+      setEventNameInput("");
+      setEventNotesInput("");
+      //setSavedEvents...
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
- */
+
   return (
     <>
       <div>
@@ -140,7 +127,12 @@ const Event = () => {
                       </Col>
                       <Col xs={12} md={4}>
                         <Link to="/viewevent">
-                          <Button type="submit" variant="success" size="lg">
+                          <Button
+                            onClick={handleAddEvent}
+                            type="submit"
+                            variant="success"
+                            size="lg"
+                          >
                             Invite your friends
                           </Button>
                         </Link>
