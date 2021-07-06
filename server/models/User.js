@@ -1,13 +1,13 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 //const Restaurant = require("./Restaurant");
+const eventSchema = require("./EventSchema");
 
 const userSchema = new Schema(
   {
     username: {
       type: String,
       required: true,
-      unique: true,
     },
     email: {
       type: String,
@@ -19,6 +19,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    events: [eventSchema],
     /* // set to be an array of data that adheres to the bookSchema
     savedEvent: [Restaurant],
 

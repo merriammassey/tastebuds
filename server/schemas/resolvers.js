@@ -2,7 +2,7 @@
 //mutation type definition that perform the CRUD actions that each query or mutation is expected to perform.
 const { AuthenticationError } = require("apollo-server-express");
 const User = require("../models/User");
-const Event = require("../models/Event");
+const Event = require("../models/EventModel");
 
 const { signToken } = require("../utils/auth");
 
@@ -13,15 +13,14 @@ const resolvers = {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
           .select("-__v -password")
-          .populate("thoughts")
-          .populate("friends");
+          .populate("events");
 
         return userData;
       }
 
       throw new AuthenticationError("Not logged in");
     },
-
+    /* 
     users: async () => {
       return User.find().select(" -password").populate("event");
     },
@@ -36,7 +35,7 @@ const resolvers = {
     },
     event: async (parent, { _id }) => {
       return Event.findOne({ _id });
-    },
+    },*/
   },
   Mutation: {
     addUser: async (parent, args) => {
@@ -61,44 +60,10 @@ const resolvers = {
       return { token, user };
     },
     //Only logged-in users should be able to use this mutation, hence why we check for the existence of context.user first
-    addEvent: async (parents, eventData, context) => {
-      console.log(eventData);
-      console.log(context.user);
-      if (context.user) {
-        const event = await Event.create({
-          ...args,
-          _id: context.user._id,
-        });
-
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $push: { events: event._id } },
-          // without the { new: true } flag Mongo would return the original document instead of the updated document.
-          { new: true }
-        );
-        return user;
-      }
-      throw new AuthenticationError("You need to be logged in!");
+    addEvent: async (parent, eventData) => {
+      const event = await Event.create(eventData);
+      return event;
     },
-
-    /*    addRestaurant: async (parent, { thoughtId, restaurantName }, context) => {
-      if (context.user) {
-        const updatedEvent = await Event.findOneAndUpdate(
-          { _id: eventId },
-          // Mongo $push to update an existing event
-          {
-            $push: {
-              restaurant: { restaurantName, username: context.user.username },
-            },
-          },
-          { new: true, runValidators: true }
-        );
-
-        return updatedEvent;
-      }
-
-      throw new AuthenticationError("You need to be logged in!");
-    }, */
 
     // 21.2.6 end of page might need to revisit this
     addVote: async (parent, { restaurantId, restaurantName }, context) => {
@@ -157,3 +122,22 @@ module.exports = resolvers;
   }
   throw new AuthenticationError("You need to be logged in!");
 }, */
+
+/*    addRestaurant: async (parent, { thoughtId, restaurantName }, context) => {
+      if (context.user) {
+        const updatedEvent = await Event.findOneAndUpdate(
+          { _id: eventId },
+          // Mongo $push to update an existing event
+          {
+            $push: {
+              restaurant: { restaurantName, username: context.user.username },
+            },
+          },
+          { new: true, runValidators: true }
+        );
+
+        return updatedEvent;
+      }
+
+      throw new AuthenticationError("You need to be logged in!");
+    }, */
