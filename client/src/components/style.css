@@ -1,0 +1,9 @@
+#footer {
+  display: flex;
+  justify-content: center;
+  background: rgba(88, 116, 129, 0.8);
+  width: 100%;
+  position: fixed;
+  padding: 20px 20px;
+  bottom: 0;
+}

@@ -1,14 +1,25 @@
 import React, { useState } from "react";
+<<<<<<< HEAD
 import { Link } from "react-router-dom";
 import { Navbar, Nav, Container, Modal, Tab } from "react-bootstrap";
 import SignUpForm from "./SignupForm";
 import LoginForm from "./LoginForm";
 import Auth from "../utils/auth";
+=======
+import { Button, Nav, Modal, Tab } from "react-bootstrap";
+import SignUpForm from "./SignupForm";
+import LoginForm from "./LoginForm";
+import Auth from "../utils/auth";
+import "./style.css";
+import Event from "../pages/Event";
+import { Link } from "react-router-dom";
+>>>>>>> createevent
 
 const Footer = () => {
   // set modal display state
   const [showModal, setShowModal] = useState(false);
 
+<<<<<<< HEAD
   return (
     <>
       <Footer>
@@ -94,6 +105,39 @@ const Footer = () => {
         </Container>
       </Navbar>
       {/* set modal data up */}
+=======
+  /*const handleCreateEvent = async (restaurantData) => {
+    get token
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if (!token) {
+      setShowModal(true);
+    } else {
+      console.log("render event");
+      //send props to event
+      return <Event />;
+    } 
+  };*/
+
+  return (
+    <>
+      <div id="footer">
+        <Link to="/event">
+          <Button
+            type="submit"
+            variant="success"
+            size="lg"
+            //onClick={handleCreateEvent}
+          >
+            {" "}
+            {/*pass saved rest here*/}
+            Invite your friends
+          </Button>
+        </Link>
+      </div>
+
+      {/* modal data */}
+>>>>>>> createevent
       <Modal
         size="lg"
         show={showModal}
@@ -130,4 +174,8 @@ const Footer = () => {
   );
 };
 
+<<<<<<< HEAD
 export default AppNavbar;
+=======
+export default Footer;
+>>>>>>> createevent

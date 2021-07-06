@@ -11,7 +11,10 @@ export const reducer = (state, action) => {
     case UPDATE_SEARCHED_RESTAURANTS:
       return {
         ...state,
-        currentRestaurants: [...action.currentRestaurants],
+        currentRestaurants: [
+          ...state.currentRestaurants,
+          ...action.currentRestaurants,
+        ],
       };
 
     //if action type value is update_categories, return a new state object with an updated categories array
