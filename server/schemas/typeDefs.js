@@ -13,7 +13,6 @@ const typeDefs = gql`
     email: String!
     events: [Event]
   }
-
   type Event {
     title: String
     note: String
