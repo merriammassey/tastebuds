@@ -44,14 +44,15 @@ const Event = () => {
       return false;
     }
     try {
+      console.log(eventNameInput, eventNotesInput, currentRestaurants);
       await addEvent({
         variables: {
           title: eventNameInput,
           note: eventNotesInput,
-          restaurants: [currentRestaurants],
+          restaurants: currentRestaurants,
         },
       });
-
+      console.log(event);
       //setSavedEvents...
     } catch (err) {
       console.error(err);
