@@ -1,31 +1,21 @@
-<<<<<<< HEAD
-const { Schema, models } = require('mongoose');
-=======
 const { Schema, model } = require("mongoose");
->>>>>>> b5b3a8562f360d10bd21393da58a40cccce2908b
 
 const restaurantSchema = new Schema({
-  restaurantId: {
+  id: {
     type: String,
     required: true,
-  },
-  key: {
-    type: String,
   },
   name: {
     type: String,
     required: true,
   },
-  url: {
+  rating: {
     type: String,
   },
   price: {
     type: String,
   },
-  rating: {
-    type: String,
-  },
-  address1: {
+  location: {
     type: String,
   },
   city: {
@@ -37,12 +27,16 @@ const restaurantSchema = new Schema({
   image_url: {
     type: String,
   },
+  url: {
+    type: String,
+  },
+  votes: {
+    type: Number,
+  },
 });
 
 // creating model
 const Restaurant = model("Restaurant", restaurantSchema);
 
-// creating model
-const Restaurant = model("Restaurant", restaurantSchema);
-
-module.export = Restaurant;
+//module.exports = Restaurant;
+module.exports = restaurantSchema;
