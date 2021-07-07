@@ -10,7 +10,7 @@ const Home = () => {
       <header>
         <div id="homephoto">
           <div id="welcome">
-            <p style={{ color: "white" }}>Welcome to TasteBuds</p>
+            <h3 style={{ color: "white" }}>Welcome to TasteBuds</h3>
             <SearchRestaurants
               selectedRestaurants={selectedRestaurants}
               setSelectedRestaurants={setSelectedRestaurants}
