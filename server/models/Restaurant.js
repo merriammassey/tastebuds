@@ -30,6 +30,9 @@ const restaurantSchema = new Schema({
   url: {
     type: String,
   },
+  votes: {
+    type: Number,
+  },
 });
 
 // creating model

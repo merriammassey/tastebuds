@@ -5,10 +5,10 @@ var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 class VoteChart extends Component {
-  render() {
+  render(eventTitle) {
     const options = {
       title: {
-        text: "Basic Column Chart in React",
+        text: { eventTitle },
       },
       data: [
         {

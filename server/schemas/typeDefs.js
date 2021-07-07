@@ -30,6 +30,7 @@ const typeDefs = gql`
     phone: String
     image_url: String
     url: String
+    votes: Int
   }
 
   input RestaurantInput {
@@ -42,6 +43,7 @@ const typeDefs = gql`
     phone: String
     image_url: String
     url: String
+    votes: Int
   }
 
   type Auth {

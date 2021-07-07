@@ -35,7 +35,8 @@ router.post("/", (req, res) => {
 
   new Vote(newVote).save().then((vote) => {
     pusher.trigger("tastebuds", "tastebudsvote", {
-      points: parseInt(vote.points),
+      //commented this line out due to unexpected p at json position 0 error
+      //points: parseInt(vote.points),
       //points: 1,
       restaurant: vote.restaurant,
       //restaurant: req.body.restaurant,

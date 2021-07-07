@@ -32,11 +32,12 @@ import { propTypes } from "react-bootstrap/esm/Image";
 const ViewEvent = () => {
   const [state, dispatch] = useStoreContext();
   const { currentRestaurants, eventTitle, eventNote } = state;
+  /* 
+  const handleVote = async (event) => {
+    const index = event.target.getAttribute("value");
+    console.log(event.target.getAttribute("value"));
+    //
 
-  const handleVote = async (voteData) => {
-    const choice = await document.querySelector(
-      'input[name="restaurant"]:checked'
-    ).value;
     const data = { restaurant: choice };
     //const data = choice;
     console.log(data);
@@ -51,7 +52,7 @@ const ViewEvent = () => {
     ];
     //chart, passing dataPoints and totalVotes
   };
-
+ */
   return (
     <>
       <div id="homephoto">
@@ -119,7 +120,7 @@ const ViewEvent = () => {
                 </Col>
               </Row>
             </Container>
-            <VoteChart />
+            <VoteChart eventTitle={eventTitle} />
             <div id="form">
               <form id="vote-form">
                 <h5>
@@ -159,7 +160,7 @@ const ViewEvent = () => {
                   <label htmlFor="other"> Other</label>
                 </h5>
                 <Button
-                  onSubmit={handleVote}
+                  // onSubmit={handleVote}
                   type="submit"
                   variant="success"
                   size="lg"

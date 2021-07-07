@@ -16,13 +16,13 @@ import {
 } from "react-bootstrap";
 
 const MyEvents = () => {
-  /*   const token = Auth.loggedIn() ? Auth.getToken() : null;
+  const token = Auth.loggedIn() ? Auth.getToken() : null;
   const { loading, data } = useQuery(GET_ME, {
     variables: { token },
   });
   //when get_me is run, repsonse returns our data; query_user returns data in user property
   const userData = data?.me || data?.user || {};
-  console.log(userData); */
+  console.log(userData);
 
   /*     const handleDeleteEvent = async (bookId) => {
         try {
