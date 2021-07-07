@@ -1,33 +1,12 @@
 //import React, { useState, useEffect } from "react";
-import { makeChart, getVotes } from "../utils/chartapi";
-import React, { useState, useEffect } from "react";
-import {
-  Jumbotron,
-  Container,
-  Col,
-  Row,
-  Form,
-  Button,
-  Card,
-  CardColumns,
-} from "react-bootstrap";
+//import { makeChart, getVotes } from "../utils/chartapi";
+import React from "react";
+import { Container, Col, Row, Form, Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 //global state imports
 import { useStoreContext } from "../utils/GlobalState";
-import { UPDATE_SEARCHED_RESTAURANTS } from "../utils/actions";
-import { QUERY_RESTAURANTS } from "../utils/queries";
-import { searchYelp } from "../utils/yelpAPI";
-
-import { useQuery, useMutation } from "@apollo/client";
-import Auth from "../utils/auth";
-import {
-  saveRestaurantIds,
-  getSavedRestaurantIds,
-} from "../utils/localStorage";
-import { SAVE_RESTAURANT } from "../utils/mutations";
 import "./style.css";
-import VoteChart from "../components/Chart";
-import { propTypes } from "react-bootstrap/esm/Image";
+//import VoteChart from "../components/Chart";
 
 const ViewEvent = () => {
   const [state, dispatch] = useStoreContext();
@@ -66,6 +45,11 @@ const ViewEvent = () => {
             <h3>{eventTitle}</h3>
             <h5>
               {eventNote}
+              <br />
+              <br />
+              Check the box of your restaurant of choice.
+              <br />
+              Then click Vote!
               {/* Here are a few places close to the stadium. <br />
               Please vote by 3pm today, and I'll make reservations. */}
             </h5>

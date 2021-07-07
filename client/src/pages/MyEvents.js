@@ -1,19 +1,9 @@
 import React, { useState } from "react";
-import SearchRestaurants from "./SearchRestaurants";
 import "../App.css";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_ME } from "../utils/queries";
 import Auth from "../utils/auth";
-import {
-  Jumbotron,
-  Container,
-  Col,
-  Row,
-  Form,
-  Button,
-  Card,
-  CardColumns,
-} from "react-bootstrap";
+import { Container, Col, Row, Button, Card } from "react-bootstrap";
 
 const MyEvents = () => {
   const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -56,7 +46,7 @@ const MyEvents = () => {
                 </Card>
                 {/*    );
                 })} */}
-              <Card>
+              <Card style={{ margin: "10px" }}>
                 <Card.Header id="cardheader" as="h5">
                   Bev's Goodbye Dinner Tuesday <br /> July 16, 2021
                 </Card.Header>
@@ -66,10 +56,50 @@ const MyEvents = () => {
                     Note: Please let us know where you'd prefer to eat!
                   </Card.Text>
                   <div id="buttondiv">
-                    <Button id="buttons" variant="success">
+                    <Button
+                      id="buttons"
+                      style={{ margin: "5px" }}
+                      variant="success"
+                      size="lg"
+                    >
                       View Event
                     </Button>
-                    <Button id="buttons" variant="primary">
+                    <Button
+                      id="buttons"
+                      variant="primary"
+                      size="lg"
+                      style={{ margin: "5px" }}
+                    >
+                      Delete Event
+                    </Button>
+                  </div>
+                </Card.Body>
+              </Card>
+              <Card style={{ margin: "10px" }}>
+                <Card.Header id="cardheader" as="h5">
+                  Coffee Saturday <br /> July 1, 2021
+                </Card.Header>
+                <Card.Body>
+                  <Card.Title>created 6.28.21</Card.Title>
+                  <Card.Text>
+                    Note: Do you prefer local or chain? Here's a few options.
+                    9ish?
+                  </Card.Text>
+                  <div id="buttondiv">
+                    <Button
+                      id="buttons"
+                      style={{ margin: "5px" }}
+                      variant="success"
+                      size="lg"
+                    >
+                      View Event
+                    </Button>
+                    <Button
+                      id="buttons"
+                      variant="primary"
+                      size="lg"
+                      style={{ margin: "5px" }}
+                    >
                       Delete Event
                     </Button>
                   </div>

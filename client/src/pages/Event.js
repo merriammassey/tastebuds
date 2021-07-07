@@ -1,28 +1,11 @@
 //import React, { useState, useEffect } from "react";
 import React, { useState, useEffect } from "react";
-import {
-  Jumbotron,
-  Container,
-  Col,
-  Row,
-  Form,
-  Button,
-  Card,
-  CardColumns,
-} from "react-bootstrap";
+import { Col, Form, Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 //global state imports
 import { useStoreContext } from "../utils/GlobalState";
-import { UPDATE_SEARCHED_RESTAURANTS } from "../utils/actions";
-import { QUERY_RESTAURANTS } from "../utils/queries";
-import { searchYelp } from "../utils/yelpAPI";
 import { ADD_EVENT } from "../utils/mutations";
 import { useQuery, useMutation, error } from "@apollo/client";
-import Auth from "../utils/auth";
-import {
-  saveRestaurantIds,
-  getSavedRestaurantIds,
-} from "../utils/localStorage";
 //import { SAVE_EVENT } from "../utils/mutations";
 import "./style.css";
 
@@ -119,40 +102,16 @@ const Event = () => {
                           onChange={(e) => setEventNotesInput(e.target.value)}
                           type="text"
                           size="lg"
-                          id="paragraph"
+                          id="longanswer"
+                          style={{ textAlign: "left" }}
                           placeholder="Add a note to your friends"
                         />
                         <br />
-                        {currentRestaurants.map((restaurant) => {
-                          return (
-                            <Card
-                              key={restaurant.id}
-                              style={{ width: "35rem" }}
-                            >
-                              <Card.Img
-                                variant="left"
-                                width={"250"}
-                                height={"250"}
-                                src={restaurant.image_url}
-                              />
-                              <Card.Body>
-                                <Card.Title>{restaurant.name}</Card.Title>
-                                <Card.Text>
-                                  Rating: {restaurant.rating} <br />
-                                  Price: {restaurant.price} <br />
-                                  {restaurant.location}, {restaurant.city}{" "}
-                                  <br />
-                                  {restaurant.phone} <br />
-                                  <a href={restaurant.url}>Website</a>
-                                </Card.Text>
-                              </Card.Body>
-                            </Card>
-                          );
-                        })}
                       </Col>
                       <Col xs={12} md={4}>
                         <Link to="/viewevent">
                           <Button
+                            id="invitebutton"
                             onClick={handleAddEvent}
                             type="submit"
                             variant="success"
@@ -164,6 +123,30 @@ const Event = () => {
                       </Col>
                     </Form.Row>
                   </Form>
+                  <div id="restaurantCards">
+                    {currentRestaurants.map((restaurant) => {
+                      return (
+                        <Card key={restaurant.id} style={{ width: "35rem" }}>
+                          <Card.Img
+                            variant="left"
+                            width={"250"}
+                            height={"250"}
+                            src={restaurant.image_url}
+                          />
+                          <Card.Body>
+                            <Card.Title>{restaurant.name}</Card.Title>
+                            <Card.Text>
+                              Rating: {restaurant.rating} <br />
+                              Price: {restaurant.price} <br />
+                              {restaurant.location}, {restaurant.city} <br />
+                              {restaurant.phone} <br />
+                              <a href={restaurant.url}>Website</a>
+                            </Card.Text>
+                          </Card.Body>
+                        </Card>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             </div>

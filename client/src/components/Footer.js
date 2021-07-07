@@ -40,7 +40,7 @@ const Footer = () => {
             >
               {" "}
               {/*pass saved rest here*/}
-              Invite your friends
+              Create your Event
             </Button>
           ) : (
             <div></div>

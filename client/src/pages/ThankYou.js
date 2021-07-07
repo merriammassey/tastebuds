@@ -1,33 +1,12 @@
 //import React, { useState, useEffect } from "react";
-import { makeChart, getVotes } from "../utils/chartapi";
 import React, { useState, useEffect } from "react";
-import {
-  Jumbotron,
-  Container,
-  Col,
-  Row,
-  Form,
-  Button,
-  Card,
-  CardColumns,
-} from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 //global state imports
 import { useStoreContext } from "../utils/GlobalState";
-import { UPDATE_SEARCHED_RESTAURANTS } from "../utils/actions";
-import { QUERY_RESTAURANTS } from "../utils/queries";
-import { searchYelp } from "../utils/yelpAPI";
 
-import { useQuery, useMutation } from "@apollo/client";
-import Auth from "../utils/auth";
-import {
-  saveRestaurantIds,
-  getSavedRestaurantIds,
-} from "../utils/localStorage";
-import { SAVE_RESTAURANT } from "../utils/mutations";
 import "./style.css";
 import VoteChart from "../components/Chart";
-import { propTypes } from "react-bootstrap/esm/Image";
 
 const ThankYou = () => {
   const [state, dispatch] = useStoreContext();
@@ -57,7 +36,7 @@ const ThankYou = () => {
     <>
       <div id="homephoto">
         <div id="eventdiv">
-          <div id="event">
+          <div id="event" style={{ padding: "10rem" }}>
             <h1 id="eventheader" style={{ color: "#212529" }}>
               Thank you for voting!
             </h1>{" "}

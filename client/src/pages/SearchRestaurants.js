@@ -12,9 +12,6 @@ import {
   CardColumns,
 } from "react-bootstrap";
 import { searchYelp } from "../utils/yelpAPI";
-
-import { useQuery, useMutation } from "@apollo/client";
-import Auth from "../utils/auth";
 import "./style.css";
 import Footer from "../components/Footer";
 
@@ -30,7 +27,6 @@ const SearchRestaurants = () => {
   // create state for holding our search field data
   const [termInput, setTermInput] = useState("");
   const [locationInput, setLocationInput] = useState("");
-  const [eventRestaurants, setEventRestaurants] = useState([]);
 
   /* // create state to hold saved restaurant data
   const [savedRestaurantIds, setSavedRestaurantIds] = useState(
