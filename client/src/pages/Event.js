@@ -36,6 +36,10 @@ const Event = () => {
   const [addEvent, { error }] = useMutation(ADD_EVENT);
 
   const handleAddEvent = async (event) => {
+    const title = eventNameInput;
+    const note = eventNotesInput;
+    const restaurants = currentRestaurants;
+
     //event.preventDefault();
     console.log(eventNameInput);
     if (!eventNameInput) {
@@ -44,12 +48,12 @@ const Event = () => {
       return false;
     }
     try {
-      console.log(eventNameInput, eventNotesInput, currentRestaurants);
+      console.log(title, note, restaurants);
       await addEvent({
         variables: {
-          title: eventNameInput,
-          note: eventNotesInput,
-          restaurants: currentRestaurants,
+          title: title,
+          note: note,
+          restaurants: restaurants,
         },
       });
       console.log(event);

@@ -6,13 +6,12 @@ export const GET_ME = gql`
       _id
       username
       email
-      event {
-        _id
-        name
-        createdAt
-        username
-        notes
-        restaurant
+      events {
+        title
+        note
+        restaurants {
+          name
+        }
       }
     }
   }

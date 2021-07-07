@@ -17,13 +17,13 @@ import {
 
 const MyEvents = () => {
   const token = Auth.loggedIn() ? Auth.getToken() : null;
-  const { loading, data } = useQuery(GET_ME, {
+  const { loading, data, error } = useQuery(GET_ME, {
     variables: { token },
   });
   //when get_me is run, repsonse returns our data; query_user returns data in user property
   const userData = data?.me || data?.user || {};
   console.log(userData);
-
+  console.log(error); //undefined
   /*     const handleDeleteEvent = async (bookId) => {
         try {
           //replace deleteBook() with REMOVE_BOOK mutation

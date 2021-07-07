@@ -14,7 +14,7 @@ const resolvers = {
         const userData = await User.findOne({ _id: context.user._id })
           .select("-__v -password")
           .populate("events");
-
+        console.log(userData);
         return userData;
       }
 
