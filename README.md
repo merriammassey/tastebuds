@@ -9,13 +9,13 @@ A full stack web application that enables users to create a custom poll populate
 - [Installation](#installation)
 - [Usage](#usage)
 - [License](#license)
+- [Technologies](#technologies)
 - [Contributions](#contributions)
-- [Tests](#tests)
 - [Questions](#questions)
 
 ## Installation
 
-To install, clone the repo and enter "npm run develop" from the root directory.
+To install, clone the repo and enter "npm run develop" from the terminal in the root directory.
 
 ## Usage
 
@@ -30,14 +30,36 @@ Users enter keywords and location on the homepage and are presented with a list 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 [License: MIT](https://opensource.org/licenses/MIT)
 
+## Technologies
+
+- JavaScript
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- Apollo
+- GraphQL
+- React
+- Context API
+- Heroku
+- Yelp Fusion API
+- React Bootstrap
+- Axios
+- JWT
+
 ## Contributions
 
-Thank you to Phil Cowan, George Schimmel, and Claire O.
+Built by George Schimmel, Claire Ogesen, and Merriam Massey.
+
+Thank you to Fullstack Bootcamp TAs including Jude Clark, Phil Cowan, and Zack Shone.
 
 ## Questions
 
 Reach out with questions.
 
-Email merriammassey@gmail.com
+Email:
+merriammassey@gmail.com
+claire.ogesen.co@gmail.com
+gms1980@icloud.com
 
 GitHub [my GitHub profile](https://github.com/merriammassey)
