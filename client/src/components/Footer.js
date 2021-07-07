@@ -6,10 +6,13 @@ import Auth from "../utils/auth";
 import "./style.css";
 import Event from "../pages/Event";
 import { Link } from "react-router-dom";
+import { useStoreContext } from "../utils/GlobalState";
 
 const Footer = () => {
   // set modal display state
   const [showModal, setShowModal] = useState(false);
+  const [state, dispatch] = useStoreContext();
+  const { yelpRestaurants } = state;
 
   /*const handleCreateEvent = async (restaurantData) => {
     get token
@@ -28,16 +31,20 @@ const Footer = () => {
     <>
       <div id="footer">
         <Link to="/event">
-          <Button
-            type="submit"
-            variant="success"
-            size="lg"
-            //onClick={handleCreateEvent}
-          >
-            {" "}
-            {/*pass saved rest here*/}
-            Invite your friends
-          </Button>
+          {yelpRestaurants.length ? (
+            <Button
+              type="submit"
+              variant="success"
+              size="lg"
+              //onClick={handleCreateEvent}
+            >
+              {" "}
+              {/*pass saved rest here*/}
+              Invite your friends
+            </Button>
+          ) : (
+            <div></div>
+          )}
         </Link>
       </div>
 

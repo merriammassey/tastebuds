@@ -24,6 +24,8 @@ const SearchRestaurants = () => {
   //const { data: restaurantData } = useQuery(QUERY_RESTAURANTS);
 
   // create state for holding returned yelp data
+  const [yelpRestaurants, setYelpRestaurants] = useState([]);
+
   const [searchedRestaurants, setSearchedRestaurants] = useState([]);
   // create state for holding our search field data
   const [termInput, setTermInput] = useState("");
@@ -62,6 +64,14 @@ const SearchRestaurants = () => {
         image_url: restaurant.image_url,
         url: restaurant.url,
       }));
+      //save all restaurants to state to conditinally render button in footer
+      const saveYelpRestaurants = (restaurantData) => {
+        dispatch({
+          type: "UPDATE_YELP_RESTAURANTS",
+          yelpRestaurants: restaurantData,
+        });
+      };
+      saveYelpRestaurants(mappedRestaurantData);
       setSearchedRestaurants(mappedRestaurantData);
       setTermInput("");
       setLocationInput("");
@@ -70,6 +80,7 @@ const SearchRestaurants = () => {
     }
   };
 
+  //save selected restaurants to global state
   const tempArr = [];
 
   const addRestaurant = (event) => {

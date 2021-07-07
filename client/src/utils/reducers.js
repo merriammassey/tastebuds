@@ -1,5 +1,6 @@
 //import possible actions
 import {
+  UPDATE_YELP_RESTAURANTS,
   UPDATE_SEARCHED_RESTAURANTS,
   UPDATE_EVENT,
   UPDATE_EVENT_NOTES,
@@ -13,6 +14,11 @@ export const reducer = (state, action) => {
   switch (action.type) {
     //if action type value is the value of 'UPDATE_RPODUCTS', return a new state object with an updated products array
     //setting products key to new array with action.products value spread across it
+    case UPDATE_YELP_RESTAURANTS:
+      return {
+        ...state,
+        yelpRestaurants: [...state.yelpRestaurants, ...action.yelpRestaurants],
+      };
     case UPDATE_SEARCHED_RESTAURANTS:
       return {
         ...state,
