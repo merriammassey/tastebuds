@@ -19,6 +19,7 @@ import Signup from "../src/pages/Signup";
 import Event from "../src/pages/Event";
 import MyEvents from "../src/pages/MyEvents";
 import ViewEvent from "../src/pages/ViewEvent";
+import ThankYou from "../src/pages/ThankYou";
 import AppNavBar from "../src/components/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 require("dotenv").config({ path: __dirname + "/.env" });
@@ -65,6 +66,7 @@ function App() {
               <Route exact path="/myevents" component={MyEvents} />
               <Route exact path="/event" component={Event} />
               <Route exact path="/viewevent" component={ViewEvent} />
+              <Route exact path="/thankyou" component={ThankYou} />
             </Switch>
           </StoreProvider>
         </div>

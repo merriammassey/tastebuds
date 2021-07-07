@@ -36,7 +36,7 @@ const restaurantSchema = new Schema({
 });
 
 // creating model
-const Restaurant = model("Restaurant", restaurantSchema);
+//const Restaurant = model("Restaurant", restaurantSchema);
 
 //module.exports = Restaurant;
 module.exports = restaurantSchema;

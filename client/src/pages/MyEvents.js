@@ -39,28 +39,45 @@ const MyEvents = () => {
       }; */
   return (
     <>
-      <div>
-        <header>
-          <div>
-            <div>
-              <h1 style={{ color: "#343a40" }}>Your Events</h1>
-              {/*  <CardColumns>
-                {userData.events.map((event) => {
-                  return (
-                    <Card key={event.title}>
-                      <Card.Header as="h5">{event.title}</Card.Header>
-                      <Card.Body>
-                        <Card.Title>{event.createdAt}</Card.Title>
-                        <Card.Text>{event.note}</Card.Text>
-                        <Button variant="primary">View Event</Button>
-                      </Card.Body>
-                    </Card>
-                  );
-                })}
-              </CardColumns> */}
-            </div>
-          </div>
-        </header>
+      <div style={{ backgroundColor: "#343a40" }}>
+        <h1 id="eventsheader">Your Events</h1>
+        <Container>
+          <Row>
+            <Col style={{ alignItems: "center" }}>
+              {/* {userData.events.map((event) => {
+                  return ( 
+                <Card key={event.title}>
+                  <Card.Header as="h5">{event.title}</Card.Header>
+                  <Card.Body>
+                    <Card.Title>{event.createdAt}</Card.Title>
+                    <Card.Text>{event.note}</Card.Text>
+                    <Button variant="primary">View Event</Button>
+                  </Card.Body>
+                </Card>
+                {/*    );
+                })} */}
+              <Card>
+                <Card.Header id="cardheader" as="h5">
+                  Bev's Goodbye Dinner Tuesday <br /> July 16, 2021
+                </Card.Header>
+                <Card.Body>
+                  <Card.Title>created 7.10.21</Card.Title>
+                  <Card.Text>
+                    Note: Please let us know where you'd prefer to eat!
+                  </Card.Text>
+                  <div id="buttondiv">
+                    <Button id="buttons" variant="success">
+                      View Event
+                    </Button>
+                    <Button id="buttons" variant="primary">
+                      Delete Event
+                    </Button>
+                  </div>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
       </div>
     </>
   );

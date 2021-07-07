@@ -29,7 +29,7 @@ import "./style.css";
 import VoteChart from "../components/Chart";
 import { propTypes } from "react-bootstrap/esm/Image";
 
-const ViewEvent = () => {
+const ThankYou = () => {
   const [state, dispatch] = useStoreContext();
   const { currentRestaurants, eventTitle, eventNote } = state;
   /* 
@@ -59,74 +59,21 @@ const ViewEvent = () => {
         <div id="eventdiv">
           <div id="event">
             <h1 id="eventheader" style={{ color: "#212529" }}>
-              Where would you like to eat?
+              Thank you for voting!
             </h1>{" "}
             <br />
             {/* <h3>Pre-game dinner</h3> */}
-            <h3>{eventTitle}</h3>
-            <h5>
-              {eventNote}
-              {/* Here are a few places close to the stadium. <br />
-              Please vote by 3pm today, and I'll make reservations. */}
-            </h5>
-            {/* MAP CARDS */}
-            <Container id="restaurantCards">
-              <Row>
-                <Col style={{ alignItems: "center" }}>
-                  {currentRestaurants.map((restaurant, index) => {
-                    return (
-                      <Card
-                        key={restaurant.id}
-                        index={index}
-                        style={{ width: "35rem" }}
-                      >
-                        <Card.Img
-                          variant="left"
-                          width={"250"}
-                          height={"250"}
-                          src={restaurant.image_url}
-                        />
-                        <Card.Body>
-                          <Card.Title>{restaurant.name}</Card.Title>
-                          <Card.Text>
-                            Rating: {restaurant.rating} <br />
-                            Price: {restaurant.price} <br />
-                            {restaurant.location}, {restaurant.city} <br />
-                            {restaurant.phone} <br />
-                            <a href={restaurant.url}>Website</a>
-                          </Card.Text>
-                          <Form.Group controlId="formBasicCheckbox">
-                            <Form.Check
-                              // onClick={(event) => vote(event)}
-                              type="checkbox"
-                              label="Click to select"
-                              value={index}
-                              name={restaurant}
-                            />
-                          </Form.Group>
-                          {/* <div
-                            // onClick={(event) => addRestaurant(event)}
-                            value={index}
-                            name={restaurant}
-                          >
-                            Click to select
-                          </div> */}
-                        </Card.Body>
-                      </Card>
-                    );
-                  })}
-                </Col>
-              </Row>
-            </Container>
+            <h3></h3>
+            <h5></h5>
             <div id="buttons">
-              <Link to="/thankyou">
+              <Link to="/">
                 <Button
                   // onSubmit={handleVote}
                   type="submit"
                   variant="success"
                   size="lg"
                 >
-                  Vote
+                  Make your own TasteBuds poll
                 </Button>
               </Link>
             </div>
@@ -178,4 +125,4 @@ const ViewEvent = () => {
   );
 };
 
-export default ViewEvent;
+export default ThankYou;
