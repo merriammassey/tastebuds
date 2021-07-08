@@ -36,11 +36,8 @@ const ThankYou = () => {
     <>
       <div id="homephoto">
         <div id="eventdiv">
-          <div id="event" style={{ padding: "10rem" }}>
-            <h1 id="eventheader" style={{ color: "#212529" }}>
-              Thank you for voting!
-            </h1>{" "}
-            <br />
+          <div id="thanks">
+            <h1 id="eventheader">Thank you for voting!</h1> <br />
             {/* <h3>Pre-game dinner</h3> */}
             <h3></h3>
             <h5></h5>
@@ -48,6 +45,7 @@ const ThankYou = () => {
               <Link to="/">
                 <Button
                   // onSubmit={handleVote}
+                  id="makebutton"
                   type="submit"
                   variant="success"
                   size="lg"

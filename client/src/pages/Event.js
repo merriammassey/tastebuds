@@ -74,7 +74,7 @@ const Event = () => {
             <div id="eventdiv">
               <div id="event">
                 <h1 id="eventheader" style={{ color: "#212529" }}>
-                  Create your Event
+                  Create Your Event
                 </h1>
                 <br />
                 <h5>
@@ -109,6 +109,17 @@ const Event = () => {
                         <br />
                       </Col>
                       <Col xs={12} md={4}>
+                        <h5>The choices you selected:</h5>
+
+                        <ul>
+                          {currentRestaurants.map((restaurant) => {
+                            return (
+                              <li styl={{ paddingLeft: "3px" }}>
+                                {restaurant.name}
+                              </li>
+                            );
+                          })}
+                        </ul>
                         <Link to="/viewevent">
                           <Button
                             id="invitebutton"
@@ -123,7 +134,7 @@ const Event = () => {
                       </Col>
                     </Form.Row>
                   </Form>
-                  <div id="restaurantCards">
+                  {/* <div id="restaurantCards">
                     {currentRestaurants.map((restaurant) => {
                       return (
                         <Card key={restaurant.id} style={{ width: "35rem" }}>
@@ -137,16 +148,23 @@ const Event = () => {
                             <Card.Title>{restaurant.name}</Card.Title>
                             <Card.Text>
                               Rating: {restaurant.rating} <br />
+                              <a href={restaurant.url} target="_blank">
+                                Read the reviews
+                              </a>
+                              <br />
                               Price: {restaurant.price} <br />
-                              {restaurant.location}, {restaurant.city} <br />
-                              {restaurant.phone} <br />
-                              <a href={restaurant.url}>Website</a>
+                              {restaurant.location}, {restaurant.city}
+                              <br />
+                              <a href="tel:{restaurant.phone}">
+                                {restaurant.phone}
+                              </a>{" "}
+                              <br />
                             </Card.Text>
                           </Card.Body>
                         </Card>
                       );
                     })}
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

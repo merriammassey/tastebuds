@@ -33,6 +33,13 @@
   border: 10px;
 }
 
+#thanks {
+  padding: 10rem;
+  color: white !important;
+  border-top: 5px;
+  border-bottom: 5px;
+}
+
 #form {
   max-width: 99% !important;
   box-sizing: content-box;
@@ -125,5 +132,13 @@ footer {
   .card {
     display: block !important;
     width: 100% !important;
+  }
+
+  #makebutton {
+    width: 20pc;
+  }
+
+  .form-control-lg {
+    font-size: 1rem !important;
   }
 }
