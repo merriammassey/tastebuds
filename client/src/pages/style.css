@@ -39,6 +39,7 @@
   margin-left: 5%;
   margin-top: 5%;
   margin-bottom: 5%;
+  margin-right: 5%;
 }
 
 #paragraph,
@@ -110,6 +111,11 @@ footer {
 
   h1 {
     font-size: 2rem !important;
+  }
+
+  h5 {
+    font-size: 1rem !important;
+    margin: 1pc;
   }
 
   #restaurantCards {

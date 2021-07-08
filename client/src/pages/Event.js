@@ -153,36 +153,6 @@ const Event = () => {
           </div>
         </header>
       </div>
-      {/* <Container id="restaurantCards">
-        <Row>
-          <Col style={{ alignItems: "center" }}>
-            {searchedRestaurants.map((restaurant) => {
-              return (
-                <Card key={restaurant.id} style={{ width: "35rem" }}>
-                  <Card.Img
-                    variant="left"
-                    width={"250"}
-                    height={"250"}
-                    src={restaurant.image_url}
-                  />
-                  <Card.Body>
-                    <Card.Title>{restaurant.name}</Card.Title>
-                    <Card.Text>
-                      Rating: {restaurant.rating} <br />
-                      Price: {restaurant.price} <br />
-                      {restaurant.location}, {restaurant.city} <br />
-                      {restaurant.phone} <br />
-                      <a href={restaurant.url}>Website</a>
-                    </Card.Text>
-                    <Button variant="primary">Add to event</Button>
-                  </Card.Body>
-                </Card> 
-                
-              );
-            })}
-          </Col>
-        </Row>
-      </Container>*/}
     </>
   );
 };

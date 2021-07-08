@@ -46,7 +46,6 @@ const ViewEvent = () => {
             <h5>
               {eventNote}
               <br />
-              <br />
               Check the box of your restaurant of choice.
               <br />
               Then click Vote!
@@ -74,10 +73,17 @@ const ViewEvent = () => {
                           <Card.Title>{restaurant.name}</Card.Title>
                           <Card.Text>
                             Rating: {restaurant.rating} <br />
+                            <a href={restaurant.url} target="_blank">
+                              Read the reviews
+                            </a>
+                            <br />
                             Price: {restaurant.price} <br />
-                            {restaurant.location}, {restaurant.city} <br />
-                            {restaurant.phone} <br />
-                            <a href={restaurant.url}>Website</a>
+                            {restaurant.location}, {restaurant.city}
+                            <br />
+                            <a href="tel:{restaurant.phone}">
+                              {restaurant.phone}
+                            </a>{" "}
+                            <br />
                           </Card.Text>
                           <Form.Group controlId="formBasicCheckbox">
                             <Form.Check
@@ -103,7 +109,7 @@ const ViewEvent = () => {
               </Row>
             </Container>
             <div id="buttons">
-              <Link to="/thankyou">
+              {/* <Link to="/thankyou">
                 <Button
                   // onSubmit={handleVote}
                   type="submit"
@@ -112,7 +118,7 @@ const ViewEvent = () => {
                 >
                   Vote
                 </Button>
-              </Link>
+              </Link> */}
             </div>
             {/* <VoteChart eventTitle={eventTitle} /> */}
             {/*   <div id="form">
@@ -157,6 +163,18 @@ const ViewEvent = () => {
               <br /> */}
           </div>
         </div>
+      </div>
+      <div id="footer">
+        <Link to="/thankyou">
+          <Button
+            // onSubmit={handleVote}
+            type="submit"
+            variant="success"
+            size="lg"
+          >
+            Vote
+          </Button>
+        </Link>
       </div>
     </>
   );
