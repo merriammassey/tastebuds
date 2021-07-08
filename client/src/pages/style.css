@@ -1,5 +1,6 @@
 :root {
   background-color: #343a40;
+  opacity: 100%;
 }
 
 #restaurantCards {
@@ -41,6 +42,11 @@
   margin-left: 5%;
   margin-top: 5%;
   margin-bottom: 5%;
+  opacity: 100%;
+}
+
+#searchform,
+#searchformelements {
   opacity: 100%;
 }
 
