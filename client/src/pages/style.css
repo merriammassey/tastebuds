@@ -1,12 +1,14 @@
 :root {
   background-color: #343a40;
 }
+
 #restaurantCards {
   padding-top: 5%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  opacity: 100%;
 }
 
 #eventdiv {
@@ -27,10 +29,10 @@
 #event {
   width: 75%;
   height: 50% !important;
-  background-color: rgba(255, 255, 255);
   justify-content: center;
   padding-top: 10;
   border: 10px;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 #form {
@@ -39,6 +41,7 @@
   margin-left: 5%;
   margin-top: 5%;
   margin-bottom: 5%;
+  opacity: 100%;
 }
 
 #paragraph,
@@ -48,6 +51,7 @@ h3,
 h4,
 h5 {
   text-align: center;
+  opacity: 100%;
 }
 
 #eventheader {
@@ -56,7 +60,7 @@ h5 {
 }
 
 footer {
-  background: rgba(20, 30, 34);
+  background: rgba(20, 30, 34, 0.8);
   width: 100%;
   opacity: 70%;
   position: fixed;
@@ -70,6 +74,7 @@ footer {
   align-items: center;
   justify-content: center;
   margin-bottom: 15px;
+  opacity: 100%;
 }
 
 #cardheader {
@@ -96,4 +101,28 @@ footer {
 
 #longanswer {
   height: 100px;
+}
+
+@media screen and (max-width: 575px) {
+  #searchformelements {
+    width: 75%;
+    margin: auto;
+  }
+
+  #searchbutton {
+    margin: auto;
+  }
+
+  h1 {
+    font-size: 2rem !important;
+  }
+
+  #restaurantCards {
+    width: 75% !important;
+  }
+
+  .card {
+    display: block !important;
+    width: 100% !important;
+  }
 }

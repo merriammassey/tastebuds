@@ -94,81 +94,65 @@ const SearchRestaurants = () => {
     };
     saveRestaurantData(tempArr);
   };
+  //let googlemaps = `https://www.google.com/maps/search/?api=1&amp;query=${restaurant.name}`;
 
   return (
     <>
       {/* <Jumbotron fluid className="text-light bg-dark">
         <Container> */}
-      <div>
-        <h1 style={{ color: "white" }}>Search for a restaurant to begin</h1>
+      <div id="searchform">
+        <div id="searchformelements">
+          <h1 style={{ color: "white" }}>Search for a restaurant to begin</h1>
+        </div>
         <Form onSubmit={handleFormSubmit}>
           <Form.Row>
             <Col xs={12} md={8}>
-              <Form.Control
-                name="termInput"
-                value={termInput}
-                onChange={(e) => setTermInput(e.target.value)}
-                type="text"
-                size="lg"
-                placeholder="Restaurant name or keyword"
-              />
-              <Form.Control
-                name="locationInput"
-                value={locationInput}
-                onChange={(e) => setLocationInput(e.target.value)}
-                type="text"
-                size="lg"
-                placeholder="Location"
-              />
+              <div id="searchformelements">
+                <Form.Control
+                  name="termInput"
+                  value={termInput}
+                  onChange={(e) => setTermInput(e.target.value)}
+                  type="text"
+                  size="lg"
+                  placeholder="Keyword"
+                />
+                <br />
+
+                <Form.Control
+                  name="locationInput"
+                  value={locationInput}
+                  onChange={(e) => setLocationInput(e.target.value)}
+                  type="text"
+                  size="lg"
+                  placeholder="Location"
+                />
+                <br />
+              </div>
             </Col>
             <Col xs={12} md={4}>
               {/* <Link to="/restaurants"> */}
-              <Button type="submit" variant="success" size="lg">
-                Search
-              </Button>
+              <div id="searchformelements">
+                <Button
+                  id="searchbutton"
+                  type="submit"
+                  variant="success"
+                  size="lg"
+                >
+                  Search
+                </Button>
+              </div>
               {/* </Link> */}
             </Col>
           </Form.Row>
         </Form>
-        {/*   <Container>
-          <h2>
-            {searchedRestaurants.length
-              ? `Viewing ${searchedRestaurants.length} results:`
-              : "Search for a book to begin"}
-          </h2>
-          <CardColumns>
-            {searchedRestaurants.map((restaurant) => {
-              return (
-                <Card key={restaurant.name} border="dark">
-                  {restaurant.image ? (
-                    <Card.Img
-                      src={restaurant.name}
-                      alt={`The cover for ${restaurant.name}`}
-                      variant="top"
-                    />
-                  ) : null}
-                  <Card.Body>
-                    <Card.Title>{restaurant.name}</Card.Title>
-                    <p className="small">Authors:</p>
-                    <Card.Text>{restaurant.name}</Card.Text>
-                    {/* {Auth.loggedIn() && (
-                      
-                    )} *
-                  </Card.Body>
-                </Card>
-              );
-            })}
-          </CardColumns>
-        </Container> */}
-
-        {/*      </Container>
-      </Jumbotron> */}
       </div>
       <Container id="restaurantCards">
         <Row>
           <Col style={{ alignItems: "center" }}>
             {searchedRestaurants.map((restaurant, index) => {
-              return (
+              /* let google =
+                "htt */ //www.google.com/maps/search/?api=1&amp;query="+{restaurant.name};
+              ps: return (
                 <Card
                   key={restaurant.id}
                   index={index}
@@ -184,10 +168,17 @@ const SearchRestaurants = () => {
                     <Card.Title>{restaurant.name}</Card.Title>
                     <Card.Text>
                       Rating: {restaurant.rating} <br />
+                      <a href={restaurant.url} target="_blank">
+                        Read the reviews
+                      </a>
+                      <br />
                       Price: {restaurant.price} <br />
-                      {restaurant.location}, {restaurant.city} <br />
-                      {restaurant.phone} <br />
-                      <a href={restaurant.url}>Website</a>
+                      {restaurant.location}, {restaurant.city}
+                      <br />
+                      <a href="tel:{restaurant.phone}">
+                        {restaurant.phone}
+                      </a>{" "}
+                      <br />
                     </Card.Text>
                     <Form.Group controlId="formBasicCheckbox">
                       <Form.Check
