@@ -2,7 +2,7 @@
 
 ## Description
 
-A full stack web application that enables users to create a custom poll populated with restaurant data from the Yelp Fusion API so that they can conveniently choose a place to eat based on poll results.
+A full stack web application that enables users to create a custom poll populated with restaurant data from the Yelp Fusion API so that they can survey friends, family, or coworkers and conveniently choose a place to eat based on majority vote.
 
 ## Table of Contents
 
