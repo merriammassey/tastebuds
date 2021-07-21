@@ -21,7 +21,7 @@ const Event = () => {
   const handleAddEvent = async (event) => {
     const title = eventNameInput;
     const note = eventNotesInput;
-    const restaurants = currentRestaurants;
+    const { restaurants } = currentRestaurants;
 
     //event.preventDefault();
     console.log(eventNameInput);
