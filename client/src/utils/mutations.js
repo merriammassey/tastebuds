@@ -31,7 +31,13 @@ export const ADD_EVENT = gql`
     $restaurants: [RestaurantInput]
   ) {
     addEvent(title: $title, note: $note, restaurants: $restaurants) {
-      username
+      events {
+        title
+        note
+        restaurants {
+          name
+        }
+      }
     }
   }
 `;

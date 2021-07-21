@@ -45,7 +45,7 @@ const Event = () => {
       console.error(err);
     }
     //global state
-    const saveEventNotes = (eventNotesInput) => {
+    /* const saveEventNotes = (eventNotesInput) => {
       dispatch({
         type: "UPDATE_EVENT_NOTES",
         eventNote: eventNotesInput,
@@ -58,9 +58,9 @@ const Event = () => {
         type: "UPDATE_EVENT_TITLE",
         eventTitle: eventNameInput,
       });
-    };
+    }; */
     //
-    saveEventTitle(eventNameInput);
+    //saveEventTitle(eventNameInput);
     console.log(state);
     //setEventNameInput("");
     //setEventNotesInput("");

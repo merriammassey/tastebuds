@@ -22,7 +22,7 @@ const typeDefs = gql`
   type Restaurant {
     id: String
     name: String!
-    rating: String
+    rating: Float
     price: String
     location: String
     city: String
@@ -35,7 +35,7 @@ const typeDefs = gql`
   input RestaurantInput {
     id: String
     name: String!
-    rating: String
+    rating: Float
     price: String
     location: String
     city: String
