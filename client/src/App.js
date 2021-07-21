@@ -5,6 +5,7 @@ import {
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
+  from,
   useQuery,
   gql,
 } from "@apollo/client";
@@ -22,11 +23,25 @@ import ViewEvent from "../src/pages/ViewEvent";
 import ThankYou from "../src/pages/ThankYou";
 import AppNavBar from "../src/components/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { onError } from "@apollo/client/link/error";
+
 require("dotenv").config({ path: __dirname + "/.env" });
 // End Pages import
-
+//
 const httpLink = createHttpLink({
   uri: "/graphql",
+});
+
+//
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors)
+    graphQLErrors.forEach(({ message, locations, path }) =>
+      console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+      )
+    );
+
+  if (networkError) console.log(`[Network error]: ${networkError}`);
 });
 
 //function to add token to httpLink
@@ -43,7 +58,8 @@ const authLink = setContext((_, { headers }) => {
 //establish connection to back end servier's graphql endpoint
 const client = new ApolloClient({
   //establish new link to gql server...combine autLink and httpLink so every request retrieves token and sets request headers before amking the request to API
-  link: authLink.concat(httpLink),
+  //link: authLink.concat(httpLink),
+  link: from([authLink, errorLink, httpLink]),
   //instantiate a new cache object
   cache: new InMemoryCache(),
 });
