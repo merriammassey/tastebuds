@@ -28,7 +28,7 @@ export const ADD_EVENT = gql`
   mutation addEvent(
     $title: String!
     $note: String
-    $restaurants: [Restaurant]
+    $restaurants: [RestaurantInput]
   ) {
     addEvent(title: $title, note: $note, restaurants: $restaurants) {
       user

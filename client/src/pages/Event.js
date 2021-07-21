@@ -6,10 +6,10 @@ import { Link } from "react-router-dom";
 import { useStoreContext } from "../utils/GlobalState";
 import { ADD_EVENT } from "../utils/mutations";
 import { useQuery, useMutation, error } from "@apollo/client";
-//import { SAVE_EVENT } from "../utils/mutations";
 import "./style.css";
 
 const Event = () => {
+  //get currentRestaurants from global state
   const [state, dispatch] = useStoreContext();
   const { currentRestaurants } = state;
 

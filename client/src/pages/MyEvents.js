@@ -34,18 +34,18 @@ const MyEvents = () => {
         <Container>
           <Row>
             <Col style={{ alignItems: "center" }}>
-              {/* {userData.events.map((event) => {
-                  return ( 
-                <Card key={event.title}>
-                  <Card.Header as="h5">{event.title}</Card.Header>
-                  <Card.Body>
-                    <Card.Title>{event.createdAt}</Card.Title>
-                    <Card.Text>{event.note}</Card.Text>
-                    <Button variant="primary">View Event</Button>
-                  </Card.Body>
-                </Card>
-                {/*    );
-                })} */}
+              {userData.events.map((event) => {
+                return (
+                  <Card key={event.title}>
+                    <Card.Header as="h5">{event.title}</Card.Header>
+                    <Card.Body>
+                      <Card.Title>{event.createdAt}</Card.Title>
+                      <Card.Text>{event.note}</Card.Text>
+                      <Button variant="primary">View Event</Button>
+                    </Card.Body>
+                  </Card>
+                );
+              })}
               <Card style={{ margin: "10px" }}>
                 <Card.Header id="cardheader" as="h5">
                   Bev's Goodbye Dinner Tuesday <br /> July 16, 2021
