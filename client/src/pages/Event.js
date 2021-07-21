@@ -14,29 +14,29 @@ const Event = () => {
   const { currentRestaurants } = state;
 
   // create state for holding our search field data
-  const [eventNameInput, setEventNameInput] = useState("");
+  const [eventTitleInput, setEventTitleInput] = useState("");
   const [eventNotesInput, setEventNotesInput] = useState("");
   const [addEvent, { error }] = useMutation(ADD_EVENT);
 
   const handleAddEvent = async (event) => {
-    const title = eventNameInput;
+    const title = eventTitleInput;
     const note = eventNotesInput;
-    const { restaurants } = currentRestaurants;
+    //const { restaurants } = currentRestaurants;
 
     //event.preventDefault();
-    console.log(eventNameInput);
-    if (!eventNameInput) {
+    console.log(eventTitleInput);
+    if (!eventTitleInput) {
       //add modal
       console.log("please enter a name for your event");
       return false;
     }
     try {
-      console.log(title, note, restaurants);
+      console.log(title, note, currentRestaurants);
       await addEvent({
         variables: {
           title: title,
           note: note,
-          restaurants: restaurants,
+          restaurants: currentRestaurants,
         },
       });
       console.log(event);
@@ -45,7 +45,8 @@ const Event = () => {
       console.error(err);
     }
     //global state
-    /* const saveEventNotes = (eventNotesInput) => {
+    //TITLE AND NOTES EMPTY ARRAY IN STATE, REGARDLESS OF THE LINES BELOW
+    /*  const saveEventNotes = (eventNotesInput) => {
       dispatch({
         type: "UPDATE_EVENT_NOTES",
         eventNote: eventNotesInput,
@@ -53,16 +54,16 @@ const Event = () => {
     };
     saveEventNotes(eventNotesInput);
 
-    const saveEventTitle = (eventNameInput) => {
+    const saveEventTitle = (eventTitleInput) => {
       dispatch({
         type: "UPDATE_EVENT_TITLE",
-        eventTitle: eventNameInput,
+        eventTitle: eventTitleInput,
       });
-    }; */
+    };
     //
-    //saveEventTitle(eventNameInput);
+    saveEventTitle(eventTitleInput); */
     console.log(state);
-    //setEventNameInput("");
+    //setEventTitleInput("");
     //setEventNotesInput("");
   };
 
@@ -88,9 +89,9 @@ const Event = () => {
                     <Form.Row>
                       <Col xs={12} md={8}>
                         <Form.Control
-                          name="eventNameInput"
-                          value={eventNameInput}
-                          onChange={(e) => setEventNameInput(e.target.value)}
+                          name="eventTitleInput"
+                          value={eventTitleInput}
+                          onChange={(e) => setEventTitleInput(e.target.value)}
                           type="text"
                           size="lg"
                           placeholder="Give your event a name"
