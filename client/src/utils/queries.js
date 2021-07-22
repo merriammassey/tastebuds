@@ -10,6 +10,7 @@ export const GET_ME = gql`
         note
         restaurants {
           name
+          votes
         }
       }
     }

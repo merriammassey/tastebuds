@@ -11,7 +11,7 @@ const MyEvents = () => {
     variables: { token },
   });
   //when get_me is run, repsonse returns our data; query_user returns data in user property
-  const userData = data?.me || data?.user || {};
+  const userData = data?.me || data?.user;
   console.log(userData);
   console.log(error); //undefined
   /*     const handleDeleteEvent = async (bookId) => {

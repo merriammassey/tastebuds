@@ -36,6 +36,7 @@ export const ADD_EVENT = gql`
         note
         restaurants {
           name
+          votes
         }
       }
     }
