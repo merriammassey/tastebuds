@@ -11,9 +11,9 @@ const MyEvents = () => {
     variables: { token },
   });
   //when get_me is run, repsonse returns our data; query_user returns data in user property
-  const userData = data?.me || data?.user;
+  const userData = data?.me || data?.user || {};
   console.log(userData);
-  console.log(error); //undefined
+  //console.log(error); //undefined
   /*     const handleDeleteEvent = async (bookId) => {
         try {
           //replace deleteBook() with REMOVE_BOOK mutation
@@ -27,6 +27,9 @@ const MyEvents = () => {
           console.error(error);
         }
       }; */
+  if (loading) {
+    return <h2>LOADING...</h2>;
+  }
   return (
     <>
       <div style={{ backgroundColor: "#343a40" }}>
