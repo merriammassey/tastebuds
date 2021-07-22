@@ -48,8 +48,8 @@ const SearchRestaurants = () => {
       console.log(restaurantData);
 
       const mappedRestaurantData = restaurantData.map((restaurant, index) => ({
-        key: restaurant.id,
-        id: restaurant.id,
+        /*         key: restaurant.id,
+         */ id: restaurant.id,
         name: restaurant.name,
         //categories: restaurant.categories.title,
         rating: restaurant.rating,
@@ -151,10 +151,10 @@ const SearchRestaurants = () => {
           <Col style={{ alignItems: "center" }}>
             {searchedRestaurants.map((restaurant, index) => {
               /* let google =
-                "htt */ //www.google.com/maps/search/?api=1&amp;query="+{restaurant.name};
-              ps: return (
+                "https: */ //www.google.com/maps/search/?api=1&amp;query="+{restaurant.name};
+              return (
                 <Card
-                  key={restaurant.id}
+                  // key={restaurant.id}
                   index={index}
                   style={{ width: "35rem" }}
                 >
