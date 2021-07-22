@@ -5,6 +5,9 @@ const Restaurant = require("./Restaurant");
 
 const eventSchema = new Schema(
   {
+    /* _id: {
+      type: String,
+    }, */
     title: {
       type: String,
     },

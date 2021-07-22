@@ -19,7 +19,7 @@ import Login from "../src/pages/Login";
 import Signup from "../src/pages/Signup";
 import Event from "../src/pages/Event";
 import MyEvents from "../src/pages/MyEvents";
-import ViewEvent from "../src/pages/ViewEvent";
+import Vote from "./pages/Vote";
 import ThankYou from "../src/pages/ThankYou";
 import AppNavBar from "../src/components/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -81,7 +81,10 @@ function App() {
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/myevents" component={MyEvents} />
               <Route exact path="/event" component={Event} />
-              <Route exact path="/viewevent" component={ViewEvent} />
+              {/* <Route exact path="/events/:id" component={Detail} /> */}
+              <Route exact path="/vote" component={Vote} />
+
+              {/* <Route exact path="/events/:id" component={Vote} /> */}
               <Route exact path="/thankyou" component={ThankYou} />
             </Switch>
           </StoreProvider>

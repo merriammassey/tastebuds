@@ -32,18 +32,25 @@ const Event = () => {
     }
     try {
       console.log(title, note, currentRestaurants);
-      await addEvent({
+      const data = await addEvent({
         variables: {
           title: title,
           note: note,
           restaurants: restaurants,
         },
       });
-      console.log(event);
+      //console.log(data.data.addEvent.events);
+      const newEvent = data.data.addEvent.events.length - 1;
+      //console.log(newEvent); //logs the number needed
+      //console.log(data.data.addEvent.events[newEvent]);
+
+      //console.log(data.data.addEvent.events[newEvent]._id);
+      const eventID = data.data.addEvent.events[newEvent]._id;
       //setSavedEvents...
     } catch (err) {
       console.error(err);
     }
+
     //global state
     //TITLE AND NOTES EMPTY ARRAY IN STATE, REGARDLESS OF THE LINES BELOW
     /*  const saveEventNotes = (eventNotesInput) => {
@@ -66,8 +73,8 @@ const Event = () => {
     //setEventTitleInput("");
     //setEventNotesInput("");
   };
-
-  return (
+  /*   const _id = events._id;
+   */ return (
     <>
       <div>
         <header>
@@ -121,7 +128,8 @@ const Event = () => {
                             );
                           })}
                         </ul>
-                        <Link to="/viewevent">
+                        {/* <Link to={`/events/${_id}`}> */}
+                        <Link to={"/vote"}>
                           <Button
                             id="invitebutton"
                             onClick={handleAddEvent}

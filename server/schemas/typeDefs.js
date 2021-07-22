@@ -14,6 +14,7 @@ const typeDefs = gql`
     events: [Event]
   }
   type Event {
+    _id: String
     title: String
     note: String
     restaurants: [Restaurant]
