@@ -3,6 +3,8 @@
 const { AuthenticationError } = require("apollo-server-express");
 const User = require("../models/User");
 const Event = require("../models/EventModel");
+const Restaurant = require("../models/RestaurantModel");
+//const Vote = require("../models/Vote");
 
 const { signToken } = require("../utils/auth");
 
@@ -19,6 +21,13 @@ const resolvers = {
       }
 
       throw new AuthenticationError("Not logged in");
+    },
+    event: async (parent, { _id }) => {
+      return Event.findOne({ _id });
+      //.populate("votes");
+    },
+    restaurant: async (parent, { _id }) => {
+      return Restaurant.findOne({ _id });
     },
   },
   Mutation: {
@@ -62,6 +71,23 @@ const resolvers = {
         console.log(user);
         return user;
       }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    //updating Event or Restaurant?
+    addVotes: async (parent, restaurantId, context) => {
+      //const restaurantId = restaurant._id;
+      if (context.user) {
+        const updatedEvent = await Event.findOneAndUpdate(
+          { _id: restaurantId, username: context.user.username }, //take the id from the restaurant id
+          { $push: { votes: { username: context.user.username } } },
+          { new: true, runValidators: true }
+        );
+        //.populate("votes");
+        console.log(votes);
+        console.log(updatedRestaurant);
+        return updatedEvent;
+      }
+
       throw new AuthenticationError("You need to be logged in!");
     },
   },

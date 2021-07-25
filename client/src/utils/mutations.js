@@ -44,7 +44,19 @@ export const ADD_EVENT = gql`
   }
 `;
 
-export const SAVE_RESTAURANT = gql`
+export const ADD_VOTES = gql`
+  mutation addVotes($restaurantId: ID) {
+    addVotes(restaurantId: $restaurantId) {
+      _id
+      voteCount
+      votes {
+        username
+      }
+    }
+  }
+`;
+
+/* export const SAVE_RESTAURANT = gql`
   mutation saveRestaurant(
     $id: String!
     $name: String!
@@ -82,7 +94,7 @@ export const SAVE_RESTAURANT = gql`
     }
   }
 `;
-
+ */
 /* export const SAVE_EVENT = gql`
   mutation saveEvent(
     $id: String!

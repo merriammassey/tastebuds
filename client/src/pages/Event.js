@@ -17,6 +17,7 @@ const Event = () => {
   const [eventTitleInput, setEventTitleInput] = useState("");
   const [eventNotesInput, setEventNotesInput] = useState("");
   const [addEvent, { error }] = useMutation(ADD_EVENT);
+  const _id = handleAddEvent();
 
   const handleAddEvent = async (event) => {
     const title = eventTitleInput;
@@ -45,7 +46,8 @@ const Event = () => {
       //console.log(data.data.addEvent.events[newEvent]);
 
       //console.log(data.data.addEvent.events[newEvent]._id);
-      const eventID = data.data.addEvent.events[newEvent]._id;
+      const _id = data.data.addEvent.events[newEvent]._id;
+      return _id;
       //setSavedEvents...
     } catch (err) {
       console.error(err);
@@ -72,9 +74,12 @@ const Event = () => {
     console.log(state);
     //setEventTitleInput("");
     //setEventNotesInput("");
+    //return data.data.addEvent.events[newEvent]._id;
   };
-  /*   const _id = events._id;
-   */ return (
+  //OUT OF SCOPE:
+  //const _id = data.data.addEvent.events[newEvent]._id;
+
+  return (
     <>
       <div>
         <header>
@@ -128,8 +133,8 @@ const Event = () => {
                             );
                           })}
                         </ul>
-                        {/* <Link to={`/events/${_id}`}> */}
-                        <Link to={"/vote"}>
+                        <Link to={`/events/${_id}`}>
+                          {/* <Link to={"/vote"}> */}
                           <Button
                             id="invitebutton"
                             onClick={handleAddEvent}

@@ -81,8 +81,8 @@ function App() {
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/myevents" component={MyEvents} />
               <Route exact path="/event" component={Event} />
-              {/* <Route exact path="/events/:id" component={Detail} /> */}
-              <Route exact path="/vote" component={Vote} />
+              <Route exact path="/events/:id" component={Vote} />
+              {/* <Route exact path="/vote" component={Vote} /> */}
 
               {/* <Route exact path="/events/:id" component={Vote} /> */}
               <Route exact path="/thankyou" component={ThankYou} />

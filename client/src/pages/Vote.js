@@ -7,8 +7,12 @@ import { Link } from "react-router-dom";
 import { useStoreContext } from "../utils/GlobalState";
 import "./style.css";
 //import VoteChart from "../components/Chart";
+import { ADD_VOTES } from "../utils/mutations";
+import { useQuery, useMutation, error } from "@apollo/client";
 
 const Vote = () => {
+  //CALL GET EVENT QUERY THEN ADD VOTES MUTATION
+
   const [state, dispatch] = useStoreContext();
   const { currentRestaurants, eventTitle, eventNote } = state;
   /* 

@@ -16,3 +16,18 @@ export const GET_ME = gql`
     }
   }
 `;
+
+export const GET_EVENT = gql`
+  query event($id: ID!) {
+    event(_id: $id) {
+      _id
+      title
+      note
+      restaurants {
+        _id
+        name
+        votes
+      }
+    }
+  }
+`;

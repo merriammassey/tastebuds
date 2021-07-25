@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const Restaurant = require("./Restaurant");
+const restaurantSchema = require("./RestaurantSchema");
 const dateFormat = require("../utils/dateFormat");
 const User = require("./User");
 
@@ -14,7 +14,7 @@ const eventSchema = new Schema(
     note: {
       type: String,
     },
-    restaurants: [Restaurant],
+    restaurants: [restaurantSchema],
   },
   {
     toJSON: {

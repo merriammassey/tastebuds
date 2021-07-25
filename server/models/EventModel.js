@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const Restaurant = require("./Restaurant");
+const Restaurant = require("./RestaurantModel");
 //const dateFormat = require("../utils/dateFormat");
 //const User = require("./User");
 
