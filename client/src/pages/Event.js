@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 //global state imports
 import { useStoreContext } from "../utils/GlobalState";
 import { ADD_EVENT } from "../utils/mutations";
-import { useQuery, useMutation, error } from "@apollo/client";
+import { useQuery, useMutation, onCompleted, error } from "@apollo/client";
 import "./style.css";
 
 const Event = () => {
@@ -16,8 +16,17 @@ const Event = () => {
   // create state for holding our search field data
   const [eventTitleInput, setEventTitleInput] = useState("");
   const [eventNotesInput, setEventNotesInput] = useState("");
-  const [addEvent, { error }] = useMutation(ADD_EVENT);
-  const _id = handleAddEvent();
+  const [addEvent, { error }] = useMutation(ADD_EVENT, {
+    onCompleted: (data) => {
+      //const { eventId } = await addEvent;
+      //console.log((data.addEvent.events.length - 1)._id); undefined
+      const eventId = (data.addEvent.events.length - 1)._id;
+      //console.log(data.addEvent.events.length - 1);
+      //console.log(data);
+      console.log(eventId); //UNDEFINED
+    },
+  });
+  //const _id =  handleAddEvent();
 
   const handleAddEvent = async (event) => {
     const title = eventTitleInput;
@@ -40,14 +49,16 @@ const Event = () => {
           restaurants: restaurants,
         },
       });
+
+      console.log(data);
       //console.log(data.data.addEvent.events);
       const newEvent = data.data.addEvent.events.length - 1;
-      //console.log(newEvent); //logs the number needed
+      console.log(newEvent); //logs the event index needed
       //console.log(data.data.addEvent.events[newEvent]);
-
       //console.log(data.data.addEvent.events[newEvent]._id);
       const _id = data.data.addEvent.events[newEvent]._id;
-      return _id;
+      console.log(_id); //logs event ID
+      //return _id;
       //setSavedEvents...
     } catch (err) {
       console.error(err);
@@ -133,11 +144,12 @@ const Event = () => {
                             );
                           })}
                         </ul>
-                        <Link to={`/events/${_id}`}>
-                          {/* <Link to={"/vote"}> */}
+                        {/* <Link to={`/events/${_id}`}> */}
+                        <Link to={"/vote"}>
                           <Button
                             id="invitebutton"
                             onClick={handleAddEvent}
+                            //onCompleted = {data => console.log("Hi World")
                             type="submit"
                             variant="success"
                             size="lg"

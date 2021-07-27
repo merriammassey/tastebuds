@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
-const VoteSchema = require("./Vote");
+const VoteSchema = require("./Votes");
+const userSchema = require("./UserSchema");
 
 const restaurantSchema = new Schema(
   {
@@ -32,11 +33,13 @@ const restaurantSchema = new Schema(
     url: {
       type: String,
     },
-    votes: [VoteSchema],
+    votes: {
+      type: String,
+    },
   },
   {
     toJSON: {
-      getters: true,
+      virtuals: true,
     },
   }
 );

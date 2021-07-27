@@ -33,7 +33,7 @@ const typeDefs = gql`
     phone: String
     image_url: String
     url: String
-    votes: [Votes]
+    votes: [String]
   }
 
   input RestaurantInput {
@@ -47,17 +47,6 @@ const typeDefs = gql`
     phone: String
     image_url: String
     url: String
-    votes: [Votes]
-  }
-
-  input VotesInput {
-    restaurantId: ID!
-    username: String
-  }
-
-  type Votes {
-    restaurantId: ID!
-    username: String
   }
 
   type Auth {
@@ -69,7 +58,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     addEvent(title: String!, note: String, restaurants: [RestaurantInput]): User
-    addVotes(restaurantId: ID!, username: String): Restaurant
+    addVotes(eventId: ID!, restaurantId: ID!): Event
   }
 `;
 

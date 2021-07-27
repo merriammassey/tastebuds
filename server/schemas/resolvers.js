@@ -23,11 +23,18 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
     event: async (parent, { _id }) => {
-      return Event.findOne({ _id });
-      //.populate("votes");
+      const eventData = await Event.findOne({ _id })
+        .populate("restaurants")
+        .populate("votes");
+      console.log(eventData);
+      return eventData;
     },
     restaurant: async (parent, { _id }) => {
-      return Restaurant.findOne({ _id });
+      const restaurantData = await Restaurant.findOne({ _id }).populate(
+        "votes"
+      );
+      console.log(restaurantData);
+      return restaurantData;
     },
   },
   Mutation: {
@@ -74,17 +81,22 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
     //updating Event or Restaurant?
-    addVotes: async (parent, restaurantId, context) => {
+    addVotes: async (parent, { eventId, restaurantId }, context) => {
       //const restaurantId = restaurant._id;
       if (context.user) {
         const updatedEvent = await Event.findOneAndUpdate(
-          { _id: restaurantId, username: context.user.username }, //take the id from the restaurant id
-          { $push: { votes: { username: context.user.username } } },
+          { _id: eventId, restaurant: restaurantId },
+          {
+            //$set: { _id: restaurantId },
+            //$set: { restaurant: restaurant.votes },
+            $set: { votes: restaurant.votes },
+            $addToSet: { votes: context.user.username },
+          },
           { new: true, runValidators: true }
-        );
-        //.populate("votes");
-        console.log(votes);
-        console.log(updatedRestaurant);
+        )
+          .populate("restaurants")
+          .populate("votes");
+        console.log(updatedEvent);
         return updatedEvent;
       }
 

@@ -5,6 +5,7 @@ const VoteSchema = new Schema({
   username: {
     type: String,
     required: true,
+    unique: true,
   },
   /* toJSON: {
     getters: true,

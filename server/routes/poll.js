@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const mongoose = require("mongoose");
-const Vote = require("../models/Vote");
+const Vote = require("../models/Votes");
 //
 const Pusher = require("pusher");
 
