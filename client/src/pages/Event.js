@@ -20,10 +20,11 @@ const Event = () => {
     onCompleted: (data) => {
       //const { eventId } = await addEvent;
       //console.log((data.addEvent.events.length - 1)._id); undefined
-      const eventId = (data.addEvent.events.length - 1)._id;
+      //const eventId = (data.addEvent.events.length - 1)._id; i think this is right
+      const _id = data.addEvent.events[data.addEvent.events.length - 1]._id; //matt's suggestion
       //console.log(data.addEvent.events.length - 1);
       //console.log(data);
-      console.log(eventId); //UNDEFINED
+      console.log(_id); //UNDEFINED
     },
   });
   //const _id =  handleAddEvent();
@@ -144,8 +145,8 @@ const Event = () => {
                             );
                           })}
                         </ul>
-                        {/* <Link to={`/events/${_id}`}> */}
-                        <Link to={"/vote"}>
+                        <Link to={`/events/${_id}`}>
+                          {/* <Link to={"/vote"}> */}
                           <Button
                             id="invitebutton"
                             onClick={handleAddEvent}
