@@ -7,8 +7,12 @@ import { useStoreContext } from "../utils/GlobalState";
 import { ADD_EVENT } from "../utils/mutations";
 import { useQuery, useMutation, onCompleted, error } from "@apollo/client";
 import "./style.css";
-
+import { useHistory } from "react-router-dom";
+import Home from "./Home";
+import { Redirect } from "react-router-dom";
 const Event = () => {
+  let history = useHistory();
+
   //get currentRestaurants from global state
   const [state, dispatch] = useStoreContext();
   const { currentRestaurants } = state;
@@ -21,15 +25,18 @@ const Event = () => {
       //const { eventId } = await addEvent;
       //console.log((data.addEvent.events.length - 1)._id); undefined
       //const eventId = (data.addEvent.events.length - 1)._id; i think this is right
-      const _id = data.addEvent.events[data.addEvent.events.length - 1]._id; //matt's suggestion
+      const _id = data.addEvent.events[data.addEvent.events.length - 1]._id;
       //console.log(data.addEvent.events.length - 1);
       //console.log(data);
       console.log(_id); //UNDEFINED
+      history.push(`/events/${_id}`);
     },
   });
   //const _id =  handleAddEvent();
 
   const handleAddEvent = async (event) => {
+    event.preventDefault();
+
     const title = eventTitleInput;
     const note = eventNotesInput;
     const restaurants = currentRestaurants;
@@ -145,19 +152,20 @@ const Event = () => {
                             );
                           })}
                         </ul>
-                        <Link to={`/events/${_id}`}>
-                          {/* <Link to={"/vote"}> */}
-                          <Button
-                            id="invitebutton"
-                            onClick={handleAddEvent}
-                            //onCompleted = {data => console.log("Hi World")
-                            type="submit"
-                            variant="success"
-                            size="lg"
-                          >
-                            Invite your friends
-                          </Button>
-                        </Link>
+                        {/* <Link to={`/events/${_id}`}> */}
+                        {/* <Link to={"/vote"}> */}
+                        <Button
+                          id="invitebutton"
+                          onClick={handleAddEvent}
+                          //onCompleted = {data => console.log("Hi World")
+                          //onCompleted={history.push(`/events/${_id}`)}
+                          type="submit"
+                          variant="success"
+                          size="lg"
+                        >
+                          Invite your friends
+                        </Button>
+                        {/* </Link> */}
                       </Col>
                     </Form.Row>
                   </Form>
