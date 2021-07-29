@@ -30,11 +30,14 @@ const resolvers = {
       return eventData;
     },
     restaurant: async (parent, { _id }) => {
-      const restaurantData = await Restaurant.findOne({ _id }).populate(
-        "votes"
-      );
+      /* const restaurantData = await Event.findOne({ _id }).populate("votes");
       console.log(restaurantData);
-      return restaurantData;
+      //return restaurantData; */
+      const event = await Event.findOne({ _id });
+      //return event.populate("restaurants");
+      return event.restaurants.filter(
+        (restaurant) => restaurant.id === "12345"
+      );
     },
   },
   Mutation: {
@@ -69,7 +72,6 @@ const resolvers = {
         console.log(event);
         const user = await User.findOneAndUpdate(
           { _id: context.user._id },
-          //{ $push: { events: eventData } },
           { $push: { events: event } },
 
           // without the { new: true } flag Mongo would return the original document instead of the updated document.
@@ -80,12 +82,14 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    //updating Event or Restaurant?
     addVotes: async (parent, { eventId, restaurantId }, context) => {
       //const restaurantId = restaurant._id;
       if (context.user) {
         const updatedEvent = await Event.findOneAndUpdate(
-          { _id: eventId, restaurant: restaurantId },
+          //find the event and the restaurant
+          //{ _id: eventId, restaurant: restaurantId },
+          { _id: eventId },
+
           {
             //$set: { _id: restaurantId },
             //$set: { restaurant: restaurant.votes },

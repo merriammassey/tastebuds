@@ -6,7 +6,7 @@ const typeDefs = gql`
   type Query {
     me: User
     event(_id: ID!): Event
-    restaurant(_id: ID!): Restaurant
+    restaurant(_id: ID!): [Restaurant]
   }
 
   type User {
