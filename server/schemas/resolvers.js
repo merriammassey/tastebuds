@@ -29,14 +29,14 @@ const resolvers = {
       console.log(eventData);
       return eventData;
     },
-    restaurant: async (parent, { _id }) => {
+    restaurant: async (parent, { _id, restaurantId }) => {
       /* const restaurantData = await Event.findOne({ _id }).populate("votes");
       console.log(restaurantData);
       //return restaurantData; */
       const event = await Event.findOne({ _id });
       //return event.populate("restaurants");
       return event.restaurants.filter(
-        (restaurant) => restaurant.id === "12345"
+        (restaurant) => restaurant.id === restaurantId
       );
     },
   },
