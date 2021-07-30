@@ -4,7 +4,7 @@ const { AuthenticationError } = require("apollo-server-express");
 const User = require("../models/User");
 const Event = require("../models/EventModel");
 const Restaurant = require("../models/RestaurantModel");
-//const Vote = require("../models/Vote");
+const Vote = require("../models/Votes");
 
 const { signToken } = require("../utils/auth");
 
@@ -30,15 +30,16 @@ const resolvers = {
       return eventData;
     },
     restaurant: async (parent, { _id, restaurantId }) => {
-      /* const restaurantData = await Event.findOne({ _id }).populate("votes");
-      console.log(restaurantData);
-      //return restaurantData; */
       const event = await Event.findOne({ _id });
-      //return event.populate("restaurants");
       return event.restaurants.filter(
         (restaurant) => restaurant.id === restaurantId
       );
     },
+    /* vote: async (parent, { restaurantId }) => {
+      const voteData = await Voted.findOne({ restaurantId });
+      console.log(voteData);
+      return voteData;
+    }, */
   },
   Mutation: {
     addUser: async (parent, args) => {
@@ -66,11 +67,14 @@ const resolvers = {
     addEvent: async (parents, eventData, context) => {
       if (context.user) {
         const event = await Event.create({
+          //take the event data provided and the username and create an event
           ...eventData,
           username: context.user.username,
         });
         console.log(event);
+        //update the user by pushing the event to their events array
         const user = await User.findOneAndUpdate(
+          //find the user based on the context
           { _id: context.user._id },
           { $push: { events: event } },
 
@@ -82,26 +86,37 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    addVotes: async (parent, { eventId, restaurantId }, context) => {
+    /* addVote: async (parent, voteData, context) => {
+      if (context.user) {
+        const vote = await Voted.create({
+          ...voteData,
+          email: context.user.email,
+        });
+        console.log(vote);
+        return vote;
+        
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    }, */
+    addVotes: async (parent, { _id, restaurantId }, context) => {
       //const restaurantId = restaurant._id;
       if (context.user) {
+        const event = await Event.findOne({ _id });
+        const restaurant = event.restaurants.filter(
+          (restaurant) => restaurant.id === restaurantId
+        );
+        const votes = restaurant.votes;
         const updatedEvent = await Event.findOneAndUpdate(
-          //find the event and the restaurant
-          //{ _id: eventId, restaurant: restaurantId },
-          { _id: eventId },
-
-          {
-            //$set: { _id: restaurantId },
-            //$set: { restaurant: restaurant.votes },
-            $set: { votes: restaurant.votes },
-            $addToSet: { votes: context.user.username },
-          },
-          { new: true, runValidators: true }
+          { _id },
+          //{ $set: restaurant.votes },
+          { $set: { votes: restaurant.votes } },
+          { $addToSet: { votes: context.user.username } }
+          //{ new: true }
         )
           .populate("restaurants")
           .populate("votes");
-        console.log(updatedEvent);
         return updatedEvent;
+        console.log(updatedEvent);
       }
 
       throw new AuthenticationError("You need to be logged in!");

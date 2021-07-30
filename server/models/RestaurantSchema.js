@@ -34,7 +34,7 @@ const restaurantSchema = new Schema(
       type: String,
     },
     votes: {
-      type: String,
+      type: [userSchema],
     },
   },
   {

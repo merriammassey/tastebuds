@@ -7,6 +7,7 @@ const typeDefs = gql`
     me: User
     event(_id: ID!): Event
     restaurant(_id: ID!, restaurantId: String): [Restaurant]
+    voted(restaurantId: ID): Voted
   }
 
   type User {
@@ -15,6 +16,13 @@ const typeDefs = gql`
     email: String!
     events: [Event]
   }
+
+  input UserInput {
+    _id: ID!
+    username: String!
+    email: String!
+  }
+
   type Event {
     _id: String
     title: String
@@ -33,7 +41,7 @@ const typeDefs = gql`
     phone: String
     image_url: String
     url: String
-    votes: [String]
+    votes: [User]
   }
 
   input RestaurantInput {
@@ -54,11 +62,17 @@ const typeDefs = gql`
     user: User
   }
 
+  type Voted {
+    restaurant: Restaurant
+    votes: [User]
+  }
+
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     addEvent(title: String!, note: String, restaurants: [RestaurantInput]): User
-    addVotes(eventId: ID!, restaurantId: ID!): Event
+    addVotes(_id: ID!, restaurantId: String): Event
+    addVoted(restaurantId: ID, votes: UserInput): Voted
   }
 `;
 

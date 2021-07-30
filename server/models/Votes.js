@@ -2,19 +2,17 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const VoteSchema = new Schema({
-  username: {
+  restaurant: {
     type: String,
     required: true,
-    unique: true,
   },
-  /* toJSON: {
-    getters: true,
-  }, */
+  points: {
+    type: String,
+    required: true,
+  },
 });
 
 //create collection and add schema
-const Votes = mongoose.model("Votes", VoteSchema);
+const Vote = mongoose.model("Vote", VoteSchema);
 
-//module.exports = VoteSchema;
-
-module.exports = VoteSchema;
+module.exports = Vote;
