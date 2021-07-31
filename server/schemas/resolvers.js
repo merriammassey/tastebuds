@@ -23,11 +23,15 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
     event: async (parent, { _id }) => {
-      const eventData = await Event.findOne({ _id })
+      return await Event.findById(_id)
+        .populate("restaurants")
+        .populate("votes");
+
+      /* const eventData = await Event.findOne({ _id })
         .populate("restaurants")
         .populate("votes");
       console.log(eventData);
-      return eventData;
+      return eventData; */
     },
     restaurant: async (parent, { _id, restaurantId }) => {
       const event = await Event.findOne({ _id });
@@ -98,7 +102,7 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     }, */
-    addVotes: async (parent, { _id, restaurantId }, context) => {
+    /*  addVotes: async (parent, { _id, restaurantId }, context) => {
       //const restaurantId = restaurant._id;
       if (context.user) {
         const event = await Event.findOne({ _id });
@@ -120,7 +124,7 @@ const resolvers = {
       }
 
       throw new AuthenticationError("You need to be logged in!");
-    },
+    }, */
   },
 };
 

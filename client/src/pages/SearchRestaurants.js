@@ -1,7 +1,7 @@
 //import React, { useState, useEffect } from "react";
 import React, { useState, useEffect } from "react";
 import { useStoreContext } from "../utils/GlobalState";
-
+// import { Center, Spinner } from "@chakra-ui/react";
 import {
   Container,
   Col,
@@ -17,7 +17,7 @@ import Footer from "../components/Footer";
 
 const SearchRestaurants = () => {
   const [state, dispatch] = useStoreContext();
-  const { restaurants } = state;
+  //const { restaurants } = state;
   //const { data: restaurantData } = useQuery(QUERY_RESTAURANTS);
 
   // create state for holding returned yelp data
@@ -36,6 +36,17 @@ const SearchRestaurants = () => {
   // create method to search for books and set state on form submit
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    /* if (loading)
+      return (
+        <Center>
+          <Spinner
+            thickness="5px"
+            emptyColor="brand.300"
+            color="brand.100"
+            size="xl"
+          />
+        </Center>
+      ); */
 
     //console.log(locationInput);
     if (!locationInput) {
@@ -81,11 +92,11 @@ const SearchRestaurants = () => {
 
   const addRestaurant = (event) => {
     const index = event.target.getAttribute("value");
-    console.log(event.target.getAttribute("value"));
+    //console.log(event.target.getAttribute("value"));
 
     tempArr.push(searchedRestaurants[index]);
     console.log(tempArr);
-    //global state
+    //save selected restaurants to global state
     const saveRestaurantData = (restaurantData) => {
       dispatch({
         type: "UPDATE_SEARCHED_RESTAURANTS",

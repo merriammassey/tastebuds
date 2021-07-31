@@ -5,6 +5,7 @@ import {
   UPDATE_EVENT,
   UPDATE_EVENT_NOTES,
   UPDATE_EVENT_TITLE,
+  UPDATE_EVENT_ID,
 } from "./actions";
 import { useReducer } from "react";
 
@@ -43,6 +44,11 @@ export const reducer = (state, action) => {
       return {
         ...state,
         event: [...action.event],
+      };
+    case UPDATE_EVENT_ID:
+      return {
+        ...state,
+        eventId: action.eventId,
       };
     /* 
     case UPDATE_CURRENT_CATEGORY:

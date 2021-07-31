@@ -5,31 +5,21 @@ const { gql } = require("apollo-server-express");
 const typeDefs = gql`
   type Query {
     me: User
-    event(_id: ID!): Event
-    restaurant(_id: ID!, restaurantId: String): [Restaurant]
-    voted(restaurantId: ID): Voted
+    event(_id: ID): Event
+    restaurant(_id: ID!): Restaurant
   }
-
   type User {
     _id: ID!
     username: String!
     email: String!
     events: [Event]
   }
-
-  input UserInput {
-    _id: ID!
-    username: String!
-    email: String!
-  }
-
   type Event {
     _id: String
     title: String
     note: String
     restaurants: [Restaurant]
   }
-
   type Restaurant {
     _id: ID
     id: String
@@ -41,9 +31,8 @@ const typeDefs = gql`
     phone: String
     image_url: String
     url: String
-    votes: [User]
+    votes: [String]
   }
-
   input RestaurantInput {
     _id: ID
     id: String
@@ -56,23 +45,15 @@ const typeDefs = gql`
     image_url: String
     url: String
   }
-
   type Auth {
     token: ID!
     user: User
   }
-
-  type Voted {
-    restaurant: Restaurant
-    votes: [User]
-  }
-
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     addEvent(title: String!, note: String, restaurants: [RestaurantInput]): User
-    addVotes(_id: ID!, restaurantId: String): Event
-    addVoted(restaurantId: ID, votes: UserInput): Voted
+    addVotes(eventId: ID!, restaurantId: ID!): Event
   }
 `;
 

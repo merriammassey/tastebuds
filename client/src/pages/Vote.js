@@ -9,12 +9,29 @@ import "./style.css";
 //import VoteChart from "../components/Chart";
 import { ADD_VOTES } from "../utils/mutations";
 import { useQuery, useMutation, error } from "@apollo/client";
+import VoteChart from "../components/Chart";
+import { GET_EVENT } from "../utils/queries";
+import { useParams } from "react-router-dom";
 
-const Vote = () => {
+const Vote = (props) => {
   //CALL GET EVENT QUERY THEN ADD VOTES MUTATION
+  const { id: eventId } = useParams();
+  //const [state, dispatch] = useStoreContext();
+  //const { eventId } = state;
+  console.log(eventId);
+  //const { currentRestaurants, eventTitle, eventNote } = state;
 
-  const [state, dispatch] = useStoreContext();
-  const { currentRestaurants, eventTitle, eventNote } = state;
+  const { loading, data } = useQuery(GET_EVENT, {
+    variables: { id: eventId },
+  });
+
+  console.log(data);
+  const eventData = data?.event || {};
+
+  if (loading) {
+    return <h2>LOADING...</h2>;
+  }
+  console.log(eventData);
   /* 
   const handleVote = async (event) => {
     const index = event.target.getAttribute("value");
@@ -46,9 +63,9 @@ const Vote = () => {
             </h1>{" "}
             <br />
             {/* <h3>Pre-game dinner</h3> */}
-            <h3>{eventTitle}</h3>
+            <h3>{eventData.title}</h3>
             <h5>
-              {eventNote}
+              {eventData.note}
               <br />
               Check the box of your restaurant of choice.
               <br />
@@ -60,7 +77,7 @@ const Vote = () => {
             <Container id="restaurantCards">
               <Row>
                 <Col style={{ alignItems: "center" }}>
-                  {currentRestaurants.map((restaurant, index) => {
+                  {eventData.restaurants.map((restaurant, index) => {
                     return (
                       <Card
                         key={restaurant.id}
@@ -124,6 +141,7 @@ const Vote = () => {
                 </Button>
               </Link> */}
             </div>
+            <VoteChart />
             {/* <VoteChart eventTitle={eventTitle} /> */}
             {/*   <div id="form">
               <form id="vote-form">

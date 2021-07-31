@@ -30,6 +30,13 @@ const Event = () => {
       //console.log(data);
       console.log(_id); //UNDEFINED
       history.push(`/events/${_id}`);
+      const saveEventId = (_id) => {
+        dispatch({
+          type: "UPDATE_EVENT_ID",
+          eventId: _id,
+        });
+      };
+      saveEventId(_id);
     },
   });
   //const _id =  handleAddEvent();
@@ -90,7 +97,7 @@ const Event = () => {
     };
     //
     saveEventTitle(eventTitleInput); */
-    console.log(state);
+    //console.log(state);
     //setEventTitleInput("");
     //setEventNotesInput("");
     //return data.data.addEvent.events[newEvent]._id;

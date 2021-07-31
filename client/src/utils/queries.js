@@ -18,14 +18,19 @@ export const GET_ME = gql`
 `;
 
 export const GET_EVENT = gql`
-  query event($id: ID!) {
+  query event($id: ID) {
     event(_id: $id) {
-      _id
       title
       note
       restaurants {
         _id
         name
+        rating
+        image_url
+        price
+        location
+        city
+        phone
         votes
       }
     }
