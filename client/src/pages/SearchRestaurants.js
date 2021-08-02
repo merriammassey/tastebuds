@@ -1,7 +1,7 @@
 //import React, { useState, useEffect } from "react";
 import React, { useState, useEffect } from "react";
 import { useStoreContext } from "../utils/GlobalState";
-// import { Center, Spinner } from "@chakra-ui/react";
+import spinner from "../assets/spinner.gif";
 import {
   Container,
   Col,
@@ -10,19 +10,18 @@ import {
   Button,
   Card,
   CardColumns,
+  Spinner,
 } from "react-bootstrap";
 import { searchYelp } from "../utils/yelpAPI";
 import "./style.css";
 import Footer from "../components/Footer";
 
 const SearchRestaurants = () => {
+  //const [restaurantData, setRestaurantData] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [state, dispatch] = useStoreContext();
-  //const { restaurants } = state;
-  //const { data: restaurantData } = useQuery(QUERY_RESTAURANTS);
 
   // create state for holding returned yelp data
-  const [yelpRestaurants, setYelpRestaurants] = useState([]);
-
   const [searchedRestaurants, setSearchedRestaurants] = useState([]);
   // create state for holding our search field data
   const [termInput, setTermInput] = useState("");
@@ -35,18 +34,9 @@ const SearchRestaurants = () => {
 
   // create method to search for books and set state on form submit
   const handleFormSubmit = async (event) => {
+    setLoading(true);
     event.preventDefault();
-    /* if (loading)
-      return (
-        <Center>
-          <Spinner
-            thickness="5px"
-            emptyColor="brand.300"
-            color="brand.100"
-            size="xl"
-          />
-        </Center>
-      ); */
+    // if (loading) return <img src={spinner} alt="loading" />;
 
     //console.log(locationInput);
     if (!locationInput) {
@@ -82,6 +72,7 @@ const SearchRestaurants = () => {
       setSearchedRestaurants(mappedRestaurantData);
       setTermInput("");
       setLocationInput("");
+      setLoading(false);
     } catch (err) {
       console.error(err);
     }
@@ -158,6 +149,8 @@ const SearchRestaurants = () => {
         </Form>
       </div>
       <Container id="restaurantCards">
+        {loading ? <Spinner animation="border" variant="success" /> : null}
+
         <Row>
           <Col style={{ alignItems: "center" }}>
             {searchedRestaurants.map((restaurant, index) => {
