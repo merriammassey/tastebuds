@@ -141,7 +141,7 @@ const Vote = (props) => {
                 </Button>
               </Link> */}
             </div>
-            <VoteChart />
+            {/* <VoteChart /> */}
             {/* <VoteChart eventTitle={eventTitle} /> */}
             {/*   <div id="form">
               <form id="vote-form">
