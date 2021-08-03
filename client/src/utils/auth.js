@@ -37,14 +37,28 @@ class AuthService {
   login(idToken) {
     // Saves user token to localStorage
     localStorage.setItem("id_token", idToken);
-    window.location.assign("/");
+    //window.location.assign("/");
+    //let { id } = useParams();
+    /* if (!window.location.toString().includes("event")) {
+      
+    } else {
+      //window.location.assign(window.location.href);
+      setShowModal(false);
+    } */
   }
 
   logout() {
     // Clear user token and profile data from localStorage
     localStorage.removeItem("id_token");
-    // this will reload the page and reset the state of the application
     window.location.assign("/");
+    // this will reload the page and reset the state of the application
+    //let { id } = useParams();
+    /* if (!window.location.toString().includes("event")) {
+      window.location.assign("/");
+    } else {
+      //window.location.assign(window.location.href);
+      setShowModal(false);
+    } */
   }
 }
 
