@@ -1,8 +1,8 @@
-const express = require("express");
+/* const express = require("express");
 const router = express.Router();
 
 const mongoose = require("mongoose");
-const Vote = require("../models/Votes");
+const Vote = require("../models/Vote");
 //
 const Pusher = require("pusher");
 
@@ -24,7 +24,7 @@ router.get("/", (req, res) => {
     res.json({ success: true, votes: votes });
     console.log(votes);
   });
-}); */
+}); 
 
 //when user votes, make request to poll
 router.post("/", (req, res) => {
@@ -46,3 +46,4 @@ router.post("/", (req, res) => {
 });
 
 module.exports = router;
+ */

@@ -6,8 +6,9 @@ const typeDefs = gql`
   type Query {
     me: User
     event(_id: ID): Event
-    restaurant(_id: ID!): Restaurant
+    restaurant(eventId: ID!, _id: ID): Event
   }
+
   type User {
     _id: ID!
     username: String!
@@ -19,11 +20,23 @@ const typeDefs = gql`
     title: String
     note: String
     restaurants: [Restaurant]
+    votes: [Vote]
   }
+
+  type Vote {
+    restaurantId: ID
+    points: [String]
+  }
+
+  input VoteInput {
+    restaurantId: ID
+    points: [String]
+  }
+
   type Restaurant {
-    _id: ID
+    _id: ID!
     id: String
-    name: String!
+    name: String
     rating: Float
     price: String
     location: String
@@ -53,7 +66,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     addEvent(title: String!, note: String, restaurants: [RestaurantInput]): User
-    addVotes(eventId: ID!, restaurantId: ID!): Event
+    addVote(eventId: ID!, restaurantId: ID, points: [String]): Event
   }
 `;
 
