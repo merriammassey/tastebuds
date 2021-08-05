@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const VoteSchema = new Schema({
-  restaurantID: {
+  restaurantId: {
     type: String,
     required: true,
   },
@@ -10,6 +10,6 @@ const VoteSchema = new Schema({
 });
 
 //create collection and add schema
-const Vote = mongoose.model("Vote", VoteSchema);
+//const Vote = mongoose.model("Vote", VoteSchema);
 
 module.exports = VoteSchema;

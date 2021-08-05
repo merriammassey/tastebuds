@@ -3,8 +3,8 @@
 const { AuthenticationError } = require("apollo-server-express");
 const User = require("../models/User");
 const Event = require("../models/EventModel");
-const Restaurant = require("../models/RestaurantModel");
-const Vote = require("../models/Vote");
+//const Restaurant = require("../models/RestaurantModel");
+const Vote = require("../models/VoteModel");
 
 const { signToken } = require("../utils/auth");
 
@@ -32,6 +32,9 @@ const resolvers = {
         .populate("votes");
       console.log(eventData);
       return eventData; */
+    },
+    vote: async (parent, { _id }) => {
+      return await Vote.findById(_id);
     },
     restaurant: async (parent, { eventId, _id }) => {
       const event = await Event.findOne({ eventId }).populate("restaurants");
@@ -116,6 +119,7 @@ const resolvers = {
           //take the event data provided and the username and create an event
           ...eventData,
           username: context.user.username,
+          points: context.user.username,
         });
         console.log(event);
         //update the user by pushing the event to their events array
@@ -132,21 +136,21 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    addVote: async (parent, { eventId, voteData }, context) => {
+    addVote: async (parent, restaurantId, context) => {
       if (context.user) {
         const vote = await Vote.create({
-          ...voteData,
-          username: context.user.username,
+          restaurantId,
+          points: context.user.email,
         });
         console.log(vote);
-
-        const event = Event.findOneAndUpdate(
+        return vote;
+        /* const event = Event.findOneAndUpdate(
           { _id: eventId },
           { $push: { votes: vote } },
           { new: true }
         );
         console.log(event);
-        return event;
+        return event; */
       }
       throw new AuthenticationError("You need to be logged in!");
     },

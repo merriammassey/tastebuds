@@ -6,6 +6,7 @@ const typeDefs = gql`
   type Query {
     me: User
     event(_id: ID): Event
+    vote(_id: ID): Vote
     restaurant(eventId: ID!, _id: ID): Event
   }
 
@@ -24,12 +25,13 @@ const typeDefs = gql`
   }
 
   type Vote {
-    restaurantId: ID
+    _id: ID
+    restaurantId: String
     points: [String]
   }
 
   input VoteInput {
-    restaurantId: ID
+    restaurantId: String
     points: [String]
   }
 
@@ -65,8 +67,13 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    addEvent(title: String!, note: String, restaurants: [RestaurantInput]): User
-    addVote(eventId: ID!, restaurantId: ID, points: [String]): Event
+    addEvent(
+      title: String!
+      note: String
+      restaurants: [RestaurantInput]
+      votes: [VoteInput]
+    ): User
+    addVote(restaurantId: String, points: [String]): Vote
   }
 `;
 
