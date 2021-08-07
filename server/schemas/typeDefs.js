@@ -7,7 +7,7 @@ const typeDefs = gql`
     me: User
     event(_id: ID): Event
     vote(_id: ID): Vote
-    restaurant(eventId: ID!, _id: ID): Event
+    restaurant(_id: ID, restaurantId: String): Restaurant
   }
 
   type User {
@@ -16,6 +16,7 @@ const typeDefs = gql`
     email: String!
     events: [Event]
   }
+
   type Event {
     _id: String
     title: String
@@ -25,7 +26,6 @@ const typeDefs = gql`
   }
 
   type Vote {
-    _id: ID
     restaurantId: String
     points: [String]
   }
@@ -46,10 +46,8 @@ const typeDefs = gql`
     phone: String
     image_url: String
     url: String
-    votes: [String]
   }
   input RestaurantInput {
-    _id: ID
     id: String
     name: String!
     rating: Float
@@ -73,7 +71,7 @@ const typeDefs = gql`
       restaurants: [RestaurantInput]
       votes: [VoteInput]
     ): User
-    addVote(restaurantId: String, points: [String]): Vote
+    addVote(restaurantId: String, points: [String]): Event
   }
 `;
 

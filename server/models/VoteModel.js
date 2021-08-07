@@ -3,9 +3,7 @@ const { Schema, model } = require("mongoose");
 const VoteSchema = new Schema(
   {
     restaurantId: {
-      type: {
-        type: String,
-      },
+      type: String,
     },
     points: [String],
   },

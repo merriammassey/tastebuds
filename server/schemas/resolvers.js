@@ -3,7 +3,7 @@
 const { AuthenticationError } = require("apollo-server-express");
 const User = require("../models/User");
 const Event = require("../models/EventModel");
-//const Restaurant = require("../models/RestaurantModel");
+const Restaurant = require("../models/RestaurantModel");
 const Vote = require("../models/VoteModel");
 
 const { signToken } = require("../utils/auth");
@@ -23,9 +23,7 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
     event: async (parent, { _id }) => {
-      return await Event.findById(_id)
-        .populate("restaurants")
-        .populate("votes");
+      return await Event.findById(_id).populate("restaurants");
 
       /* const eventData = await Event.findOne({ _id })
         .populate("restaurants")
@@ -36,21 +34,24 @@ const resolvers = {
     vote: async (parent, { _id }) => {
       return await Vote.findById(_id);
     },
-    restaurant: async (parent, { eventId, _id }) => {
-      const event = await Event.findOne({ eventId }).populate("restaurants");
-      /* const restaurant = event.restaurants.filter(
-        (restaurant) => restaurant._id === restaurantId
-      ); */
-      //console.log(restaurant); //undefined
-      //return { restaurant }; //null
-      return event.restaurants._id(_id);
+    restaurant: async (parent, { _id }) => {
+      return await Restaurant.findById(_id).populate("votes");
     },
   },
+  /*  const event = await Event.findOne({ _id });
+      const restaurant = event.restaurants.filter(
+        (restaurant) => restaurant.id === restaurantId
+      );
+      console.log(restaurant); //undefined
+      //return { restaurant }; //null
+      return restaurant; */
+
   /* vote: async (parent, { restaurantId }) => {
       const voteData = await Voted.findOne({ restaurantId });
       console.log(voteData);
       return voteData;
     }, */
+
   Mutation: {
     addUser: async (parent, args) => {
       const user = await User.create(args);
@@ -118,8 +119,7 @@ const resolvers = {
         const event = await Event.create({
           //take the event data provided and the username and create an event
           ...eventData,
-          username: context.user.username,
-          points: context.user.username,
+          //username: context.user.username,
         });
         console.log(event);
         //update the user by pushing the event to their events array
@@ -136,36 +136,89 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    addVote: async (parent, restaurantId, context) => {
+
+    /* if (context.user) {
+        // generate restaurants
+        for (let i = 0; i < eventData.restaurants.length; i++) {
+          const restaurantList = await Restaurant.create({
+            id: restaurants[i].id,
+            name: restaurants[i].name,
+            location: restaurants[i].location,
+            city: restaurants[i].city,
+            phone: restaurants[i].phone,
+            image_url: restaurants[i].image_url,
+            url: restaurants[i].url,
+          });
+          console.log(restaurantList);
+ */
+    /* addVote: async (parent, { _id, restaurantId }, context) => {
+      //const restaurantId = restaurant._id;
       if (context.user) {
+        const event = await Event.findOne({ _id });
+        const vote = event.votes.filter(
+          (votes) => votes.restaurant.id === restaurantId
+        );
+        const updatedEvent = await Event.findOneAndUpdate(
+          { _id },
+          { $set: { points: vote.points } },
+          { $addToSet: { points: context.user.username } },
+          { new: true }
+        )
+          .populate("restaurants")
+          .populate("votes");
+        console.log(updatedEvent);
+        return updatedEvent;
+      }
+
+      throw new AuthenticationError("You need to be logged in!");
+    }, */
+    //works in console, error in playground
+    addVote: async (parent, { restaurantId }, context) => {
+      if (context.user) {
+        //console.log(context);
         const vote = await Vote.create({
           restaurantId,
-          points: context.user.email,
+          points: context.user.username,
         });
         console.log(vote);
-        return vote;
-        /* const event = Event.findOneAndUpdate(
+        console.log("hello world");
+        //return vote;
+
+        const event = Event.findOneAndUpdate(
           { _id: eventId },
           { $push: { votes: vote } },
           { new: true }
         );
         console.log(event);
-        return event; */
+        return event;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    /*  addVotes: async (parent, { _id, restaurantId }, context) => {
+  },
+  /*   addVote: async (parent, args, context, eventId) => {
       //const restaurantId = restaurant._id;
       if (context.user) {
-        const event = await Event.findOne({ _id });
-        const restaurant = event.restaurants.filter(
-          (restaurant) => restaurant.id === restaurantId
-        );
-        const votes = restaurant.votes;
+        const updatedRestaurant = await Restaurant.findOneAndUpdate(
+          { _id: args.id },
+          { $addToSet: { votes: context.user.username } },
+          { new: true }
+        ); console.log(updatedRestaurant);
+        const updatedEvent = await Event.findByIdAndUpdate(eventId, {
+          new: true,
+        });
+      }
+
+      throw new AuthenticationError("Not logged in");
+    },*/
+
+  //const event = await Event.findOne({ _id });
+  /* const restaurant = event.restaurants.find(
+          (restaurant) => restaurant.id === args.id
+        ); */
+
+  /* const votes = restaurant.votes;
         const updatedEvent = await Event.findOneAndUpdate(
           { _id },
-          //{ $set: restaurant.votes },
-          { $set: { votes: restaurant.votes } },
           { $addToSet: { votes: context.user.username } }
           //{ new: true }
         )
@@ -177,7 +230,6 @@ const resolvers = {
 
       throw new AuthenticationError("You need to be logged in!");
     }, */
-  },
 };
 
 module.exports = resolvers;
