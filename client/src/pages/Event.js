@@ -15,6 +15,7 @@ import { Navbar, Nav, Container, Modal, Tab } from "react-bootstrap";
 import SignUpForm from "../components/SignupForm";
 import LoginForm from "../components/LoginForm";
 const Event = () => {
+  const handleModalClose = () => setShowModal(false);
   // set modal display state
   const [showModal, setShowModal] = useState(false);
   let history = useHistory();
@@ -51,12 +52,35 @@ const Event = () => {
     event.preventDefault();
     //if not logged in, toggle modal
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-    if (!token) {
-      setShowModal(true);
-    }
     const title = eventTitleInput;
     const note = eventNotesInput;
     const restaurants = currentRestaurants;
+    if (!token) {
+      setShowModal(true);
+      if (!eventTitleInput) {
+        console.log("please enter a name for your event");
+        return false;
+      }
+      try {
+        const data = await addEvent({
+          variables: {
+            title: title,
+            note: note,
+            restaurants: restaurants,
+          },
+        });
+        const newEvent = data.data.addEvent.events.length - 1;
+        console.log(newEvent); //logs the event index needed
+        //console.log(data.data.addEvent.events[newEvent]);
+        //console.log(data.data.addEvent.events[newEvent]._id);
+        const _id = data.data.addEvent.events[newEvent]._id;
+        console.log(_id); //logs event ID
+        //return _id;
+        //setSavedEvents...
+      } catch (err) {
+        console.error(err);
+      }
+    }
 
     //event.preventDefault();
     console.log(eventTitleInput);
@@ -218,6 +242,7 @@ const Event = () => {
                   </div> */}
                   {/* set modal data up */}
                   <Modal
+                    id="eventModal"
                     size="lg"
                     show={showModal}
                     onHide={() => setShowModal(false)}

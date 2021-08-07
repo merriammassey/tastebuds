@@ -23,7 +23,9 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
     event: async (parent, { _id }) => {
-      return await Event.findById(_id).populate("restaurants");
+      return await Event.findById(_id)
+        .populate("restaurants")
+        .populate("votes");
 
       /* const eventData = await Event.findOne({ _id })
         .populate("restaurants")
@@ -173,24 +175,36 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     }, */
     //works in console, error in playground
-    addVote: async (parent, { restaurantId }, context) => {
+    addVote: async (parent, { restaurantId, eventId }, context) => {
       if (context.user) {
         //console.log(context);
-        const vote = await Vote.create({
+        /* const vote = await Vote.create({
           restaurantId,
           points: context.user.username,
-        });
-        console.log(vote);
-        console.log("hello world");
+        }); */
+        //console.log(context.user.username);
+        //console.log("hello world");
         //return vote;
+        const event = await Event.findById({ _id: eventId });
+        //console.log(event);
 
-        const event = Event.findOneAndUpdate(
+        const restaurant = event.restaurants.filter((restaurant) => {
+          return restaurant._id.toString() === restaurantId;
+        });
+        //console.log(restaurant);
+
+        const votes = restaurant[0].votes;
+        //console.log(votes);
+        votes.push(context.user.username);
+        const updatedEvent = await event.save();
+        /* const updatedEvent = Event.findOneAndUpdate(
           { _id: eventId },
-          { $push: { votes: vote } },
+          //{ $set: votes },
+          { $push: { votes: context.user.username } },
           { new: true }
-        );
-        console.log(event);
-        return event;
+        ); */
+        //console.log(updatedEvent);
+        return updatedEvent;
       }
       throw new AuthenticationError("You need to be logged in!");
     },

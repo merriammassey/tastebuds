@@ -5,17 +5,17 @@ var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 class VoteChart extends Component {
-  render(eventTitle) {
+  render(props) {
     const options = {
       title: {
-        text: { eventTitle },
+        text: props.title,
       },
       data: [
         {
           type: "column",
           dataPoints: [
-            { label: "Apple", y: 10 },
-            { label: "Orange", y: 15 },
+            { label: props.currentRestaurants[0], y: 10 },
+            { label: props.currentRestaurants[1], y: 15 },
             { label: "Banana", y: 25 },
             { label: "Mango", y: 30 },
             { label: "Grape", y: 28 },

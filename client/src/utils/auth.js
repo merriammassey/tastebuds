@@ -1,6 +1,6 @@
 // use this to decode a token and get the user's information out of it
 import decode from "jwt-decode";
-
+import Event from "../pages/Event";
 // create a new class to instantiate for a user
 class AuthService {
   // get user data
@@ -35,16 +35,20 @@ class AuthService {
   }
 
   login(idToken) {
+    var modal = document.getElementById("signup-modal");
     // Saves user token to localStorage
     localStorage.setItem("id_token", idToken);
     //window.location.assign("/");
     //let { id } = useParams();
-    /* if (!window.location.toString().includes("event")) {
-      
+    if (window.location.toString().includes("event")) {
+      //window.location.assign("/event");
+      const handleModalClose = Event.handleModalClose;
+      handleModalClose(); //doesn't work
+      //Event.handleAddEvent();
     } else {
       //window.location.assign(window.location.href);
-      setShowModal(false);
-    } */
+      window.location.assign("/");
+    }
   }
 
   logout() {

@@ -33,9 +33,9 @@ const restaurantSchema = new Schema(
     url: {
       type: String,
     },
-    /* votes: {
-      type: [userSchema],
-    }, */
+    votes: {
+      type: [String],
+    },
     /* [
       {
         type: Schema.Types.ObjectId,
