@@ -7,13 +7,27 @@ import { Link } from "react-router-dom";
 import { useStoreContext } from "../utils/GlobalState";
 import "./style.css";
 //import VoteChart from "../components/Chart";
-import { ADD_VOTES } from "../utils/mutations";
+import { ADD_VOTE } from "../utils/mutations";
 import { useQuery, useMutation, error } from "@apollo/client";
 import VoteChart from "../components/Chart";
 import { GET_EVENT } from "../utils/queries";
 import { useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import Auth from "../utils/auth";
 
 const Vote = (props) => {
+  let history = useHistory();
+
+  const [addVote, { error }] = useMutation(ADD_VOTE, {
+    onCompleted: () => {
+      history.push("/thankyou");
+    },
+  });
+
+  //if not logged in, toggle modal
+  //const token = Auth.loggedIn() ? Auth.getToken() : null;
+  //if (!token) {
+  //setShowModal(true)};
   //CALL GET EVENT QUERY THEN ADD VOTES MUTATION
   const { id: eventId } = useParams();
   //const [state, dispatch] = useStoreContext();
@@ -31,19 +45,43 @@ const Vote = (props) => {
   if (loading) {
     return <h2>LOADING...</h2>;
   }
-  console.log(eventData);
-  /* 
+  //console.log(eventData);
+
   const handleVote = async (event) => {
-    const index = event.target.getAttribute("value");
-    console.log(event.target.getAttribute("value"));
-    //
+    event.preventDefault();
 
-    const data = { restaurant: choice };
-    //const data = choice;
-    console.log(data);
+    //modify this
+    if (!Auth) {
+      console.log("please enter a name for your event");
+      return false;
+    }
+    try {
+      //const eventId = eventId.toObjectId();
+      const restaurantId = event.target.getAttribute("value");
+      console.log(event.target.getAttribute("value"));
+      console.log(restaurantId); //null
+      //console.log(eventId);
+      const vote = await addVote({
+        variables: {
+          restaurantId: restaurantId,
+          eventId: eventId,
+        },
+      });
+      console.log(vote);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-    const { votes, totalVotes, votesCounts } = await getVotes(voteData);
+  //const index = event.target.getAttribute("value");
+  //console.log(event.target.getAttribute("value"));
 
+  //const data = { restaurant: choice };
+  //const data = choice;
+  //console.log(data);
+
+  //const { votes, totalVotes, votesCounts } = await getVotes(voteData);
+  /*
     let dataPoints = [
       { y: votesCounts.Maskadores, label: "Maskadores" },
       { y: votesCounts.MunichGyro, label: "MunichGyro" },
@@ -108,10 +146,10 @@ const Vote = (props) => {
                           </Card.Text>
                           <Form.Group controlId="formBasicCheckbox">
                             <Form.Check
-                              // onClick={(event) => vote(event)}
+                              onClick={(event) => handleVote(event)}
                               type="checkbox"
                               label="Click to select"
-                              value={index}
+                              value={restaurant._id}
                               name={restaurant}
                             />
                           </Form.Group>
@@ -141,7 +179,7 @@ const Vote = (props) => {
                 </Button>
               </Link> */}
             </div>
-            <VoteChart props={eventData} />
+            {/* <VoteChart props={eventData} /> */}
             {/* <VoteChart eventTitle={eventTitle} /> */}
             {/*   <div id="form">
               <form id="vote-form">
@@ -187,16 +225,16 @@ const Vote = (props) => {
         </div>
       </div>
       <div id="footer">
-        <Link to="/thankyou">
-          <Button
-            // onSubmit={handleVote}
-            type="submit"
-            variant="success"
-            size="lg"
-          >
-            Vote
-          </Button>
-        </Link>
+        {/* <Link to="/thankyou"> */}
+        <Button
+          onClick={() => handleVote()}
+          type="submit"
+          variant="success"
+          size="lg"
+        >
+          Vote
+        </Button>
+        {/* </Link> */}
       </div>
     </>
   );

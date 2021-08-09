@@ -5,9 +5,9 @@ const User = require("../models/User");
 const Event = require("../models/EventModel");
 const Restaurant = require("../models/RestaurantModel");
 const Vote = require("../models/VoteModel");
-
+const ObjectId = require("mongodb").ObjectId;
 const { signToken } = require("../utils/auth");
-
+const mongoose = require("mongoose");
 const resolvers = {
   Query: {
     // get a single user - me
@@ -176,6 +176,8 @@ const resolvers = {
     }, */
     //works in console, error in playground
     addVote: async (parent, { restaurantId, eventId }, context) => {
+      //const eventId2 = eventId.toObjectId();
+      console.log(eventId);
       if (context.user) {
         //console.log(context);
         /* const vote = await Vote.create({
@@ -185,8 +187,10 @@ const resolvers = {
         //console.log(context.user.username);
         //console.log("hello world");
         //return vote;
-        const event = await Event.findById({ _id: eventId });
-        //console.log(event);
+        const event = await Event.findById({
+          _id: eventId,
+        });
+        console.log(event);
 
         const restaurant = event.restaurants.filter((restaurant) => {
           return restaurant._id.toString() === restaurantId;

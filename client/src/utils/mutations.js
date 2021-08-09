@@ -44,13 +44,14 @@ export const ADD_EVENT = gql`
   }
 `;
 
-export const ADD_VOTES = gql`
-  mutation addVotes($restaurantId: ID) {
-    addVotes(restaurantId: $restaurantId) {
-      _id
-      voteCount
-      votes {
-        username
+export const ADD_VOTE = gql`
+  mutation addVote($restaurantId: String, $eventId: ID) {
+    addVote(restaurantId: $restaurantId, eventId: $eventId) {
+      title
+      note
+      restaurants {
+        name
+        votes
       }
     }
   }

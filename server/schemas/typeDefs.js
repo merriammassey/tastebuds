@@ -76,7 +76,7 @@ const typeDefs = gql`
       restaurants: [RestaurantInput]
       votes: [VoteInput]
     ): User
-    addVote(restaurantId: String, eventId: String): Event
+    addVote(restaurantId: String, eventId: ID): Event
   }
 `;
 
