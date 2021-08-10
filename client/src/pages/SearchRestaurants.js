@@ -1,7 +1,5 @@
-//import React, { useState, useEffect } from "react";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useStoreContext } from "../utils/GlobalState";
-import spinner from "../assets/spinner.gif";
 import {
   Container,
   Col,
@@ -9,7 +7,6 @@ import {
   Form,
   Button,
   Card,
-  CardColumns,
   Spinner,
 } from "react-bootstrap";
 import { searchYelp } from "../utils/yelpAPI";
@@ -27,16 +24,9 @@ const SearchRestaurants = () => {
   const [termInput, setTermInput] = useState("");
   const [locationInput, setLocationInput] = useState("");
 
-  /* // create state to hold saved restaurant data
-  const [savedRestaurantIds, setSavedRestaurantIds] = useState(
-    getSavedRestaurantIds()
-  ); */
-
-  // create method to search for books and set state on form submit
   const handleFormSubmit = async (event) => {
     setLoading(true);
     event.preventDefault();
-    // if (loading) return <img src={spinner} alt="loading" />;
 
     //console.log(locationInput);
     if (!locationInput) {
@@ -49,10 +39,8 @@ const SearchRestaurants = () => {
       console.log(restaurantData);
 
       const mappedRestaurantData = restaurantData.map((restaurant, index) => ({
-        /*         key: restaurant.id,
-         */ id: restaurant.id,
+        id: restaurant.id,
         name: restaurant.name,
-        //categories: restaurant.categories.title,
         rating: restaurant.rating,
         price: restaurant.price,
         location: restaurant.location.address1,
@@ -78,12 +66,10 @@ const SearchRestaurants = () => {
     }
   };
 
-  //save selected restaurants to global state
   const tempArr = [];
 
   const addRestaurant = (event) => {
     const index = event.target.getAttribute("value");
-    //console.log(event.target.getAttribute("value"));
 
     tempArr.push(searchedRestaurants[index]);
     console.log(tempArr);
@@ -96,12 +82,9 @@ const SearchRestaurants = () => {
     };
     saveRestaurantData(tempArr);
   };
-  //let googlemaps = `https://www.google.com/maps/search/?api=1&amp;query=${restaurant.name}`;
 
   return (
     <>
-      {/* <Jumbotron fluid className="text-light bg-dark">
-        <Container> */}
       <div id="searchform">
         <div id="searchformelements">
           <h1 style={{ color: "white" }}>Search for a restaurant to begin</h1>
@@ -132,7 +115,6 @@ const SearchRestaurants = () => {
               </div>
             </Col>
             <Col xs={12} md={4}>
-              {/* <Link to="/restaurants"> */}
               <div id="searchformelements">
                 <Button
                   id="searchbutton"
@@ -143,7 +125,6 @@ const SearchRestaurants = () => {
                   Search
                 </Button>
               </div>
-              {/* </Link> */}
             </Col>
           </Form.Row>
         </Form>
@@ -154,8 +135,6 @@ const SearchRestaurants = () => {
         <Row>
           <Col style={{ alignItems: "center" }}>
             {searchedRestaurants.map((restaurant, index) => {
-              /* let google =
-                "https: */ //www.google.com/maps/search/?api=1&amp;query="+{restaurant.name};
               return (
                 <Card
                   // key={restaurant.id}
@@ -193,15 +172,6 @@ const SearchRestaurants = () => {
                         label="Add to event"
                       />
                     </Form.Group>
-                    {/*   <div
-                      onClick={(event) => addRestaurant(event)}
-                      value={index}
-                      name={restaurant}
-                    >
-                      click to add to event
-                    </div> */}
-                    {/*                     <Button variant="primary">Add to event</Button>
-                     */}{" "}
                   </Card.Body>
                 </Card>
               );

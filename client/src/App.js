@@ -13,7 +13,6 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { StoreProvider } from "./utils/GlobalState";
-// Start Pages import //
 import Home from "../src/pages/Home";
 import Login from "../src/pages/Login";
 import Signup from "../src/pages/Signup";
@@ -27,13 +26,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { onError } from "@apollo/client/link/error";
 
 require("dotenv").config({ path: __dirname + "/.env" });
-// End Pages import
-//
+
 const httpLink = createHttpLink({
   uri: "/graphql",
 });
 
-//
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
     graphQLErrors.forEach(({ message, locations, path }) =>
@@ -56,7 +53,7 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-//establish connection to back end servier's graphql endpoint
+//establish connection to back end server's graphql endpoint
 const client = new ApolloClient({
   //establish new link to gql server...combine autLink and httpLink so every request retrieves token and sets request headers before amking the request to API
   //link: authLink.concat(httpLink),
@@ -84,9 +81,6 @@ function App() {
               <Route exact path="/event" component={Event} />
               <Route exact path="/events/:id" component={Vote} />
               <Route exact path="/viewevent/:id" component={ViewEvent} />
-              {/* <Route exact path="/vote" component={Vote} /> */}
-
-              {/* <Route exact path="/events/:id" component={Vote} /> */}
               <Route exact path="/thankyou" component={ThankYou} />
             </Switch>
           </StoreProvider>

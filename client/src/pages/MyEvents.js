@@ -1,60 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import "../App.css";
-import { useQuery, useMutation } from "@apollo/client";
-import { GET_ME, GET_EVENT } from "../utils/queries";
+import { useQuery } from "@apollo/client";
+import { GET_ME } from "../utils/queries";
 import Auth from "../utils/auth";
 import { Container, Col, Row, Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import ViewEvent from "./ViewEvent";
-import { useHistory } from "react-router-dom";
 
 const MyEvents = () => {
-  //let history = useHistory();
-
-  //const [eventId, setEventId] = useState("");
   const token = Auth.loggedIn() ? Auth.getToken() : null;
   const { loading, data, error } = useQuery(GET_ME, {
     variables: { token },
   });
-  //when get_me is run, repsonse returns our data; query_user returns data in user property
   const userData = data?.me || data?.user || {};
   console.log(userData);
-  /* 
-  const viewEvent = useQuery(GET_EVENT, {
-    //variables: { id: eventId },
-    onCompleted: (data) => {
-      console.log(data);
-      return <ViewEvent data={data} />;
-    }, */
-  //const eventData = data?.event || {};
 
-  /* if(loading) {
-      return <h2>LOADING...</h2>;
-    }, */
-
-  //console.log(error); //undefined
-  /*     const handleDeleteEvent = async (bookId) => {
-        try {
-          //replace deleteBook() with REMOVE_BOOK mutation
-          await deleteBook({
-            variables: { bookId },
-          });
-          // upon success, remove book's id from localStorage
-    
-          removeBookId(bookId);
-        } catch (error) {
-          console.error(error);
-        }
-      }; */
   if (loading) {
     return <h2>LOADING...</h2>;
   }
 
-  /* const viewEvent = async (event) => {
-    setEventId(eventId);
-    event.preventDefault();
-    history.push(`/viewevent`);
-  }; */
   return (
     <>
       <div style={{ backgroundColor: "#343a40" }}>

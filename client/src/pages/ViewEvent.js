@@ -1,21 +1,14 @@
-//import React, { useState, useEffect } from "react";
-//import { makeChart, getVotes } from "../utils/chartapi";
 import React, { useState } from "react";
 import { Container, Col, Row, Form, Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-//global state imports
-import { useStoreContext } from "../utils/GlobalState";
 import "./style.css";
-//import VoteChart from "../components/Chart";
 import { GET_EVENT } from "../utils/queries";
 import { useQuery, useMutation } from "@apollo/client";
 import { useParams } from "react-router-dom";
 
 const ViewEvent = () => {
   const { id: eventId } = useParams();
-  //const [eventId, setEventId] = useState();
   console.log(eventId);
-  //const [state, dispatch] = useStoreContext();
 
   const { loading, data, error } = useQuery(GET_EVENT, {
     variables: { id: eventId },
@@ -27,28 +20,6 @@ const ViewEvent = () => {
   if (loading) {
     return <h2>LOADING...</h2>;
   }
-  /* 
-  const handleVote = async (event) => {
-    const index = event.target.getAttribute("value");
-    console.log(event.target.getAttribute("value"));
-    //
-
-    const data = { restaurant: choice };
-    //const data = choice;
-    console.log(data);
-
-    const { votes, totalVotes, votesCounts } = await getVotes(voteData);
-
-    let dataPoints = [
-      { y: votesCounts.Maskadores, label: "Maskadores" },
-      { y: votesCounts.MunichGyro, label: "MunichGyro" },
-      { y: votesCounts.Starbucks, label: "Starbucks" },
-      { y: votesCounts.Other, label: "Other" },
-    ];
-    //chart, passing dataPoints and totalVotes
-  };
- */
-  //setEventId("");
 
   return (
     <>
@@ -59,14 +30,8 @@ const ViewEvent = () => {
               Here are your event poll results
             </h1>{" "}
             <br />
-            {/* <h3>Pre-game dinner</h3> */}
             <h3>{eventData.title}</h3>
-            <h5>
-              {eventData.note}
-
-              {/* Here are a few places close to the stadium. <br />
-              Please vote by 3pm today, and I'll make reservations. */}
-            </h5>
+            <h5>{eventData.note}</h5>
             {/* MAP CARDS */}
             <Container id="restaurantCards">
               <Row>
@@ -112,13 +77,6 @@ const ViewEvent = () => {
                               name={restaurant}
                             />
                           </Form.Group>
-                          {/* <div
-                            // onClick={(event) => addRestaurant(event)}
-                            value={index}
-                            name={restaurant}
-                          >
-                            Click to select
-                          </div> */}
                         </Card.Body>
                       </Card>
                     );
@@ -126,70 +84,13 @@ const ViewEvent = () => {
                 </Col>
               </Row>
             </Container>
-            <div id="buttons">
-              {/* <Link to="/thankyou">
-                <Button
-                  // onSubmit={handleVote}
-                  type="submit"
-                  variant="success"
-                  size="lg"
-                >
-                  Vote
-                </Button>
-              </Link> */}
-            </div>
-            {/* <VoteChart eventTitle={eventTitle} /> */}
-            {/*   <div id="form">
-              <form id="vote-form">
-                <h5>
-                  <input
-                    type="radio"
-                    name="restaurant"
-                    id="maskadores"
-                    value="Maskadores"
-                  />
-                  <label htmlFor="maskadores"> Maskadores</label>
-                </h5>
-                <h5>
-                  <input
-                    type="radio"
-                    name="restaurant"
-                    id="munichgyro"
-                    value="MunichGyro"
-                  />
-                  <label htmlFor="munichgyro"> MunichGyro</label>
-                </h5>
-                <h5>
-                  <input
-                    type="radio"
-                    name="restaurant"
-                    id="starbucks"
-                    value="Starbucks"
-                  />
-                  <label htmlFor="starbucks"> Starbucks</label>
-                </h5>
-                <h5>
-                  <input
-                    type="radio"
-                    name="restaurant"
-                    id="other"
-                    value="Other"
-                  />
-                  <label htmlFor="other"> Other</label>
-                </h5> */}
-            {/* </form>
-              <br /> */}
+            <div id="buttons"></div>
           </div>
         </div>
       </div>
       <div id="footer">
         <Link to="/myevents">
-          <Button
-            // onSubmit={handleVote}
-            type="submit"
-            variant="success"
-            size="lg"
-          >
+          <Button type="submit" variant="success" size="lg">
             Return to your events
           </Button>
         </Link>

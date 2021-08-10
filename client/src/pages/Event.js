@@ -9,9 +9,8 @@ import { useQuery, useMutation, onCompleted, error } from "@apollo/client";
 import "./style.css";
 import { useHistory } from "react-router-dom";
 import Home from "./Home";
-import { Redirect } from "react-router-dom";
 import Auth from "../utils/auth";
-import { Navbar, Nav, Container, Modal, Tab } from "react-bootstrap";
+import { Nav, Modal, Tab } from "react-bootstrap";
 import SignUpForm from "../components/SignupForm";
 import LoginForm from "../components/LoginForm";
 const Event = () => {
@@ -29,13 +28,9 @@ const Event = () => {
   const [eventNotesInput, setEventNotesInput] = useState("");
   const [addEvent, { error }] = useMutation(ADD_EVENT, {
     onCompleted: (data) => {
-      //const { eventId } = await addEvent;
-      //console.log((data.addEvent.events.length - 1)._id); undefined
-      //const eventId = (data.addEvent.events.length - 1)._id; i think this is right
       const _id = data.addEvent.events[data.addEvent.events.length - 1]._id;
-      //console.log(data.addEvent.events.length - 1);
-      //console.log(data);
-      console.log(_id); //UNDEFINED
+
+      //console.log(_id);
       history.push(`/events/${_id}`);
       const saveEventId = (_id) => {
         dispatch({
@@ -46,7 +41,6 @@ const Event = () => {
       saveEventId(_id);
     },
   });
-  //const _id =  handleAddEvent();
 
   const handleAddEvent = async (event) => {
     event.preventDefault();
@@ -70,13 +64,10 @@ const Event = () => {
           },
         });
         const newEvent = data.data.addEvent.events.length - 1;
-        console.log(newEvent); //logs the event index needed
-        //console.log(data.data.addEvent.events[newEvent]);
-        //console.log(data.data.addEvent.events[newEvent]._id);
+        //console.log(newEvent);
+
         const _id = data.data.addEvent.events[newEvent]._id;
-        console.log(_id); //logs event ID
-        //return _id;
-        //setSavedEvents...
+        //console.log(_id);
       } catch (err) {
         console.error(err);
       }
@@ -98,45 +89,16 @@ const Event = () => {
         },
       });
 
-      console.log(data);
-      //console.log(data.data.addEvent.events);
+      //console.log(data);
       const newEvent = data.data.addEvent.events.length - 1;
-      console.log(newEvent); //logs the event index needed
-      //console.log(data.data.addEvent.events[newEvent]);
-      //console.log(data.data.addEvent.events[newEvent]._id);
+      console.log(newEvent);
+
       const _id = data.data.addEvent.events[newEvent]._id;
-      console.log(_id); //logs event ID
-      //return _id;
-      //setSavedEvents...
+      console.log(_id);
     } catch (err) {
       console.error(err);
     }
-
-    //global state
-    //TITLE AND NOTES EMPTY ARRAY IN STATE, REGARDLESS OF THE LINES BELOW
-    /*  const saveEventNotes = (eventNotesInput) => {
-      dispatch({
-        type: "UPDATE_EVENT_NOTES",
-        eventNote: eventNotesInput,
-      });
-    };
-    saveEventNotes(eventNotesInput);
-
-    const saveEventTitle = (eventTitleInput) => {
-      dispatch({
-        type: "UPDATE_EVENT_TITLE",
-        eventTitle: eventTitleInput,
-      });
-    };
-    //
-    saveEventTitle(eventTitleInput); */
-    //console.log(state);
-    //setEventTitleInput("");
-    //setEventNotesInput("");
-    //return data.data.addEvent.events[newEvent]._id;
   };
-  //OUT OF SCOPE:
-  //const _id = data.data.addEvent.events[newEvent]._id;
 
   return (
     <>
@@ -192,54 +154,20 @@ const Event = () => {
                             );
                           })}
                         </ul>
-                        {/* <Link to={`/events/${_id}`}> */}
-                        {/* <Link to={"/vote"}> */}
+
                         <Button
                           id="invitebutton"
                           onClick={handleAddEvent}
-                          //onCompleted = {data => console.log("Hi World")
-                          //onCompleted={history.push(`/events/${_id}`)}
                           type="submit"
                           variant="success"
                           size="lg"
                         >
                           Invite your friends
                         </Button>
-                        {/* </Link> */}
                       </Col>
                     </Form.Row>
                   </Form>
-                  {/* <div id="restaurantCards">
-                    {currentRestaurants.map((restaurant) => {
-                      return (
-                        <Card key={restaurant.id} style={{ width: "35rem" }}>
-                          <Card.Img
-                            variant="left"
-                            width={"250"}
-                            height={"250"}
-                            src={restaurant.image_url}
-                          />
-                          <Card.Body>
-                            <Card.Title>{restaurant.name}</Card.Title>
-                            <Card.Text>
-                              Rating: {restaurant.rating} <br />
-                              <a href={restaurant.url} target="_blank">
-                                Read the reviews
-                              </a>
-                              <br />
-                              Price: {restaurant.price} <br />
-                              {restaurant.location}, {restaurant.city}
-                              <br />
-                              <a href="tel:{restaurant.phone}">
-                                {restaurant.phone}
-                              </a>{" "}
-                              <br />
-                            </Card.Text>
-                          </Card.Body>
-                        </Card>
-                      );
-                    })}
-                  </div> */}
+
                   {/* set modal data up */}
                   <Modal
                     id="eventModal"
