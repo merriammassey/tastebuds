@@ -8,6 +8,12 @@
   bottom: 0;
 }
 
+#event {
+  text-align: center;
+}
+#shareButton {
+  margin-top: 15pt;
+}
 /* Share modal */
 .Demo__container {
   display: flex;

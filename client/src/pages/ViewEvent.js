@@ -26,8 +26,18 @@ const ViewEvent = () => {
       <div id="homephoto">
         <div id="eventdiv">
           <div id="event">
+            <Link to={`/events/${eventId}`}>
+              <Button
+                type="submit"
+                variant="success"
+                size="lg"
+                id="shareButton"
+              >
+                Share this poll again
+              </Button>
+            </Link>
             <h1 id="eventheader" style={{ color: "#212529" }}>
-              Here are your event poll results
+              Your poll results
             </h1>{" "}
             <br />
             <h3>{eventData.title}</h3>

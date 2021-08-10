@@ -18,6 +18,10 @@ import { Nav, Modal, Tab } from "react-bootstrap";
 import ShareIcons from "../components/ShareIcons";
 
 const Vote = () => {
+  //const [searchedRestaurants, setSearchedRestaurants] = useState([]);
+  //const [state, dispatch] = useStoreContext();
+  //const { currentRestaurants } = state;
+
   const [addVote, { error }] = useMutation(ADD_VOTE, {
     onCompleted: () => {
       history.push("/thankyou");
@@ -53,6 +57,13 @@ const Vote = () => {
 
   const handleVote = async (event) => {
     event.preventDefault();
+    const restaurantId = event.target.getAttribute("value");
+
+    /*     const { currentRestaurants } = state;
+    const tempArr = [];
+    const index = event.target.getAttribute("value");
+    tempArr.push(currentRestaurants[index]);
+    console.log(tempArr); */
 
     //modify this
     if (!Auth) {
@@ -60,14 +71,15 @@ const Vote = () => {
       return false;
     }
     try {
-      const restaurantId = event.target.getAttribute("value");
-
+      // const restaurantId = event.target.getAttribute("value");
       const vote = await addVote({
         variables: {
           restaurantId: restaurantId,
+          //restaurantId: tempArr[index],
           eventId: eventId,
         },
       });
+      //tempArr.forEach(vote);
     } catch (err) {
       console.error(err);
     }
@@ -88,6 +100,15 @@ const Vote = () => {
       <div id="homephoto">
         <div id="eventdiv">
           <div id="event">
+            <Button
+              onClick={() => setShowModal(true)}
+              type="submit"
+              variant="success"
+              size="lg"
+              id="shareButton"
+            >
+              Share this poll
+            </Button>
             <h1 id="eventheader" style={{ color: "#212529" }}>
               Where would you like to eat?
             </h1>{" "}
@@ -103,14 +124,6 @@ const Vote = () => {
               {/* Here are a few places close to the stadium. <br />
               Please vote by 3pm today, and I'll make reservations. */}
             </h5>
-            <Button
-              onClick={() => setShowModal(true)}
-              type="submit"
-              variant="success"
-              size="lg"
-            >
-              Share with your friends
-            </Button>
             {/* MAP CARDS */}
             <Container id="restaurantCards">
               <Row>
@@ -146,11 +159,11 @@ const Vote = () => {
                           </Card.Text>
                           <Form.Group controlId="formBasicCheckbox">
                             <Form.Check
-                              onClick={(event) => handleVote(event)}
                               type="checkbox"
                               label="Click to select"
                               value={restaurant._id}
                               name={restaurant}
+                              onClick={(event) => handleVote(event)}
                             />
                           </Form.Group>
                           {/* <div
@@ -265,7 +278,7 @@ const Vote = () => {
       <div id="footer">
         {/* <Link to="/thankyou"> */}
         <Button
-          onClick={() => handleVote()}
+          //onClick={(event) => handleVote(event)}
           type="submit"
           variant="success"
           size="lg"
