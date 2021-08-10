@@ -233,14 +233,15 @@ const Vote = () => {
               <Tab.Container defaultActiveKey="login">
                 <Modal.Header closeButton>
                   <Modal.Title id="signup-modal">
-                    <Nav variant="pills">
+                    <h2>Share your TasteBuds poll</h2>
+                    {/*    <Nav variant="pills">
                       <Nav.Item>
                         <Nav.Link eventKey="login">Login</Nav.Link>
                       </Nav.Item>
                       <Nav.Item>
                         <Nav.Link eventKey="signup">Sign Up</Nav.Link>
                       </Nav.Item>
-                    </Nav>
+                    </Nav> */}
                   </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>

@@ -8,8 +8,9 @@ import FacebookIcon from '../utils/FacebookIcon';
 import WhatsappIcon from '../utils/WhatsappIcon' 
 import WhatsappShareButton from '../utils/WhatsappShareButton';
 import EmailIcon from '../utils/EmailIcon';
- 
-//import "./Demo.css";
+import { Col, Form, Button, Card } from "react-bootstrap";
+
+import "./style.css";
 //import exampleImage from "./react-share-pin-example.png";
 
 class ShareIcons extends Component {
@@ -18,6 +19,7 @@ class ShareIcons extends Component {
     const title = 'Please complete my TasteBuds poll';
 
     return (
+      <div>
       <div className="Demo__container">
         <div className="Demo__some-network">
           {/* <FacebookShareButton
@@ -37,11 +39,7 @@ class ShareIcons extends Component {
             </FacebookShareCount>
           </div> */}
         </div>
-        <button 
-  onClick={() =>  navigator.clipboard.writeText(window.location.href)}
->
-  Copy
-</button>
+        
         <div className="Demo__some-network">
           <FacebookMessengerShareButton
             url={shareUrl}
@@ -50,6 +48,9 @@ class ShareIcons extends Component {
           >
             <FacebookMessengerIcon size={32} round />
           </FacebookMessengerShareButton>
+          <br />
+          <h5>Messenger</h5>
+
         </div>
 
         <div className="Demo__some-network">
@@ -61,7 +62,8 @@ class ShareIcons extends Component {
           >
             <WhatsappIcon size={32} round />
           </WhatsappShareButton>
-
+          <br />
+          <h5>Whatsapp</h5>
           <div className="Demo__some-network__share-count">&nbsp;</div>
         </div>
 
@@ -74,8 +76,16 @@ class ShareIcons extends Component {
           >
             <EmailIcon size={32} round />
           </EmailShareButton>
+          <br />
+          <h5>Email</h5>
         </div>
-      </div>
+      </div><div id="copyButton">
+      <h4>Or copy link to text        
+          <Button id="copy"
+  onClick={() =>  navigator.clipboard.writeText(window.location.href)}
+>
+  Copy
+</Button></h4> </div></div>
     );
   }
 }
