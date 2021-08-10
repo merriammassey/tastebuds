@@ -22,7 +22,6 @@ const typeDefs = gql`
     title: String
     note: String
     restaurants: [Restaurant]
-    votes: [Vote]
   }
 
   type Vote {

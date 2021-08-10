@@ -16,7 +16,6 @@ const eventSchema = new Schema(
       type: String,
     },
     restaurants: [restaurantSchema],
-    votes: [Vote],
   },
   {
     toJSON: {

@@ -137,7 +137,7 @@ const SearchRestaurants = () => {
             {searchedRestaurants.map((restaurant, index) => {
               return (
                 <Card
-                  // key={restaurant.id}
+                  key={restaurant.id}
                   index={index}
                   style={{ width: "35rem" }}
                 >

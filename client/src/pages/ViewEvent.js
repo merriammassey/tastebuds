@@ -39,7 +39,7 @@ const ViewEvent = () => {
                   {eventData.restaurants.map((restaurant, index) => {
                     return (
                       <Card
-                        key={restaurant.id}
+                        key={restaurant._id}
                         index={index}
                         style={{ width: "35rem" }}
                       >
