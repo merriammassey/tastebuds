@@ -78,7 +78,7 @@ const resolvers = {
           return restaurant._id.toString() === restaurantId;
         });
         const votes = restaurant[0].votes;
-        votes.push(context.user.username);
+        votes.addToSet(context.user.username);
         const updatedEvent = await event.save();
         return updatedEvent;
       }
