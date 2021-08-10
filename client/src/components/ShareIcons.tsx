@@ -1,8 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 /* eslint-disable import/no-unresolved, import/extensions, import/no-extraneous-dependencies */
 import React, { Component } from "react";
-import FacebookShareCount from '../utils/FacebookShareCount';
-import FacebookShareButton from '../utils/FacebookMessengerShareButton';
 import FacebookMessengerShareButton from '../utils/FacebookMessengerShareButton';
 import FacebookMessengerIcon from '../utils/FacebookMessengerIcon';
 import EmailShareButton from '../utils/EmailShareButton';
@@ -17,29 +15,33 @@ import EmailIcon from '../utils/EmailIcon';
 class ShareIcons extends Component {
   render() {
     const shareUrl = window.location.href;
-    const title = "Please complete my TasteBuds poll";
+    const title = 'Please complete my TasteBuds poll';
 
     return (
       <div className="Demo__container">
         <div className="Demo__some-network">
-          <FacebookShareButton
+          {/* <FacebookShareButton
             url={shareUrl}
             quote={title}
             className="Demo__some-network__share-button"
           >
             <FacebookIcon size={32} round />
-          </FacebookShareButton>
+          </FacebookShareButton> */}
 
-          <div>
+         {/*  <div>
             <FacebookShareCount
               url={shareUrl}
               className="Demo__some-network__share-count"
             >
               {(count) => count}
             </FacebookShareCount>
-          </div>
+          </div> */}
         </div>
-
+        <button 
+  onClick={() =>  navigator.clipboard.writeText(window.location.href)}
+>
+  Copy
+</button>
         <div className="Demo__some-network">
           <FacebookMessengerShareButton
             url={shareUrl}

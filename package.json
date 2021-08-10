@@ -47,6 +47,7 @@
   },
   "homepage": "https://github.com/merriammassey/project3#readme",
   "devDependencies": {
+    "@types/react-dom": "^17.0.9",
     "concurrently": "^5.1.0"
   }
 }
