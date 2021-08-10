@@ -1,16 +1,32 @@
 //import React, { useState, useEffect } from "react";
 //import { makeChart, getVotes } from "../utils/chartapi";
-import React from "react";
+import React, { useState } from "react";
 import { Container, Col, Row, Form, Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 //global state imports
 import { useStoreContext } from "../utils/GlobalState";
 import "./style.css";
 //import VoteChart from "../components/Chart";
+import { GET_EVENT } from "../utils/queries";
+import { useQuery, useMutation } from "@apollo/client";
+import { useParams } from "react-router-dom";
 
 const ViewEvent = () => {
-  const [state, dispatch] = useStoreContext();
-  const { currentRestaurants, eventTitle, eventNote } = state;
+  const { id: eventId } = useParams();
+  //const [eventId, setEventId] = useState();
+  console.log(eventId);
+  //const [state, dispatch] = useStoreContext();
+
+  const { loading, data, error } = useQuery(GET_EVENT, {
+    variables: { id: eventId },
+  });
+  console.log(data);
+
+  const eventData = data?.event || {};
+
+  if (loading) {
+    return <h2>LOADING...</h2>;
+  }
   /* 
   const handleVote = async (event) => {
     const index = event.target.getAttribute("value");
@@ -32,23 +48,22 @@ const ViewEvent = () => {
     //chart, passing dataPoints and totalVotes
   };
  */
+  //setEventId("");
+
   return (
     <>
       <div id="homephoto">
         <div id="eventdiv">
           <div id="event">
             <h1 id="eventheader" style={{ color: "#212529" }}>
-              Where would you like to eat?
+              Here are your event poll results
             </h1>{" "}
             <br />
             {/* <h3>Pre-game dinner</h3> */}
-            <h3>{eventTitle}</h3>
+            <h3>{eventData.title}</h3>
             <h5>
-              {eventNote}
-              <br />
-              Check the box of your restaurant of choice.
-              <br />
-              Then click Vote!
+              {eventData.note}
+
               {/* Here are a few places close to the stadium. <br />
               Please vote by 3pm today, and I'll make reservations. */}
             </h5>
@@ -56,7 +71,7 @@ const ViewEvent = () => {
             <Container id="restaurantCards">
               <Row>
                 <Col style={{ alignItems: "center" }}>
-                  {currentRestaurants.map((restaurant, index) => {
+                  {eventData.restaurants.map((restaurant, index) => {
                     return (
                       <Card
                         key={restaurant.id}
@@ -70,7 +85,10 @@ const ViewEvent = () => {
                           src={restaurant.image_url}
                         />
                         <Card.Body>
-                          <Card.Title>{restaurant.name}</Card.Title>
+                          <Card.Title>
+                            Votes for {restaurant.name}:{" "}
+                            {restaurant.votes.length}
+                          </Card.Title>
                           <Card.Text>
                             Rating: {restaurant.rating} <br />
                             <a href={restaurant.url} target="_blank">
@@ -165,14 +183,14 @@ const ViewEvent = () => {
         </div>
       </div>
       <div id="footer">
-        <Link to="/thankyou">
+        <Link to="/myevents">
           <Button
             // onSubmit={handleVote}
             type="submit"
             variant="success"
             size="lg"
           >
-            Vote
+            Return to your events
           </Button>
         </Link>
       </div>

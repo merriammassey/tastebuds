@@ -21,6 +21,7 @@ import Event from "../src/pages/Event";
 import MyEvents from "../src/pages/MyEvents";
 import Vote from "./pages/Vote";
 import ThankYou from "../src/pages/ThankYou";
+import ViewEvent from "../src/pages/ViewEvent";
 import AppNavBar from "../src/components/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { onError } from "@apollo/client/link/error";
@@ -82,6 +83,7 @@ function App() {
               <Route exact path="/myevents" component={MyEvents} />
               <Route exact path="/event" component={Event} />
               <Route exact path="/events/:id" component={Vote} />
+              <Route exact path="/viewevent/:id" component={ViewEvent} />
               {/* <Route exact path="/vote" component={Vote} /> */}
 
               {/* <Route exact path="/events/:id" component={Vote} /> */}

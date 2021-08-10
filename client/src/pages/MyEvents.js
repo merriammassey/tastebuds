@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import "../App.css";
 import { useQuery, useMutation } from "@apollo/client";
-import { GET_ME } from "../utils/queries";
+import { GET_ME, GET_EVENT } from "../utils/queries";
 import Auth from "../utils/auth";
 import { Container, Col, Row, Button, Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import ViewEvent from "./ViewEvent";
+import { useHistory } from "react-router-dom";
 
 const MyEvents = () => {
+  //let history = useHistory();
+
+  //const [eventId, setEventId] = useState("");
   const token = Auth.loggedIn() ? Auth.getToken() : null;
   const { loading, data, error } = useQuery(GET_ME, {
     variables: { token },
@@ -13,6 +19,19 @@ const MyEvents = () => {
   //when get_me is run, repsonse returns our data; query_user returns data in user property
   const userData = data?.me || data?.user || {};
   console.log(userData);
+  /* 
+  const viewEvent = useQuery(GET_EVENT, {
+    //variables: { id: eventId },
+    onCompleted: (data) => {
+      console.log(data);
+      return <ViewEvent data={data} />;
+    }, */
+  //const eventData = data?.event || {};
+
+  /* if(loading) {
+      return <h2>LOADING...</h2>;
+    }, */
+
   //console.log(error); //undefined
   /*     const handleDeleteEvent = async (bookId) => {
         try {
@@ -30,6 +49,12 @@ const MyEvents = () => {
   if (loading) {
     return <h2>LOADING...</h2>;
   }
+
+  /* const viewEvent = async (event) => {
+    setEventId(eventId);
+    event.preventDefault();
+    history.push(`/viewevent`);
+  }; */
   return (
     <>
       <div style={{ backgroundColor: "#343a40" }}>
@@ -38,13 +63,16 @@ const MyEvents = () => {
           <Row>
             <Col style={{ alignItems: "center" }}>
               {userData.events.map((event) => {
+                console.log(userData.events);
                 return (
                   <Card key={event.title}>
                     <Card.Header as="h5">{event.title}</Card.Header>
                     <Card.Body>
                       <Card.Title>{event.createdAt}</Card.Title>
                       <Card.Text>{event.note}</Card.Text>
-                      <Button variant="primary">View Event</Button>
+                      <Link to={`/viewevent/${event._id}`}>
+                        <Button variant="primary">View Event</Button>
+                      </Link>
                     </Card.Body>
                   </Card>
                 );
