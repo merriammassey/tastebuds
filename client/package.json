@@ -15,6 +15,7 @@
     "canvasjs-react-charts": "^1.0.5",
     "dotenv": "^10.0.0",
     "graphql": "^15.5.1",
+    "jsonp": "^0.2.1",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
     "mongoose": "^5.13.0",

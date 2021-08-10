@@ -1,6 +1,6 @@
 //import React, { useState, useEffect } from "react";
 //import { makeChart, getVotes } from "../utils/chartapi";
-import React from "react";
+import React, { useState } from "react";
 import { Container, Col, Row, Form, Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 //global state imports
@@ -14,73 +14,65 @@ import { GET_EVENT } from "../utils/queries";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import Auth from "../utils/auth";
+import { Nav, Modal, Tab } from "react-bootstrap";
+import ShareIcons from "../components/ShareIcons";
 
-const Vote = (props) => {
-  let history = useHistory();
-
+const Vote = () => {
   const [addVote, { error }] = useMutation(ADD_VOTE, {
     onCompleted: () => {
       history.push("/thankyou");
     },
   });
-
-  //if not logged in, toggle modal
-  //const token = Auth.loggedIn() ? Auth.getToken() : null;
-  //if (!token) {
-  //setShowModal(true)};
-  //CALL GET EVENT QUERY THEN ADD VOTES MUTATION
+  const [showModal, setShowModal] = useState(false);
+  let history = useHistory();
   const { id: eventId } = useParams();
-  //const [state, dispatch] = useStoreContext();
-  //const { eventId } = state;
-  console.log(eventId);
-  //const { currentRestaurants, eventTitle, eventNote } = state;
-
   const { loading, data } = useQuery(GET_EVENT, {
     variables: { id: eventId },
   });
 
-  console.log(data);
+  //console.log(data);
   const eventData = data?.event || {};
 
   if (loading) {
     return <h2>LOADING...</h2>;
   }
+  //if not logged in, toggle modal
+  //const token = Auth.loggedIn() ? Auth.getToken() : null;
+  //if (!token) {
+  //setShowModal(true)};
+  //CALL GET EVENT QUERY THEN ADD VOTES MUTATION
+  //const [state, dispatch] = useStoreContext();
+  //const { eventId } = state;
+  //console.log(eventId);
+  //const { currentRestaurants, eventTitle, eventNote } = state;
+
   //console.log(eventData);
+  /*   const shareModal = async (event) => {
+    setShowModal(true);
+  }; */
 
   const handleVote = async (event) => {
     event.preventDefault();
 
     //modify this
     if (!Auth) {
-      console.log("please enter a name for your event");
+      console.log("please log in or sign up");
       return false;
     }
     try {
-      //const eventId = eventId.toObjectId();
       const restaurantId = event.target.getAttribute("value");
-      console.log(event.target.getAttribute("value"));
-      console.log(restaurantId); //null
-      //console.log(eventId);
+
       const vote = await addVote({
         variables: {
           restaurantId: restaurantId,
           eventId: eventId,
         },
       });
-      console.log(vote);
     } catch (err) {
       console.error(err);
     }
   };
 
-  //const index = event.target.getAttribute("value");
-  //console.log(event.target.getAttribute("value"));
-
-  //const data = { restaurant: choice };
-  //const data = choice;
-  //console.log(data);
-
-  //const { votes, totalVotes, votesCounts } = await getVotes(voteData);
   /*
     let dataPoints = [
       { y: votesCounts.Maskadores, label: "Maskadores" },
@@ -111,6 +103,14 @@ const Vote = (props) => {
               {/* Here are a few places close to the stadium. <br />
               Please vote by 3pm today, and I'll make reservations. */}
             </h5>
+            <Button
+              onClick={() => setShowModal(true)}
+              type="submit"
+              variant="success"
+              size="lg"
+            >
+              Share with your friends
+            </Button>
             {/* MAP CARDS */}
             <Container id="restaurantCards">
               <Row>
@@ -221,6 +221,43 @@ const Vote = (props) => {
                 </h5> */}
             {/* </form>
               <br /> */}
+            {/* set modal data up */}
+            <Modal
+              id="shareModal"
+              size="lg"
+              show={showModal}
+              onHide={() => setShowModal(false)}
+              aria-labelledby="signup-modal"
+            >
+              {/* tab container to do either signup or login component */}
+              <Tab.Container defaultActiveKey="login">
+                <Modal.Header closeButton>
+                  <Modal.Title id="signup-modal">
+                    <Nav variant="pills">
+                      <Nav.Item>
+                        <Nav.Link eventKey="login">Login</Nav.Link>
+                      </Nav.Item>
+                      <Nav.Item>
+                        <Nav.Link eventKey="signup">Sign Up</Nav.Link>
+                      </Nav.Item>
+                    </Nav>
+                  </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <ShareIcons />
+                  <Tab.Content>
+                    <Tab.Pane eventKey="login">
+                      {/* <LoginForm handleModalClose={() => setShowModal(false)} /> */}
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="signup">
+                      {/* <SignUpForm
+                        handleModalClose={() => setShowModal(false)}
+                      /> */}
+                    </Tab.Pane>
+                  </Tab.Content>
+                </Modal.Body>
+              </Tab.Container>
+            </Modal>
           </div>
         </div>
       </div>
