@@ -16,6 +16,7 @@ const StoreProvider = ({ value = [], ...props }) => {
     currentRestaurants: [],
     yelpRestaurants: [],
     eventId: [],
+    currentEvent: [],
     //cartOpen: false,
     //categories: [],
     //currentCategory: "",

@@ -9,11 +9,14 @@ import { useMutation } from "@apollo/client";
 import { LOGIN } from "../utils/mutations";
 
 const LoginForm = () => {
-  //
+  //const [showModal, setShowModal] = useState();
+
   //const [userFormData, setUserFormData] = useState(variant ? true : false);
   const [userFormData, setUserFormData] = useState({ email: "", password: "" });
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+  //const [showReturn, setShowReturn] = useState(false);
+
   const [login, { error }] = useMutation(LOGIN);
 
   useEffect(() => {
@@ -21,6 +24,7 @@ const LoginForm = () => {
       setShowAlert(true);
     } else {
       setShowAlert(false);
+      //setShowReturn(true);
     }
   }, [error]);
 

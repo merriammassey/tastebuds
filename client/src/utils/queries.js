@@ -7,6 +7,7 @@ export const GET_ME = gql`
       email
       events {
         _id
+        createdAt
         title
         note
         restaurants {
@@ -23,6 +24,7 @@ export const GET_EVENT = gql`
     event(_id: $id) {
       title
       note
+      createdAt
       restaurants {
         _id
         name

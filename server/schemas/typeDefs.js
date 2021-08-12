@@ -22,6 +22,7 @@ const typeDefs = gql`
     title: String
     note: String
     restaurants: [Restaurant]
+    createdAt: String
   }
 
   type Vote {

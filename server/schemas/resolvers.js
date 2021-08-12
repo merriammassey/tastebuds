@@ -12,14 +12,19 @@ const resolvers = {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
           .select("-__v -password")
-          .populate("events");
+          .populate("events")
+          .sort({ createdAt: -1 });
+
+        userData.events.sort((a, b) => b.createdAt - a.createdAt);
         console.log(userData);
         return userData;
+        //return userData.events.sort((a, b) => b.createdAt - a.createdAt);
       }
       throw new AuthenticationError("Not logged in");
     },
     event: async (parent, { _id }) => {
       return await Event.findById(_id)
+        .sort({ createdAt: -1 })
         .populate("restaurants")
         .populate("votes");
     },

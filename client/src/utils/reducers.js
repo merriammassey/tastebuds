@@ -2,10 +2,10 @@
 import {
   UPDATE_YELP_RESTAURANTS,
   UPDATE_SEARCHED_RESTAURANTS,
-  UPDATE_EVENT,
   UPDATE_EVENT_NOTES,
   UPDATE_EVENT_TITLE,
   UPDATE_EVENT_ID,
+  UPDATE_EVENTDATA,
 } from "./actions";
 import { useReducer } from "react";
 
@@ -40,10 +40,10 @@ export const reducer = (state, action) => {
         eventTitle: action.eventTitle,
       };
     //if action type value is update_categories, return a new state object with an updated categories array
-    case UPDATE_EVENT:
+    case UPDATE_EVENTDATA:
       return {
         ...state,
-        event: [...action.event],
+        currentEvent: action.currentEvent,
       };
     case UPDATE_EVENT_ID:
       return {

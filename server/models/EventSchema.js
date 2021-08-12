@@ -12,6 +12,11 @@ const eventSchema = new Schema(
     title: {
       type: String,
     },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      get: (timestamp) => dateFormat(timestamp),
+    },
     note: {
       type: String,
     },

@@ -26,7 +26,7 @@ const MyEvents = () => {
           <Row>
             <Col style={{ alignItems: "center" }}>
               {userData.events.map((event) => {
-                console.log(userData.events);
+                //console.log(userData.events);
                 return (
                   <Card key={event.title}>
                     <Card.Header as="h5">{event.title}</Card.Header>

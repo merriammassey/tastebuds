@@ -26,6 +26,7 @@ const SearchRestaurants = () => {
 
   const handleFormSubmit = async (event) => {
     setLoading(true);
+    event.stopPropagation();
     event.preventDefault();
 
     //console.log(locationInput);
