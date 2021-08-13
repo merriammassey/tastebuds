@@ -18,6 +18,7 @@ const StoreProvider = ({ value = [], ...props }) => {
     eventId: [],
     currentEvent: [],
     token: [],
+    currentUser: [],
     //cartOpen: false,
     //categories: [],
     //currentCategory: "",

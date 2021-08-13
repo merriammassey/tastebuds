@@ -1,7 +1,7 @@
 //import React, { useState, useEffect } from "react";
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 //global state imports
 import { useStoreContext } from "../utils/GlobalState";
 import Auth from "../utils/auth";
@@ -10,6 +10,7 @@ import "./style.css";
 import VoteChart from "../components/Chart";
 
 const ThankYou = () => {
+  const history = useHistory();
   const token = Auth.loggedIn() ? Auth.getToken() : null;
 
   const [state, dispatch] = useStoreContext();
@@ -43,7 +44,6 @@ const ThankYou = () => {
             <h1 id="eventheader">Thank you for voting!</h1> <br />
             {/* <h3>Pre-game dinner</h3> */}
             <h3></h3>
-            <h5></h5>
             <div id="buttons">
               <Link to="/">
                 <Button
@@ -56,6 +56,12 @@ const ThankYou = () => {
                   Make your own TasteBuds poll
                 </Button>
               </Link>
+            </div>
+            <div>
+              <h3></h3>
+              <h5 id="goBack" onClick={() => history.goBack()}>
+                Or return to vote for an additional option
+              </h5>
             </div>
             {/* <VoteChart eventTitle={eventTitle} /> */}
             {/*   <div id="form">

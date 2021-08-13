@@ -16,6 +16,10 @@
   justify-content: center;
   padding-top: 5%;
 }
+
+#myEventButtons {
+  margin: 4pt;
+}
 .card-body {
   padding-bottom: 0 !important;
 }
@@ -63,6 +67,12 @@ h5 {
   padding-top: 2pc;
 }
 
+#goBack {
+  display: block;
+  text-align: center;
+  padding-top: 2pc;
+  margin: auto;
+}
 footer {
   background: rgba(20, 30, 34);
   width: 100%;

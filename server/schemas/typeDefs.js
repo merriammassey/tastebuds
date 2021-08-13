@@ -77,6 +77,7 @@ const typeDefs = gql`
       votes: [VoteInput]
     ): User
     addVote(restaurantId: String, eventId: ID): Event
+    deleteEvent(_id: String!): User
   }
 `;
 

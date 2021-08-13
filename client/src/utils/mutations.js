@@ -58,71 +58,21 @@ export const ADD_VOTE = gql`
   }
 `;
 
-/* export const SAVE_RESTAURANT = gql`
-  mutation saveRestaurant(
-    $id: String!
-    $name: String!
-    $rating: String
-    $price: String
-    $location: String
-    $city: String
-    $phone: String
-    $image_url: String
-    $url: String
-  ) {
-    saveRestaurant(
-      id: $id
-      name: $name
-      rating: $rating
-      price: $price
-      location: $location
-      city: $city
-      phone: $phone
-      image_url: $image_url
-      url: $url
-    ) {
-      event
-      savedRestaurants {
-        id
-        name
-        rating
-        price
-        location
-        city
-        phone
-        image_url
-        url
+export const DELETE_EVENT = gql`
+  mutation deleteEvent($_id: String!) {
+    deleteEvent(_id: $_id) {
+      username
+      _id
+      events {
+        _id
+        createdAt
+        title
+        note
+        restaurants {
+          name
+          votes
+        }
       }
     }
   }
 `;
- */
-/* export const SAVE_EVENT = gql`
-  mutation saveEvent(
-    $id: String!
-    $name: String!
-    $restaurants: [Restaurant]
-    $notes: String
-  ) {
-    saveEvent(
-      id: $id
-      name: $name
-      restaurants: $[Restaurants]
-      notes: $notes
-    ) {
-      user
-      event
-      savedRestaurants {
-        id
-        name
-        rating
-        price
-        location
-        city
-        phone
-        image_url
-        url
-      }
-    }
-  }
-`; */

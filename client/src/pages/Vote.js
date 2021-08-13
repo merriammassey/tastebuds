@@ -158,7 +158,17 @@ const Vote = () => {
                             </a>{" "}
                             <br />
                           </Card.Text>
-                          <Form.Group controlId="formBasicCheckbox">
+                          <Button
+                            onClick={(event) => handleVote(event)}
+                            type="submit"
+                            value={restaurant._id}
+                            name={restaurant}
+                            variant="success"
+                          >
+                            Vote
+                          </Button>
+                          <p>for {restaurant.name}</p>
+                          {/* <Form.Group controlId="formBasicCheckbox">
                             <Form.Check
                               type="checkbox"
                               label="Click to select"
@@ -166,7 +176,7 @@ const Vote = () => {
                               name={restaurant}
                               onClick={(event) => handleVote(event)}
                             />
-                          </Form.Group>
+                          </Form.Group> */}
                           {/* <div
                             // onClick={(event) => addRestaurant(event)}
                             value={index}

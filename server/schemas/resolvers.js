@@ -13,9 +13,12 @@ const resolvers = {
         const userData = await User.findOne({ _id: context.user._id })
           .select("-__v -password")
           .populate("events")
-          .sort({ createdAt: -1 });
+          .populate("restaurants")
+          .populate("votes")
+          .exec();
+        //.sort({ createdAt: -1 });
 
-        userData.events.sort((a, b) => b.createdAt - a.createdAt);
+        //userData.events.sort((a, b) => b.createdAt - a.createdAt);
         console.log(userData);
         return userData;
         //return userData.events.sort((a, b) => b.createdAt - a.createdAt);
@@ -24,7 +27,7 @@ const resolvers = {
     },
     event: async (parent, { _id }) => {
       return await Event.findById(_id)
-        .sort({ createdAt: -1 })
+        //.sort({ createdAt: -1 })
         .populate("restaurants")
         .populate("votes");
     },
@@ -88,6 +91,24 @@ const resolvers = {
         return updatedEvent;
       }
       throw new AuthenticationError("You need to be logged in!");
+    },
+    deleteEvent: async (parent, { _id }, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          {
+            $pull: {
+              events: {
+                _id: _id,
+              },
+            },
+          },
+          { new: true }
+        ).populate("events");
+        console.log(updatedUser);
+        return updatedUser;
+      }
+      throw new AuthenticationError("You need to be logged in");
     },
   },
 };
