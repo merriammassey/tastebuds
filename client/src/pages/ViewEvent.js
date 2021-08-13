@@ -20,7 +20,7 @@ import Auth from "../utils/auth";
 const ViewEvent = () => {
   const token = Auth.loggedIn() ? Auth.getToken() : null;
   //rerender this component each time... add
-  const [voteCount, setVoteCount] = useState("");
+  // const [voteCount, setVoteCount] = useState("");
   let history = useHistory();
 
   const { id: eventId } = useParams();
@@ -40,6 +40,9 @@ const ViewEvent = () => {
     onCompleted: (data) => {
       //console.log("query data", data);
       saveEventData(data);
+      //history.push(window.location);
+      //window.location.reload(false);
+      //history.goBack();
       //history.push(`/viewevent/${eventId}`);
     },
   });
@@ -47,9 +50,10 @@ const ViewEvent = () => {
   //console.log(eventData);
   const eventData = data?.event || {};
 
-  useEffect(() => {
+  /* useEffect(() => {
     setVoteCount(1);
-  }, [error]);
+  }, [error]); */
+
   //const eventData = { currentEvent };
   //console.log(eventData);
   //const currentEventData = currentEvent.event;
@@ -59,9 +63,8 @@ const ViewEvent = () => {
   //const restaurants = currentEvent.event.restaurants;
   //console.log(currentEvent.event.restaurants);
   if (loading) {
-    return <Spinner animation="border" variant="success" />;
+    return <h2>loading your event</h2>;
   }
-
   /* let i = 0;
   let tempArr = [];
   while (i < eventData.restaurants.length) {

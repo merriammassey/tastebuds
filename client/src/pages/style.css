@@ -67,6 +67,13 @@ h5 {
   padding-top: 2pc;
 }
 
+#loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: inherit;
+}
+
 #goBack {
   display: block;
   text-align: center;

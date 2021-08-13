@@ -39,7 +39,7 @@ const Vote = () => {
   const eventData = data?.event || {};
 
   if (loading) {
-    return <h2>LOADING...</h2>;
+    return <h2>loading your options</h2>;
   }
   //if not logged in, toggle modal
   //const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -286,8 +286,8 @@ const Vote = () => {
           </div>
         </div>
       </div>
-      <div id="footer">
-        {/* <Link to="/thankyou"> */}
+      {/* <div id="footer">
+     
         <Button
           //onClick={(event) => handleVote(event)}
           type="submit"
@@ -296,8 +296,8 @@ const Vote = () => {
         >
           Vote
         </Button>
-        {/* </Link> */}
-      </div>
+        
+      </div> */}
     </>
   );
 };

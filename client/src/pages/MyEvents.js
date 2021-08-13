@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../App.css";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_ME } from "../utils/queries";
@@ -7,8 +7,11 @@ import Auth from "../utils/auth";
 import { Container, Col, Row, Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useStoreContext } from "../utils/GlobalState";
+import { Modal, Tab } from "react-bootstrap";
 
 const MyEvents = () => {
+  const [showModal, setShowModal] = useState(false);
+  //const reload = () => window.location.reload();
   const [state, dispatch] = useStoreContext();
   const { currentUser } = state;
   const [deleteEvent, error] = useMutation(DELETE_EVENT);
@@ -18,6 +21,7 @@ const MyEvents = () => {
       await deleteEvent({
         variables: { _id },
       });
+      setShowModal(true);
     } catch (error) {
       console.error(error);
     }
@@ -43,7 +47,7 @@ const MyEvents = () => {
   //console.log(currentUser.events[0].restaurants[0].votes.length);
   //console.log(currentUser.me.events[0]);
   if (loading) {
-    return <h2>LOADING...</h2>;
+    return <h2>loading your events</h2>;
   }
 
   //calculate total votes
@@ -73,7 +77,9 @@ const MyEvents = () => {
                   <Card key={event._id}>
                     <Card.Header as="h5">{event.title}</Card.Header>
                     <Card.Body>
-                      <Card.Title>{event.createdAt}</Card.Title>
+                      <Card.Title></Card.Title>
+
+                      <Card.Text>{event.createdAt}</Card.Text>
                       <Card.Text>{event.note}</Card.Text>
                       {/* <Card.Text>
                         Current Vote Count:{" "}
@@ -171,6 +177,46 @@ const MyEvents = () => {
             </Col>
           </Row>
         </Container>
+        <Modal
+          id="shareModal"
+          size="lg"
+          show={showModal}
+          onHide={() => {
+            setShowModal(false);
+            window.location.reload();
+          }}
+          aria-labelledby="signup-modal"
+        >
+          {/* tab container to do either signup or login component */}
+          <Tab.Container defaultActiveKey="login">
+            <Modal.Header closeButton>
+              <Modal.Title id="signup-modal">
+                <h4>Your event has been deleted.</h4>
+                {/*    <Nav variant="pills">
+                      <Nav.Item>
+                        <Nav.Link eventKey="login">Login</Nav.Link>
+                      </Nav.Item>
+                      <Nav.Item>
+                        <Nav.Link eventKey="signup">Sign Up</Nav.Link>
+                      </Nav.Item>
+                    </Nav> */}
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {/* <ShareIcons /> 
+                  <Tab.Content>
+                    <Tab.Pane eventKey="login">
+                      <LoginForm handleModalClose={() => setShowModal(false)} /> 
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="signup">
+                      {<SignUpForm
+                        handleModalClose={() => setShowModal(false)}
+                      /> 
+                    </Tab.Pane>
+                  </Tab.Content>*/}
+            </Modal.Body>
+          </Tab.Container>
+        </Modal>
       </div>
     </>
   );
