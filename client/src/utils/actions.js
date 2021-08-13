@@ -6,6 +6,8 @@ export const UPDATE_EVENT_NOTES = "UPDATE_EVENT_NOTES";
 export const UPDATE_EVENT_TITLE = "UPDATE_EVENT_TITLE";
 export const UPDATE_EVENT_ID = "UPDATE_EVENT_ID";
 export const UPDATE_EVENTDATA = "UPDATE_EVENTDATA";
+export const UPDATE_NAV = "UPDATE_NAV";
+
 //enable selecting a cat4egory from state created by update_categories action and display those products
 /* export const UPDATE_CURRENT_CATEGORY = "UPDATE_CURRENT_CATEGORY";
 

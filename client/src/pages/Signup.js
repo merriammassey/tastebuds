@@ -4,8 +4,11 @@ import { useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
 import { ADD_USER } from "../utils/mutations";
 import Event from "../pages/Event";
+import { useStoreContext } from "../utils/GlobalState";
 
 function Signup(props) {
+  const [state, dispatch] = useStoreContext();
+
   const handleClose = () => props.setShowModal(false);
   //const [showModal, setShowModal] = useState();
 
@@ -19,6 +22,13 @@ function Signup(props) {
   const [formState, setFormState] = useState({ email: "", password: "" });
 
   const [addUser] = useMutation(ADD_USER);
+  const saveToken = () => {
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    dispatch({
+      type: "UPDATE_NAV",
+      token: token,
+    });
+  };
 
   const handleFormSubmit = async (event) => {
     console.log();
@@ -33,6 +43,7 @@ function Signup(props) {
     });
     const token = mutationResponse.data.addUser.token;
     Auth.login(token);
+    saveToken();
     handleClose();
     //Event.setShowModal(false);
     //redirect

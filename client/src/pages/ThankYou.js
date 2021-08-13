@@ -4,11 +4,14 @@ import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 //global state imports
 import { useStoreContext } from "../utils/GlobalState";
+import Auth from "../utils/auth";
 
 import "./style.css";
 import VoteChart from "../components/Chart";
 
 const ThankYou = () => {
+  const token = Auth.loggedIn() ? Auth.getToken() : null;
+
   const [state, dispatch] = useStoreContext();
   const { currentRestaurants, eventTitle, eventNote } = state;
   /* 

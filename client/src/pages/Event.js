@@ -14,8 +14,6 @@ import { Nav, Modal, Tab } from "react-bootstrap";
 import SignUpForm from "../components/SignupForm";
 import LoginForm from "../components/LoginForm";
 const Event = () => {
-  const token = Auth.loggedIn() ? Auth.getToken() : null;
-
   const handleModalClose = () => setShowModal(false);
   // set modal display state
   const [showModal, setShowModal] = useState(false);

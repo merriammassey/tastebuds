@@ -18,6 +18,7 @@ import { Nav, Modal, Tab } from "react-bootstrap";
 import ShareIcons from "../components/ShareIcons";
 
 const Vote = () => {
+  const token = Auth.loggedIn() ? Auth.getToken() : null;
   //const [searchedRestaurants, setSearchedRestaurants] = useState([]);
   //const [state, dispatch] = useStoreContext();
   //const { currentRestaurants } = state;

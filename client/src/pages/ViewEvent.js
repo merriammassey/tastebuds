@@ -15,8 +15,10 @@ import { useQuery, useMutation } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { useStoreContext } from "../utils/GlobalState";
 import { useHistory } from "react-router-dom";
+import Auth from "../utils/auth";
 
 const ViewEvent = () => {
+  const token = Auth.loggedIn() ? Auth.getToken() : null;
   //rerender this component each time... add
   const [voteCount, setVoteCount] = useState("");
   let history = useHistory();
