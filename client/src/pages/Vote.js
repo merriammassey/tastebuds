@@ -11,26 +11,87 @@ import { ADD_VOTE } from "../utils/mutations";
 import { useQuery, useMutation, error } from "@apollo/client";
 import VoteChart from "../components/Chart";
 import { GET_EVENT } from "../utils/queries";
+import { GET_ME } from "../utils/queries";
+import SignUpForm from "../components/SignupForm";
+import LoginForm from "../components/LoginForm";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import Auth from "../utils/auth";
 import { Nav, Modal, Tab } from "react-bootstrap";
 import ShareIcons from "../components/ShareIcons";
-
+import ShareModal from "../components/ShareModal";
 const Vote = () => {
+  //const [showModal, setShowModal] = useState(false);
+  const [showModal1, setShowModal1] = useState(false);
+  const [showModal2, setShowModal2] = useState(false);
+  const [state, dispatch] = useStoreContext();
+  const id = useParams();
+  let history = useHistory();
+  const { id: eventId } = useParams();
+  const { currentUser } = state;
+
   const token = Auth.loggedIn() ? Auth.getToken() : null;
   //const [searchedRestaurants, setSearchedRestaurants] = useState([]);
   //const [state, dispatch] = useStoreContext();
   //const { currentRestaurants } = state;
+  const { userData } = useQuery(GET_ME, {
+    //removed loading
+    variables: { token },
+    onCompleted: (userData) => {
+      const saveUserData = (userData) => {
+        dispatch({
+          type: "SAVE_USERDATA",
+          currentUser: userData,
+        });
+      };
+      //console.log("query data", data);
+      saveUserData(userData);
+      //history.push(`/viewevent/${eventId}`);
+    },
+  });
+  // if token, do get me and compare all eventIds to param
+  const shareButton = () => {
+    if (token) {
+      //compare userData.events _ids to params
+      const user = userData?.me || userData?.user || {};
+      //const userId = data._id;
+      //console.log(userId);
+      console.log(currentUser.me.events);
+      //collect all the user's event id's in an array
+      let i = 0;
+      let tempArr = [];
+      while (i < currentUser.me.events.length) {
+        tempArr.push(currentUser.me.events[i]._id);
+        i++;
+      }
+      console.log(tempArr);
+      //check to see if it includes the current event to determine if logged in user owns event
+      console.log(id.id.toString());
+      const shareButton = tempArr.includes(id.id);
+      console.log(shareButton);
+      // add conditional to share button below
+    }
+    return shareButton;
+  };
+  //if there is no token, trigger sign up modal
 
   const [addVote, { error }] = useMutation(ADD_VOTE, {
     onCompleted: () => {
       history.push("/thankyou");
     },
   });
-  const [showModal, setShowModal] = useState(false);
-  let history = useHistory();
-  const { id: eventId } = useParams();
+  /*  const handleShowEventModal = () => {
+    setShowModal("eventModal", true);
+  };
+
+  const handleShowShareModal = () => {
+    setShowModal("shareModal", true);
+  };
+
+  const handleClose = () => {
+    setShowModal(false);
+  }; */
+
   const { loading, data } = useQuery(GET_EVENT, {
     variables: { id: eventId },
   });
@@ -66,10 +127,9 @@ const Vote = () => {
     tempArr.push(currentRestaurants[index]);
     console.log(tempArr); */
 
-    //modify this
-    if (!Auth) {
-      console.log("please log in or sign up");
-      return false;
+    if (!token) {
+      setShowModal1(true);
+      //setShowModal(true);
     }
     try {
       // const restaurantId = event.target.getAttribute("value");
@@ -101,8 +161,17 @@ const Vote = () => {
       <div id="homephoto">
         <div id="eventdiv">
           <div id="event">
+            {/* make this render only for event owner or if previous component was event */}
+            {/*        {() =>
+              shareButton() === true ? ( */}
             <Button
-              onClick={() => setShowModal(true)}
+              onClick={() => setShowModal2(true)}
+              /* onClick={() =>
+                this.setShowModal({
+                  setShowShareModal: true,
+                  setShowEventModal: false,
+                })
+              } */
               type="submit"
               variant="success"
               size="lg"
@@ -110,6 +179,10 @@ const Vote = () => {
             >
               Share this poll
             </Button>
+            {/* ) : (
+                <div></div>
+              )
+            } */}
             <h1 id="eventheader" style={{ color: "#212529" }}>
               Where would you like to eat?
             </h1>{" "}
@@ -249,36 +322,73 @@ const Vote = () => {
             <Modal
               id="shareModal"
               size="lg"
-              show={showModal}
-              onHide={() => setShowModal(false)}
+              show={showModal2}
+              //show={setShowShareModal}
+              onHide={() => setShowModal2(false)}
+              aria-labelledby="signup-modal"
+            >
+              <Tab.Container defaultActiveKey="login">
+                <Modal.Header closeButton>
+                  <Modal.Title id="signup-modal">
+                    <h2>Share your TasteBuds poll</h2>
+                  </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <ShareIcons />
+                  <Tab.Content>
+                    <Tab.Pane eventKey="login"></Tab.Pane>
+                    <Tab.Pane eventKey="signup"></Tab.Pane>
+                  </Tab.Content>
+                </Modal.Body>
+              </Tab.Container>
+            </Modal>
+            {/* login/signup modal */}
+            <Modal
+              id="eventModal"
+              size="lg"
+              show={showModal1}
+              onHide={() => setShowModal1(false)}
               aria-labelledby="signup-modal"
             >
               {/* tab container to do either signup or login component */}
               <Tab.Container defaultActiveKey="login">
                 <Modal.Header closeButton>
                   <Modal.Title id="signup-modal">
-                    <h2>Share your TasteBuds poll</h2>
-                    {/*    <Nav variant="pills">
+                    <Nav variant="pills">
                       <Nav.Item>
                         <Nav.Link eventKey="login">Login</Nav.Link>
                       </Nav.Item>
                       <Nav.Item>
                         <Nav.Link eventKey="signup">Sign Up</Nav.Link>
                       </Nav.Item>
-                    </Nav> */}
+                    </Nav>
                   </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <ShareIcons />
                   <Tab.Content>
                     <Tab.Pane eventKey="login">
-                      {/* <LoginForm handleModalClose={() => setShowModal(false)} /> */}
+                      <LoginForm
+                        handleModalClose={() => setShowModal1(false)}
+                      />
                     </Tab.Pane>
                     <Tab.Pane eventKey="signup">
-                      {/* <SignUpForm
-                        handleModalClose={() => setShowModal(false)}
-                      /> */}
+                      <SignUpForm
+                        handleModalClose={() => setShowModal1(false)}
+                      />
                     </Tab.Pane>
+                    {/*   {token ? (
+                            <Button
+                              type="submit"
+                              variant="success"
+                              size="lg"
+                              onClick={() => setShowModal(false)}
+                            >
+                              {" "}
+                              Return to your Event{" "}
+                            </Button>
+                          ) : (
+                            <div></div>
+                          )} */}
                   </Tab.Content>
                 </Modal.Body>
               </Tab.Container>
