@@ -19,7 +19,7 @@ import { useHistory } from "react-router-dom";
 import Auth from "../utils/auth";
 import { Nav, Modal, Tab } from "react-bootstrap";
 import ShareIcons from "../components/ShareIcons";
-import ShareModal from "../components/ShareModal";
+
 const Vote = () => {
   //const [showModal, setShowModal] = useState(false);
   const [showModal1, setShowModal1] = useState(false);
@@ -80,17 +80,6 @@ const Vote = () => {
       history.push("/thankyou");
     },
   });
-  /*  const handleShowEventModal = () => {
-    setShowModal("eventModal", true);
-  };
-
-  const handleShowShareModal = () => {
-    setShowModal("shareModal", true);
-  };
-
-  const handleClose = () => {
-    setShowModal(false);
-  }; */
 
   const { loading, data } = useQuery(GET_EVENT, {
     variables: { id: eventId },
@@ -113,9 +102,6 @@ const Vote = () => {
   //const { currentRestaurants, eventTitle, eventNote } = state;
 
   //console.log(eventData);
-  /*   const shareModal = async (event) => {
-    setShowModal(true);
-  }; */
 
   const handleVote = async (event) => {
     event.preventDefault();
