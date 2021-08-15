@@ -12,15 +12,10 @@ function Signup(props) {
   const handleClose = () => props.setShowModal(false);
   //const [showModal, setShowModal] = useState();
 
-  /* const match = matchPath("/events/:id", {
-    path: "/events/:id",
-    exact: true,
-    strict: false,
-  }); */
-
   //let { id } = useParams();
   const [formState, setFormState] = useState({ email: "", password: "" });
 
+  //To do: check to see if user exists, and alert them to log in instead of sign up
   const [addUser] = useMutation(ADD_USER);
   const saveToken = () => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;

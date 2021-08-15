@@ -101,7 +101,7 @@ const Vote = () => {
   //console.log(eventId);
   //const { currentRestaurants, eventTitle, eventNote } = state;
 
-  //console.log(eventData);
+  console.log(eventData);
 
   const handleVote = async (event) => {
     event.preventDefault();
@@ -178,9 +178,7 @@ const Vote = () => {
             <h5>
               {eventData.note}
               <br />
-              Check the box of your restaurant of choice.
-              <br />
-              Then click Vote!
+              Vote for the restaurant of your choice by clicking Vote!
               {/* Here are a few places close to the stadium. <br />
               Please vote by 3pm today, and I'll make reservations. */}
             </h5>

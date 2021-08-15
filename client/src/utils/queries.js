@@ -29,6 +29,7 @@ export const GET_EVENT = gql`
         _id
         name
         rating
+        url
         image_url
         price
         location
