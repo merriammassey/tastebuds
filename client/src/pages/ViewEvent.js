@@ -16,6 +16,7 @@ import { useParams } from "react-router-dom";
 import { useStoreContext } from "../utils/GlobalState";
 import { useHistory } from "react-router-dom";
 import Auth from "../utils/auth";
+import VoteChart from "../components/Chart";
 
 const ViewEvent = () => {
   const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -65,7 +66,7 @@ const ViewEvent = () => {
   if (loading) {
     return <h2>loading your event</h2>;
   }
-  /* let i = 0;
+  let i = 0;
   let tempArr = [];
   while (i < eventData.restaurants.length) {
     tempArr.push(eventData.restaurants[i].votes);
@@ -77,7 +78,7 @@ const ViewEvent = () => {
     i++;
   }
   //setVoteCount(flat.length);
-  if (flat.length) {
+  /*if (flat.length) {
     history.push(`/viewevent/${eventId}`);
   } */
 
@@ -86,8 +87,8 @@ const ViewEvent = () => {
   //console.log(eventData.restaurants[0].votes.length);
   //let sum = 0;
 
-  //voteCount = flat.length;
-  //console.log("tempArr: ", tempArr);
+  const voteCount = flat.length;
+  console.log(voteCount);
   //console.log("sum: ", sum);
   //console.log("reduce: ", reduce);
   //console.log("flat: ", flat.length);
@@ -101,23 +102,44 @@ const ViewEvent = () => {
       <div id="homephoto">
         <div id="eventdiv">
           <div id="event">
-            <Link to={`/vote/${eventId}`}>
-              <Button
-                type="submit"
-                variant="success"
-                size="lg"
-                id="shareButton"
-              >
-                Share again
-              </Button>
-            </Link>
             <h3 id="eventheader" style={{ color: "#212529" }}>
-              Your poll results
-              <br />
-              for {eventData.title}
+              Your poll results for <h1>{eventData.title}</h1>
             </h3>
-            <h5>Your note: {eventData.note}</h5>
+            {eventData.note ? <h5>Your note: {eventData.note}</h5> : null}
             {/* MAP CARDS */}
+            {voteCount === 0 ? (
+              <div>
+                <br />
+                <h1>No votes yet!</h1>
+
+                <Link to={`/vote/${eventId}`}>
+                  <Button
+                    type="submit"
+                    variant="success"
+                    size="lg"
+                    id="shareButton"
+                  >
+                    Share again
+                  </Button>
+                </Link>
+              </div>
+            ) : (
+              <div>
+                <VoteChart eventData={eventData} />
+                <br />
+                <h3>Need more input?</h3>
+                <Link to={`/vote/${eventId}`}>
+                  <Button
+                    type="submit"
+                    variant="success"
+                    size="lg"
+                    id="shareButton"
+                  >
+                    Share again
+                  </Button>
+                </Link>
+              </div>
+            )}
             <Container id="restaurantCards">
               <Row>
                 <Col style={{ alignItems: "center" }}>

@@ -20,7 +20,7 @@
 #shareButton {
   margin-top: 15pt;
   margin-bottom: 15pt;
-  width: 75% !important;
+  max-width: 50% !important;
 }
 .logo {
   height: 50px;
