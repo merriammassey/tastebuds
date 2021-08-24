@@ -15,7 +15,9 @@ const MyEvents = () => {
   const [state, dispatch] = useStoreContext();
   const { currentUser } = state;
   const [deleteEvent, error] = useMutation(DELETE_EVENT);
-
+  function sortByDate(a, b) {
+    return b.createdAt - a.createdAt;
+  }
   const handleDeleteEvent = async (_id) => {
     try {
       await deleteEvent({
@@ -36,13 +38,18 @@ const MyEvents = () => {
           currentUser: userData,
         });
       };
-      //console.log("query data", data);
+      console.log("query data", data);
       saveUserData(data);
       //history.push(`/viewevent/${eventId}`);
     },
   });
   const userData = data?.me || data?.user || {};
-  //console.log(userData.events[0]);
+  /* let eventsArr = [];
+  eventsArr.push(userData.events);
+  eventsArr.sort(sortByDate);
+  console.log(eventsArr.sort(sortByDate)); */
+
+  console.log(userData);
   //console.log(userData.events[0].restaurants[0].votes.length);
   //console.log(currentUser.events[0].restaurants[0].votes.length);
   //console.log(currentUser.me.events[0]);
@@ -67,20 +74,22 @@ const MyEvents = () => {
   return (
     <>
       <div style={{ backgroundColor: "#343a40" }}>
-        <h1 id="eventsheader">Your Events</h1>
+        <h3 id="eventsheader">Welcome, {userData.username}!</h3>{" "}
         <Container>
           <Row>
             <Col style={{ alignItems: "center" }}>
               {userData.events.map((event) => {
-                //console.log(userData.events);
+                // console.log(event.restaurants[0]);
                 return (
                   <Card key={event._id}>
                     <Card.Header as="h5">{event.title}</Card.Header>
                     <Card.Body>
                       <Card.Title></Card.Title>
 
-                      <Card.Text>{event.createdAt}</Card.Text>
+                      <Card.Text>Created on {event.createdAt}</Card.Text>
                       <Card.Text>{event.note}</Card.Text>
+                      {/* <Card.Text>{event.restaurants}</Card.Text> */}
+
                       {/* <Card.Text>
                         Current Vote Count:{" "}
                         {() => {
@@ -114,66 +123,6 @@ const MyEvents = () => {
                   </Card>
                 );
               })}
-              {/* 
-              <Card style={{ margin: "10px" }}>
-                <Card.Header id="cardheader" as="h5">
-                  Bev's Goodbye Dinner Tuesday <br /> July 16, 2021
-                </Card.Header>
-                <Card.Body>
-                  <Card.Title>created 7.10.21</Card.Title>
-                  <Card.Text>
-                    Note: Please let us know where you'd prefer to eat!
-                  </Card.Text>
-                  <div id="buttondiv">
-                    <Button
-                      id="buttons"
-                      style={{ margin: "5px" }}
-                      variant="success"
-                      size="lg"
-                    >
-                      View Event
-                    </Button>
-                    <Button
-                      id="buttons"
-                      variant="primary"
-                      size="lg"
-                      style={{ margin: "5px" }}
-                    >
-                      Delete Event
-                    </Button>
-                  </div>
-                </Card.Body>
-              </Card>
-              <Card style={{ margin: "10px" }}>
-                <Card.Header id="cardheader" as="h5">
-                  Coffee Saturday <br /> July 1, 2021
-                </Card.Header>
-                <Card.Body>
-                  <Card.Title>created 6.28.21</Card.Title>
-                  <Card.Text>
-                    Note: Do you prefer local or chain? Here's a few options.
-                    9ish?
-                  </Card.Text>
-                  <div id="buttondiv">
-                    <Button
-                      id="buttons"
-                      style={{ margin: "5px" }}
-                      variant="success"
-                      size="lg"
-                    >
-                      View Event
-                    </Button>
-                    <Button
-                      id="buttons"
-                      variant="primary"
-                      size="lg"
-                      style={{ margin: "5px" }}
-                    >
-                      Delete Event
-                    </Button>
-                  </div>
-                </Card.Body> 
-              </Card>*/}
             </Col>
           </Row>
         </Container>

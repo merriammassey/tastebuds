@@ -4,6 +4,7 @@ import { Navbar, Nav, Container, Modal, Tab } from "react-bootstrap";
 import SignUpForm from "./SignupForm";
 import LoginForm from "./LoginForm";
 import AuthContext from "../utils/auth-context.js";
+import logo from "../assets/images/tblogo.png";
 
 import Auth from "../utils/auth";
 import { useStoreContext } from "../utils/GlobalState";
@@ -28,7 +29,7 @@ const AppNavbar = () => {
           <Navbar bg="dark" variant="dark" expand="lg">
             <Container fluid>
               <Navbar.Brand as={Link} to="/">
-                TasteBuds
+                <img src={logo} id="logo" alt="logo" className="logo" />
               </Navbar.Brand>
               <Navbar.Toggle aria-controls="navbar" />
               <Navbar.Collapse id="navbar">

@@ -105,15 +105,14 @@ const Event = () => {
           <div id="homephoto">
             <div id="eventdiv">
               <div id="event">
-                <h1 id="eventheader" style={{ color: "#212529" }}>
-                  Create Your Event
-                </h1>
+                <h3 id="eventheader" style={{ color: "#212529" }}>
+                  Add a few details{" "}
+                </h3>
                 <br />
-                <h5>
-                  Add details about your event.
+                {/* <h5>
+                  Give your event a name
                   <br />
-                  Then invite your friends to help choose the restaurant!
-                </h5>
+and ...               </h5> */}
 
                 <div id="form">
                   <Form>

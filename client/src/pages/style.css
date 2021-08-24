@@ -25,16 +25,17 @@
 }
 .card {
   flex-direction: row !important;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 #event {
   width: 75%;
   height: 50% !important;
-  background-color: rgba(255, 255, 255);
+  background-color: rgb(231, 231, 231);
   justify-content: center;
   padding-top: 10;
   border: 10px;
+  margin-bottom: 100px;
 }
 
 #thanks {
@@ -113,6 +114,8 @@ footer {
   color: white;
   border-top: 5px;
   border-bottom: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 #invitebutton {
@@ -123,6 +126,9 @@ footer {
   height: 100px;
 }
 
+li {
+  text-align: left !important;
+}
 @media screen and (max-width: 575px) {
   #searchformelements {
     width: 75%;

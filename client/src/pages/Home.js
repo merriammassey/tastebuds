@@ -11,7 +11,8 @@ const Home = () => {
         <div id="homephoto">
           <div id="welcome">
             <h3 style={{ color: "white", shadowSize: 5 }}>
-              Welcome to TasteBuds
+              Welcome to <br />
+              <span id="tb">TasteBuds</span>
             </h3>
             <SearchRestaurants
               selectedRestaurants={selectedRestaurants}

@@ -1,3 +1,9 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Anton&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap");
+#tb {
+  font-family: "Amatic SC";
+  font-size: 50pt;
+}
 #footer {
   display: flex;
   justify-content: center;
@@ -13,6 +19,13 @@
 }
 #shareButton {
   margin-top: 15pt;
+  margin-bottom: 15pt;
+  width: 75% !important;
+}
+.logo {
+  height: 50px;
+  width: 50px;
+  margin-right: 5pt;
 }
 /* Share modal */
 .Demo__container {

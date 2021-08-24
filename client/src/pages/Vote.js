@@ -169,16 +169,20 @@ const Vote = () => {
                 <div></div>
               )
             } */}
-            <h1 id="eventheader" style={{ color: "#212529" }}>
+            {/* <h1 id="eventheader" style={{ color: "#212529" }}>
               Where would you like to eat?
             </h1>{" "}
             <br />
-            {/* <h3>Pre-game dinner</h3> */}
-            <h3>{eventData.title}</h3>
+
+            <h3>{eventData.title}</h3> */}
+            <br />
+            <h3>
+              Vote for your preferred venue <br />
+              for {eventData.title}!
+            </h3>
+            <br />
             <h5>
               {eventData.note}
-              <br />
-              Vote for the restaurant of your choice by clicking Vote!
               {/* Here are a few places close to the stadium. <br />
               Please vote by 3pm today, and I'll make reservations. */}
             </h5>

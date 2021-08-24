@@ -108,15 +108,15 @@ const ViewEvent = () => {
                 size="lg"
                 id="shareButton"
               >
-                Share this poll again
+                Share again
               </Button>
             </Link>
-            <h1 id="eventheader" style={{ color: "#212529" }}>
+            <h3 id="eventheader" style={{ color: "#212529" }}>
               Your poll results
-            </h1>{" "}
-            <br />
-            <h3>{eventData.title}</h3>
-            <h5>{eventData.note}</h5>
+              <br />
+              for {eventData.title}
+            </h3>
+            <h5>Your note: {eventData.note}</h5>
             {/* MAP CARDS */}
             <Container id="restaurantCards">
               <Row>

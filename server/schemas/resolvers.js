@@ -12,14 +12,16 @@ const resolvers = {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
           .select("-__v -password")
-          .populate("events")
-          .populate("restaurants")
-          .populate("votes")
-          .exec();
+          .populate("events");
         //.sort({ createdAt: -1 });
-
-        //userData.events.sort((a, b) => b.createdAt - a.createdAt);
-        console.log(userData);
+        //.sort({ createdAt: -1 });
+        //.populate("restaurants");
+        //.populate("votes")
+        //.exec();
+        //.sort({ createdAt: -1 });
+        //userData.events.sort({ createdAt: -1 });
+        userData.events.sort((a, b) => b.createdAt - a.createdAt);
+        //console.log(userData);
         return userData;
         //return userData.events.sort((a, b) => b.createdAt - a.createdAt);
       }

@@ -86,54 +86,59 @@ const SearchRestaurants = () => {
 
   return (
     <>
-      <div id="searchform">
-        <div id="searchformelements">
-          <h1 style={{ color: "white" }}>Search for a restaurant to begin</h1>
-        </div>
-        <Form onSubmit={handleFormSubmit}>
-          <Form.Row>
-            <Col xs={12} md={8}>
-              <div id="searchformelements">
-                <Form.Control
-                  name="termInput"
-                  value={termInput}
-                  onChange={(e) => setTermInput(e.target.value)}
-                  type="text"
-                  size="lg"
-                  placeholder="Keyword"
-                />
-                <br />
+      {searchedRestaurants.length ? (
+        <h3 style={{ color: "white" }}>Select a few venues</h3>
+      ) : (
+        <div id="searchform">
+          <div id="searchformelements">
+            <h1 style={{ color: "white" }}>Search for a restaurant to begin</h1>
+          </div>
+          <Form onSubmit={handleFormSubmit}>
+            <Form.Row>
+              <Col xs={12} md={8}>
+                <div id="searchformelements">
+                  <Form.Control
+                    name="termInput"
+                    value={termInput}
+                    onChange={(e) => setTermInput(e.target.value)}
+                    type="text"
+                    size="lg"
+                    placeholder="Keyword"
+                  />
+                  <br />
 
-                <Form.Control
-                  name="locationInput"
-                  value={locationInput}
-                  onChange={(e) => setLocationInput(e.target.value)}
-                  type="text"
-                  size="lg"
-                  placeholder="Location"
-                />
-                <br />
-              </div>
-            </Col>
-            <Col xs={12} md={4}>
-              <div id="searchformelements">
-                <Button
-                  id="searchbutton"
-                  type="submit"
-                  variant="success"
-                  size="lg"
-                >
-                  Search
-                </Button>
-              </div>
-            </Col>
-          </Form.Row>
-        </Form>
-      </div>
+                  <Form.Control
+                    name="locationInput"
+                    value={locationInput}
+                    onChange={(e) => setLocationInput(e.target.value)}
+                    type="text"
+                    size="lg"
+                    placeholder="Location"
+                  />
+                  <br />
+                </div>
+              </Col>
+              <Col xs={12} md={4}>
+                <div id="searchformelements">
+                  <Button
+                    id="searchbutton"
+                    type="submit"
+                    variant="success"
+                    size="lg"
+                  >
+                    Search
+                  </Button>
+                </div>
+              </Col>
+            </Form.Row>
+          </Form>
+        </div>
+      )}
+
       <Container id="restaurantCards">
         {loading ? <Spinner animation="border" variant="success" /> : null}
 
-        <Row>
+        <Row style={{ marginBottom: "100px" }}>
           <Col style={{ alignItems: "center" }}>
             {searchedRestaurants.map((restaurant, index) => {
               return (

@@ -21,8 +21,8 @@ class ShareIcons extends Component {
     return (
       <div>
       <div className="Demo__container">
-        <div className="Demo__some-network">
-          {/* <FacebookShareButton
+        {/*<div className="Demo__some-network">
+           <FacebookShareButton
             url={shareUrl}
             quote={title}
             className="Demo__some-network__share-button"
@@ -37,10 +37,10 @@ class ShareIcons extends Component {
             >
               {(count) => count}
             </FacebookShareCount>
-          </div> */}
-        </div>
+          </div> 
+        </div>*/}
         
-        <div className="Demo__some-network">
+        {/* <div className="Demo__some-network">
           <FacebookMessengerShareButton
             url={shareUrl}
             appId="368110118285486"
@@ -65,7 +65,7 @@ class ShareIcons extends Component {
           <br />
           <h5>Whatsapp</h5>
           <div className="Demo__some-network__share-count">&nbsp;</div>
-        </div>
+        </div> */}
 
         <div className="Demo__some-network">
           <EmailShareButton
@@ -79,13 +79,13 @@ class ShareIcons extends Component {
           <br />
           <h5>Email</h5>
         </div>
-      </div><div id="copyButton">
-      <h4>Or copy link to text        
-          <Button id="copy"
+      <div id="copyButton">
+      <h3>or         
+          <Button id="copy" 
   onClick={() =>  navigator.clipboard.writeText(window.location.href)}
 >
-  Copy
-</Button></h4> </div></div>
+  Copy link
+</Button></h3> </div></div></div>
     );
   }
 }

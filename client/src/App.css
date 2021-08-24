@@ -51,5 +51,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 20%;
+  padding-top: 10%;
+}
+
+.btn-success {
+  background-color: #81daf8 !important;
+  border-color: #81daf8 !important;
+  width: 100%;
+}
+
+.btn-secondary {
+  width: 100%;
+  margin-bottom: 8pt !important;
 }
