@@ -79,7 +79,7 @@ function App() {
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/myevents" component={MyEvents} />
               <Route exact path="/event" component={Event} />
-              <Route exact path="/events/:id" component={Vote} />
+              <Route exact path="/vote/:id" component={Vote} />
               <Route exact path="/viewevent/:id" component={ViewEvent} />
               <Route exact path="/thankyou" component={ThankYou} />
             </Switch>

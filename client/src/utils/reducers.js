@@ -62,60 +62,6 @@ export const reducer = (state, action) => {
         ...state,
         token: action.token,
       };
-    /* 
-    case UPDATE_CURRENT_CATEGORY:
-      return {
-        ...state,
-        currentCategory: action.currentCategory,
-      };
-    //add cart
-    case ADD_TO_CART:
-      return {
-        ...state,
-        cartOpen: true,
-        cart: [...state.cart, action.product],
-      };
-    case ADD_MULTIPLE_TO_CART:
-      return {
-        ...state,
-        cart: [...state.cart, ...action.products],
-      };
-    case REMOVE_FROM_CART:
-      //use filter to only keep items that don't match the _id property provided
-      let newState = state.cart.filter((product) => {
-        return product._id !== action._id;
-      });
-
-      return {
-        ...state,
-        //check array length to set cartOPen to false when array is empty
-        cartOpen: newState.length > 0,
-        cart: newState,
-      };
-
-    case UPDATE_CART_QUANTITY:
-      return {
-        ...state,
-        cartOpen: true,
-        cart: state.cart.map((product) => {
-          if (action._id === product._id) {
-            product.purchaseQuantity = action.purchaseQuantity;
-          }
-          return product;
-        }),
-      };
-    case CLEAR_CART:
-      return {
-        ...state,
-        cartOpen: false,
-        cart: [],
-      };
-    case TOGGLE_CART:
-      return {
-        ...state,
-        cartOpen: !state.cartOpen,
-      };
- */
     //if it's none of these actions, do not update state
     default:
       return state;

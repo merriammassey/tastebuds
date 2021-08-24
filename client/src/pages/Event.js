@@ -1,20 +1,17 @@
-//import React, { useState, useEffect } from "react";
 import React, { useState, useEffect } from "react";
 import { Col, Form, Button, Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
 //global state imports
 import { useStoreContext } from "../utils/GlobalState";
 import { ADD_EVENT } from "../utils/mutations";
-import { useQuery, useMutation, onCompleted, error } from "@apollo/client";
+import { useMutation, onCompleted, error } from "@apollo/client";
 import "./style.css";
 import { useHistory } from "react-router-dom";
-import Home from "./Home";
 import Auth from "../utils/auth";
 import { Nav, Modal, Tab } from "react-bootstrap";
 import SignUpForm from "../components/SignupForm";
 import LoginForm from "../components/LoginForm";
+
 const Event = () => {
-  const handleModalClose = () => setShowModal(false);
   // set modal display state
   const [showModal, setShowModal] = useState(false);
   let history = useHistory();
@@ -31,7 +28,7 @@ const Event = () => {
       const _id = data.addEvent.events[data.addEvent.events.length - 1]._id;
 
       //console.log(_id);
-      history.push(`/events/${_id}`);
+      history.push(`/vote/${_id}`);
       const saveEventId = (_id) => {
         dispatch({
           type: "UPDATE_EVENT_ID",
@@ -51,6 +48,7 @@ const Event = () => {
     const restaurants = currentRestaurants;
     if (!token) {
       setShowModal(true);
+
       if (!eventTitleInput) {
         console.log("please enter a name for your event");
         return false;
@@ -74,7 +72,7 @@ const Event = () => {
     }
 
     //event.preventDefault();
-    console.log(eventTitleInput);
+    //console.log(eventTitleInput);
     if (!eventTitleInput) {
       console.log("please enter a name for your event");
       return false;

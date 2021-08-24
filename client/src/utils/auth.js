@@ -35,19 +35,11 @@ class AuthService {
   }
 
   login(idToken) {
-    var modal = document.getElementById("signup-modal");
-    // Saves user token to localStorage
     localStorage.setItem("id_token", idToken);
-    //window.location.assign("/");
-    //let { id } = useParams();
     if (window.location.toString().includes("event")) {
-      //window.location.assign("/event");
-      const handleModalClose = Event.handleModalClose;
-      handleModalClose(); //doesn't work
-      //Event.handleAddEvent();
+      document.getElementById("eventModal").style.display = "none";
     } else {
-      //window.location.assign(window.location.href);
-      window.location.assign("/");
+      window.location.reload();
     }
   }
 
@@ -55,14 +47,6 @@ class AuthService {
     // Clear user token and profile data from localStorage
     localStorage.removeItem("id_token");
     window.location.assign("/");
-    // this will reload the page and reset the state of the application
-    //let { id } = useParams();
-    /* if (!window.location.toString().includes("event")) {
-      window.location.assign("/");
-    } else {
-      //window.location.assign(window.location.href);
-      setShowModal(false);
-    } */
   }
 }
 

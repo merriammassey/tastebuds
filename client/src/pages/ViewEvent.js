@@ -101,7 +101,7 @@ const ViewEvent = () => {
       <div id="homephoto">
         <div id="eventdiv">
           <div id="event">
-            <Link to={`/events/${eventId}`}>
+            <Link to={`/vote/${eventId}`}>
               <Button
                 type="submit"
                 variant="success"

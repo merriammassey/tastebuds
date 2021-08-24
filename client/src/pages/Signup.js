@@ -6,13 +6,8 @@ import { ADD_USER } from "../utils/mutations";
 import Event from "../pages/Event";
 import { useStoreContext } from "../utils/GlobalState";
 
-function Signup(props) {
+function Signup() {
   const [state, dispatch] = useStoreContext();
-
-  const handleClose = () => props.setShowModal(false);
-  //const [showModal, setShowModal] = useState();
-
-  //let { id } = useParams();
   const [formState, setFormState] = useState({ email: "", password: "" });
 
   //To do: check to see if user exists, and alert them to log in instead of sign up
@@ -39,11 +34,6 @@ function Signup(props) {
     const token = mutationResponse.data.addUser.token;
     Auth.login(token);
     saveToken();
-    handleClose();
-    //Event.setShowModal(false);
-    //redirect
-    //if current page is /, stay /
-    //if current page is /events, stay /
   };
 
   const handleChange = (event) => {

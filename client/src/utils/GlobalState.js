@@ -19,9 +19,6 @@ const StoreProvider = ({ value = [], ...props }) => {
     currentEvent: [],
     token: [],
     currentUser: [],
-    //cartOpen: false,
-    //categories: [],
-    //currentCategory: "",
   });
   //confirm it works
   console.log(state);
