@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SearchRestaurants from "./SearchRestaurants";
 import "../App.css";
+import logo from "../assets/images/tblogo.png";
 
 const Home = () => {
   const [selectedRestaurants, setSelectedRestaurants] = useState([]);
@@ -11,8 +12,11 @@ const Home = () => {
         <div id="homephoto">
           <div id="welcome">
             <h3 style={{ color: "white", shadowSize: 5 }}>
-              Welcome to <br />
-              <span id="tb">TasteBuds</span>
+              {" "}
+              {/*               <img src={logo} id="logo" alt="logo" className="logoLarge" />
+               */}
+              Welcome to <br /> <span id="t">Taste</span>
+              <span id="b">Buds</span>{" "}
             </h3>
             <SearchRestaurants
               selectedRestaurants={selectedRestaurants}

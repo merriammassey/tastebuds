@@ -45,6 +45,27 @@
   object-fit: cover;
   opacity: 150;
 }
+#brunch {
+  background-image: url("./assets/images/brunch.jpg");
+  background-size: cover;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  object-fit: cover;
+  opacity: 150;
+  animation-delay: 7s;
+  animation-name: brunch;
+}
+
+@keyframes brunch {
+  from {
+    visibility: hidden;
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
+}
 
 #welcome {
   flex-direction: column;
@@ -54,13 +75,39 @@
   padding-top: 10%;
 }
 
+#icons {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2%;
+}
 .btn-success {
-  background-color: #81daf8 !important;
-  border-color: #81daf8 !important;
+  background-color: #9ae6ff !important;
+  border-color: #9ae6ff !important;
+  color: #282c34 !important;
   width: 100%;
 }
 
 .btn-secondary {
   width: 100%;
   margin-bottom: 8pt !important;
+}
+
+@media screen and (max-width: 575px) {
+  #icons {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10%;
+  }
+  .icon {
+    height: 150px;
+    width: 150px;
+    margin-top: 15%;
+    margin-right: 8%;
+    margin-left: 8%;
+    margin-bottom: 5%;
+  }
 }

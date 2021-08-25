@@ -140,7 +140,7 @@ and ...               </h5> */}
                         <br />
                       </Col>
                       <Col xs={12} md={4}>
-                        <h5>The choices you selected:</h5>
+                        <h5>The venues you selected:</h5>
 
                         <ul>
                           {currentRestaurants.map((restaurant) => {

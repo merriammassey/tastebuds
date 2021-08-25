@@ -22,10 +22,32 @@
   margin-bottom: 15pt;
   max-width: 50% !important;
 }
+
 .logo {
   height: 50px;
   width: 50px;
   margin-right: 5pt;
+}
+
+.logoLarge {
+  height: 100px;
+  width: 100px;
+  margin-right: 5pt;
+}
+.icon {
+  height: 150px;
+  width: 150px;
+  margin-right: 8%;
+  margin-left: 8%;
+  margin-bottom: 5%;
+}
+
+.iconText {
+  color: #343a40;
+  margin-right: 10%;
+  margin-left: 10%;
+  font-family: "Amatic SC";
+  font-size: 25pt;
 }
 /* Share modal */
 .Demo__container {

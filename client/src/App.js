@@ -19,6 +19,7 @@ import Signup from "../src/pages/Signup";
 import Event from "../src/pages/Event";
 import MyEvents from "../src/pages/MyEvents";
 import Vote from "./pages/Vote";
+import About from "./pages/About";
 import ThankYou from "../src/pages/ThankYou";
 import ViewEvent from "../src/pages/ViewEvent";
 import AppNavBar from "../src/components/Navbar";
@@ -82,6 +83,7 @@ function App() {
               <Route exact path="/vote/:id" component={Vote} />
               <Route exact path="/viewevent/:id" component={ViewEvent} />
               <Route exact path="/thankyou" component={ThankYou} />
+              <Route exact path="/about" component={About} />
             </Switch>
           </StoreProvider>
         </div>

@@ -12,8 +12,11 @@ import {
 import { searchYelp } from "../utils/yelpAPI";
 import "./style.css";
 import Footer from "../components/Footer";
+//import Typewriter from "typewriter-effect";
+//import typing from "../utils/typing";
 
 const SearchRestaurants = () => {
+  //const type = type();
   //const [restaurantData, setRestaurantData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [state, dispatch] = useStoreContext();
@@ -23,7 +26,17 @@ const SearchRestaurants = () => {
   // create state for holding our search field data
   const [termInput, setTermInput] = useState("");
   const [locationInput, setLocationInput] = useState("");
-
+  /* const typing = () => {
+    return (
+      <div>
+        <Typewriter
+          onInit={(typewriter) => {
+            typewriter.typeString("coffee").start();
+          }}
+        />
+      </div>
+    );
+  }; */
   const handleFormSubmit = async (event) => {
     setLoading(true);
     event.stopPropagation();
@@ -70,9 +83,12 @@ const SearchRestaurants = () => {
   const tempArr = [];
 
   const addRestaurant = (event) => {
+    //event.preventDefault();
+    event.stopPropagation();
     const index = event.target.getAttribute("value");
-
-    tempArr.push(searchedRestaurants[index]);
+    if (!tempArr.includes(index)) {
+      tempArr.push(searchedRestaurants[index]);
+    }
     console.log(tempArr);
     //save selected restaurants to global state
     const saveRestaurantData = (restaurantData) => {
@@ -86,18 +102,24 @@ const SearchRestaurants = () => {
 
   return (
     <>
+      {/*     <Typewriter
+        onInit={(typewriter) => {
+          typewriter.typeString("coffee").start();
+        }}
+      /> */}
       {searchedRestaurants.length ? (
         <h3 style={{ color: "white" }}>Select a few venues</h3>
       ) : (
         <div id="searchform">
           <div id="searchformelements">
-            <h1 style={{ color: "white" }}>Search for a restaurant to begin</h1>
+            <h1 style={{ color: "white" }}>Search for restaurants to begin</h1>
           </div>
           <Form onSubmit={handleFormSubmit}>
             <Form.Row>
               <Col xs={12} md={8}>
                 <div id="searchformelements">
                   <Form.Control
+                    id="keyword"
                     name="termInput"
                     value={termInput}
                     onChange={(e) => setTermInput(e.target.value)}
@@ -136,7 +158,7 @@ const SearchRestaurants = () => {
       )}
 
       <Container id="restaurantCards">
-        {loading ? <Spinner animation="border" variant="success" /> : null}
+        {loading ? <Spinner animation="border" variant="info" /> : null}
 
         <Row style={{ marginBottom: "100px" }}>
           <Col style={{ alignItems: "center" }}>

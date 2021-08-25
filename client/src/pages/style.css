@@ -1,6 +1,10 @@
 :root {
   background-color: #343a40;
 }
+#aboutBox {
+  height: 80vh;
+  color: white;
+}
 #restaurantCards {
   padding-top: 5%;
   display: flex;
@@ -9,6 +13,23 @@
   align-items: center;
 }
 
+#t {
+  color: #9bcfe0;
+  font-family: "Amatic SC";
+  font-size: 50pt;
+}
+
+#b {
+  color: #e76f3d;
+  font-family: "Amatic SC";
+  font-size: 50pt;
+}
+
+.steps {
+  text-align: left !important;
+  padding-left: 10%;
+  padding-bottom: 5%;
+}
 #eventdiv {
   flex-direction: column;
   display: flex;
