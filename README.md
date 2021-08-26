@@ -11,6 +11,7 @@ A full stack web application that enables users to create a custom poll populate
 - [License](#license)
 - [Technologies](#technologies)
 - [Contributions](#contributions)
+- [Planned Updates](#plannedupdates)
 - [Questions](#questions)
 
 ## Installation
@@ -81,15 +82,18 @@ Thank you to Fullstack Bootcamp TAs including Jude Clark, Phil Cowan, and Zack S
 
 ## Planned updates
 
-At the moment, this app is a minimum viable product. We hope to make updates to improve the UI/UX, and add more features (such as setting a target cost, markup %, etc). We also have plans to build out a mobile version of the application using React Native.
+At the moment, this app is a minimum viable product. We hope to make updates to improve the UI/UX, and add more features. We also have plans to build out a mobile version of the application using React Native.
 
 ## Questions
 
 Reach out with questions.
 
 Email:
+
 merriammassey@gmail.com
+
 claire.ogesen.co@gmail.com
+
 gms1980@icloud.com
 
 [my GitHub profile](https://github.com/merriammassey)
