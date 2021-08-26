@@ -75,9 +75,13 @@ Users enter keywords and location on the homepage and are presented with a list 
 
 ## Contributions
 
-Built by George Schimmel, Claire Ogesen, and Merriam Massey.
+See the list of [contributors](https://github.com/merriammassey/tastebuds/graphs/contributors) who participated in this project along with individual commit history.
 
 Thank you to Fullstack Bootcamp TAs including Jude Clark, Phil Cowan, and Zack Shone.
+
+## Planned updates
+
+At the moment, this app is a minimum viable product. We hope to make updates to improve the UI/UX, and add more features (such as setting a target cost, markup %, etc). We also have plans to build out a mobile version of the application using React Native.
 
 ## Questions
 
@@ -88,4 +92,4 @@ merriammassey@gmail.com
 claire.ogesen.co@gmail.com
 gms1980@icloud.com
 
-GitHub [my GitHub profile](https://github.com/merriammassey)
+[my GitHub profile](https://github.com/merriammassey)
