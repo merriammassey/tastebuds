@@ -15,7 +15,33 @@ A full stack web application that enables users to create a custom poll populate
 
 ## Installation
 
-To install, clone the repo and enter "npm run develop" from the terminal in the root directory.
+### Prerequisites
+
+You will need MongoDB installed if you want to run this application locally. For help installing MongoDB, visit
+````
+https://docs.mongodb.com/manual/installation/
+````
+Once installed, make sure the MongoDB daemon is running with the following command line command:
+````
+$ mongod
+````
+
+### Installing
+
+Git clone the repository to your local machine. To connect to your local Mongo database, you will need to add an .env file in the root of your cloned repository containing the following code:
+````
+MONGO_DB="mongodb://localhost/<you decide the name here>"
+````
+
+Next, cd into the repository you cloned and install the necessary dependencies by running:
+````
+$ npm i
+````
+
+You will then be able to start the app locally by runnning:
+````
+$ npm run develop
+````
 
 ## Usage
 
