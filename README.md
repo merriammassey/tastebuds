@@ -82,7 +82,7 @@ Thank you to Fullstack Bootcamp TAs including Jude Clark, Phil Cowan, and Zack S
 
 ## Planned updates
 
-At the moment, this app is a minimum viable product. We hope to make updates to improve the UI/UX including finishing the About page, make the authentication error handling more robust, and add more features including enabling invitees to add comments for the host and incorporating Web Share API and possibly Web Contact Picker API. We also have plans to build out a mobile version of the application using React Native.
+At the moment, this app is a minimum viable product. We hope to make updates to improve the UI/UX (including finishing the About page), make the authentication error handling more robust, and add more features including enabling invitees to add comments for the host and incorporating Web Share API and possibly Web Contact Picker API. We also have plans to build out a mobile version of the application using React Native.
 
 ## Questions
 
