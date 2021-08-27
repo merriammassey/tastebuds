@@ -46,7 +46,7 @@ $ npm run develop
 
 ## Usage
 
-Users enter keywords and location on the homepage and are presented with a list of relevant restaurants. Then, they may select several and click the button at the bottom and enter details about the event on the next page. After clicking the button to submit those details, the user will be directed to a page they can share with their friends where friends can vote and results are tallied. Upon signing in, the user can view saved events on the My Events page.
+Users enter keywords and location on the homepage and are presented with a list of relevant restaurants. Then, they select several and continue to add an event name and notes on the next page. From there, the user is presented with a url to share with invitees so they can vote. When the user selects "My Events" from the nav bar, they will be presented with a list of their events and will be able to view a bar chart with poll results for each.
 
 ## Screenshot
 
@@ -82,7 +82,7 @@ Thank you to Fullstack Bootcamp TAs including Jude Clark, Phil Cowan, and Zack S
 
 ## Planned updates
 
-At the moment, this app is a minimum viable product. We hope to make updates to improve the UI/UX, and add more features. We also have plans to build out a mobile version of the application using React Native.
+At the moment, this app is a minimum viable product. We hope to make updates to improve the UI/UX, make the authentication error handling more robust, and add more features including enabling invitees to add comments for the host and incorporating Web Share API and possibly Web Contact Picker API. We also have plans to build out a mobile version of the application using React Native.
 
 ## Questions
 
