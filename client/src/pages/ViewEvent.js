@@ -7,6 +7,8 @@ import {
   Button,
   Card,
   Spinner,
+  Modal,
+  Tab,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./style.css";
@@ -17,8 +19,11 @@ import { useStoreContext } from "../utils/GlobalState";
 import { useHistory } from "react-router-dom";
 import Auth from "../utils/auth";
 import VoteChart from "../components/Chart";
+import ShareIcons from "../components/ShareIcons2";
 
 const ViewEvent = () => {
+  const [showModal2, setShowModal2] = useState(false);
+
   const token = Auth.loggedIn() ? Auth.getToken() : null;
   //rerender this component each time... add
   // const [voteCount, setVoteCount] = useState("");
@@ -96,7 +101,7 @@ const ViewEvent = () => {
   //const currentEventData = { currentEvent };
   //const restaurantList = currentEventData.currentEvent.event.restaurants;
   //console.log(restaurantList);
-
+  console.log(eventData);
   return (
     <>
       <div id="homephoto">
@@ -112,32 +117,34 @@ const ViewEvent = () => {
                 <br />
                 <h1>No votes yet!</h1>
 
-                <Link to={`/vote/${eventId}`}>
-                  <Button
-                    type="submit"
-                    variant="success"
-                    size="lg"
-                    id="shareButton"
-                  >
-                    Share again
-                  </Button>
-                </Link>
+                {/* <Link to={`/vote/${eventId}`}> */}
+                <Button
+                  type="submit"
+                  variant="success"
+                  size="lg"
+                  id="shareButton"
+                  onClick={() => setShowModal2(true)}
+                >
+                  Share again
+                </Button>
+                {/* </Link> */}
               </div>
             ) : (
               <div>
                 <VoteChart eventData={eventData} />
                 <br />
                 <h3>Need more input?</h3>
-                <Link to={`/vote/${eventId}`}>
-                  <Button
-                    type="submit"
-                    variant="success"
-                    size="lg"
-                    id="shareButton"
-                  >
-                    Share again
-                  </Button>
-                </Link>
+                {/* <Link to={`/vote/${eventId}`}> */}
+                <Button
+                  type="submit"
+                  variant="success"
+                  size="lg"
+                  id="shareButton"
+                  onClick={() => setShowModal2(true)}
+                >
+                  Share again
+                </Button>
+                {/* </Link> */}
               </div>
             )}
             <Container id="restaurantCards">
@@ -192,6 +199,31 @@ const ViewEvent = () => {
               </Row>
             </Container>
             <div id="buttons"></div>
+            {/* set modal data up */}
+            <Modal
+              id="shareModal"
+              size="lg"
+              show={showModal2}
+              //show={setShowShareModal}
+              onHide={() => setShowModal2(false)}
+              eventid={eventId}
+              aria-labelledby="signup-modal"
+            >
+              <Tab.Container defaultActiveKey="login">
+                <Modal.Header closeButton>
+                  <Modal.Title id="signup-modal">
+                    <h2>Share your TasteBuds poll</h2>
+                  </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <ShareIcons eventid={eventId} />
+                  <Tab.Content>
+                    <Tab.Pane eventKey="login"></Tab.Pane>
+                    <Tab.Pane eventKey="signup"></Tab.Pane>
+                  </Tab.Content>
+                </Modal.Body>
+              </Tab.Container>
+            </Modal>
           </div>
         </div>
       </div>

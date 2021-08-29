@@ -18,7 +18,7 @@ import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import Auth from "../utils/auth";
 import { Nav, Modal, Tab } from "react-bootstrap";
-import ShareIcons from "../components/ShareIcons";
+import ShareIcons from "../components/ShareIcons2";
 
 const Vote = () => {
   //const [showModal, setShowModal] = useState(false);
