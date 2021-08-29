@@ -1,6 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 /* eslint-disable import/no-unresolved, import/extensions, import/no-extraneous-dependencies */
-import React, { Component } from "react";
+import React, { useState, Component } from "react";
 import FacebookMessengerShareButton from "../utils/FacebookMessengerShareButton";
 import FacebookMessengerIcon from "../utils/FacebookMessengerIcon";
 import EmailShareButton from "../utils/EmailShareButton";
@@ -8,13 +8,15 @@ import FacebookIcon from "../utils/FacebookIcon";
 import WhatsappIcon from "../utils/WhatsappIcon";
 import WhatsappShareButton from "../utils/WhatsappShareButton";
 import EmailIcon from "../utils/EmailIcon";
-import { Col, Form, Button, Card } from "react-bootstrap";
+import { Col, Form, Button, Card, Alert, Toast } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
 import "./style.css";
 //import exampleImage from "./react-share-pin-example.png";
 
 const ShareIcons = ({ eventid }) => {
+  const [showAlert, setShowAlert] = useState(false);
+
   //const id = useParams();
   //console.log(id.id, "this is the id");
   const props = { eventid };
@@ -32,6 +34,10 @@ const ShareIcons = ({ eventid }) => {
 
     return shareUrl;
   };*/
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(shareUrl);
+    setShowAlert(true);
+  };
   return (
     <div>
       <div className="Demo__container">
@@ -96,17 +102,22 @@ const ShareIcons = ({ eventid }) => {
         <div id="copyButton">
           <h3>
             or
-            <Button
-              id="copy"
-              onClick={() =>
-                //navigator.clipboard.writeText(window.location.href)
-                navigator.clipboard.writeText(shareUrl)
-              }
-            >
+            <Button id="copy" onClick={handleCopyLink}>
               Copy link
             </Button>
           </h3>{" "}
         </div>
+      </div>
+      <div>
+        <Alert
+          dismissible
+          onClose={() => setShowAlert(false)}
+          show={showAlert}
+          variant="success"
+          style={{ textAlign: "center" }}
+        >
+          Link copied to clipboard!{" "}
+        </Alert>
       </div>
     </div>
   );
