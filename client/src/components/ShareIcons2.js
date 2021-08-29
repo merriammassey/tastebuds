@@ -37,6 +37,15 @@ const ShareIcons = ({ eventid }) => {
   const handleCopyLink = () => {
     navigator.clipboard.writeText(shareUrl);
     setShowAlert(true);
+    setTimeout(function () {
+      //document.getElementById("shareModal").style.display = "none";
+      window.location.reload();
+    }, 3000);
+    //try
+    /* var modal = document.getElementById('modal');
+ modal.parentNode.removeChild(modal); */
+    //or
+    //document.getElementById("alert").innerHTML = ''
   };
   return (
     <div>
