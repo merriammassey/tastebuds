@@ -132,6 +132,25 @@ const Vote = () => {
     }
   };
 
+  const handleShare = () => {
+    if (!navigator.share) {
+      setShowModal2(true);
+    } else {
+      navigator
+        .share({
+          url: "",
+          title: "Sharing Cool things",
+          text: "Checkout my really cool website.",
+        })
+        .then(() => {
+          console.log("Shared YEEEE!!!!!");
+        })
+        .catch((error) => {
+          console.log("Sharing Failed");
+        });
+    }
+  };
+
   /*
     let dataPoints = [
       { y: votesCounts.Maskadores, label: "Maskadores" },
@@ -151,7 +170,8 @@ const Vote = () => {
             {/*        {() =>
               shareButton() === true ? ( */}
             <Button
-              onClick={() => setShowModal2(true)}
+              //onClick={() => setShowModal2(true)}
+              onClick={handleShare}
               /* onClick={() =>
                 this.setShowModal({
                   setShowShareModal: true,
