@@ -22,8 +22,8 @@ const ShareIcons = ({ eventid }) => {
   const props = { eventid };
   console.log(eventid);
   const title = "Please complete my TasteBuds poll";
-  //const shareUrl = `https://whereyouwannaeat.herokuapp.com/vote/${eventid}`;
-  console.log(shareUrl);
+  const shareUrl = `https://whereyouwannaeat.herokuapp.com/vote/${eventid}`;
+  //console.log(shareUrl);
   /*  const shareUrl = () => {
     if (window.location.toString().includes("viewevent")) {
       const shareUrl = `https://www.whereyouwannaeat.herokuapp.com/vote/${eventid}`;
