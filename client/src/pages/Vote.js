@@ -340,6 +340,7 @@ const Vote = () => {
               id="shareModal"
               size="lg"
               show={showModal2}
+              eventid={eventId}
               //show={setShowShareModal}
               onHide={() => setShowModal2(false)}
               aria-labelledby="signup-modal"
@@ -351,7 +352,7 @@ const Vote = () => {
                   </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <ShareIcons />
+                  <ShareIcons eventid={eventId} />
                   <Tab.Content>
                     <Tab.Pane eventKey="login"></Tab.Pane>
                     <Tab.Pane eventKey="signup"></Tab.Pane>
