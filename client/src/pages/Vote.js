@@ -150,7 +150,7 @@ const Vote = () => {
           text: "Checkout my TasteBuds poll",
         })
         .then(() => {
-          console.log("Shared YEEEE!!!!!");
+          console.log("Shared!");
         })
         .catch((error) => {
           console.log("Sharing Failed");
