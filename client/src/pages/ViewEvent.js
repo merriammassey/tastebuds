@@ -109,10 +109,10 @@ const ViewEvent = () => {
       ? document.querySelector("link[rel=canonical]").href
       : document.location.href; */
     const text = "Please check out my TasteBuds poll!";
-    if (!navigator.share) {
+    /* if (!navigator.share) {
       //shareDialog.classList.add("is-open");
       setShowModal2(true);
-    } else {
+    } else { */
       navigator
         .share(url, title, text)
         .then(() => {

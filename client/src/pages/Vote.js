@@ -134,7 +134,7 @@ const Vote = () => {
 
   const handleShare = () => {
     const title = document.title;
-    const url = document.location.href;
+    const url = "";
     /* document.querySelector("link[rel=canonical]")
       ? document.querySelector("link[rel=canonical]").href
       : document.location.href; */
