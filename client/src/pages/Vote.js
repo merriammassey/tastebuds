@@ -133,27 +133,30 @@ const Vote = () => {
   };
 
   const handleShare = () => {
-    const title = document.title;
-    const url = "";
+    //const title = document.title;
+    //const url = "";
     /* document.querySelector("link[rel=canonical]")
       ? document.querySelector("link[rel=canonical]").href
       : document.location.href; */
-    const text = "Please check out my TasteBuds poll!";
+    //const text = "Please check out my TasteBuds poll!";
     if (!navigator.share) {
       //shareDialog.classList.add("is-open");
       setShowModal2(true);
     } else {
       navigator
-        .share(url, title, text)
+        .share({
+          url: "",
+          title: "TasteBuds - the restaurant polling app",
+          text: "Checkout my TasteBuds poll",
+        })
         .then(() => {
-          console.log("Shared");
+          console.log("Shared YEEEE!!!!!");
         })
         .catch((error) => {
           console.log("Sharing Failed");
         });
     }
   };
-
   /*
     let dataPoints = [
       { y: votesCounts.Maskadores, label: "Maskadores" },
