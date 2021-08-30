@@ -104,7 +104,7 @@ const ViewEvent = () => {
   console.log(eventData);
   const handleShare = () => {
     const title = document.title;
-    const url = `https://whereyouwannaeat.herokuapp.com/vote/${eventid}`;
+    const url = `https://whereyouwannaeat.herokuapp.com/vote/${eventId}`;
     /* document.querySelector("link[rel=canonical]")
       ? document.querySelector("link[rel=canonical]").href
       : document.location.href; */
@@ -113,15 +113,15 @@ const ViewEvent = () => {
       //shareDialog.classList.add("is-open");
       setShowModal2(true);
     } else { */
-      navigator
-        .share(url, title, text)
-        .then(() => {
-          console.log("Shared");
-        })
-        .catch((error) => {
-          console.log("Sharing Failed");
-        });
-    }
+    navigator
+      .share(url, title, text)
+      .then(() => {
+        console.log("Shared");
+      })
+      .catch((error) => {
+        console.log("Sharing Failed");
+      });
+    //}
   };
   return (
     <>
