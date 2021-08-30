@@ -125,7 +125,9 @@ const ShareIcons = ({ eventid }) => {
           variant="success"
           style={{ textAlign: "center" }}
         >
-          Link copied to clipboard!{" "}
+          Copied to clipboard: <br />
+          "Please check out my TasteBuds poll! <br />
+          `https://whereyouwannaeat.herokuapp.com/vote/${eventid}`{" "}
         </Alert>
       </div>
     </div>

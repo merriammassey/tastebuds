@@ -102,6 +102,27 @@ const ViewEvent = () => {
   //const restaurantList = currentEventData.currentEvent.event.restaurants;
   //console.log(restaurantList);
   console.log(eventData);
+  const handleShare = () => {
+    const title = document.title;
+    const url = `https://whereyouwannaeat.herokuapp.com/vote/${eventid}`;
+    /* document.querySelector("link[rel=canonical]")
+      ? document.querySelector("link[rel=canonical]").href
+      : document.location.href; */
+    const text = "Please check out my TasteBuds poll!";
+    if (!navigator.share) {
+      //shareDialog.classList.add("is-open");
+      setShowModal2(true);
+    } else {
+      navigator
+        .share(url, title, text)
+        .then(() => {
+          console.log("Shared");
+        })
+        .catch((error) => {
+          console.log("Sharing Failed");
+        });
+    }
+  };
   return (
     <>
       <div id="homephoto">
@@ -123,7 +144,8 @@ const ViewEvent = () => {
                   variant="success"
                   size="lg"
                   id="shareButton"
-                  onClick={() => setShowModal2(true)}
+                  //onClick={() => setShowModal2(true)}
+                  onClick={handleShare}
                 >
                   Share again
                 </Button>
@@ -140,7 +162,9 @@ const ViewEvent = () => {
                   variant="success"
                   size="lg"
                   id="shareButton"
-                  onClick={() => setShowModal2(true)}
+                  onClick={handleShare}
+
+                  //onClick={() => setShowModal2(true)}
                 >
                   Share again
                 </Button>

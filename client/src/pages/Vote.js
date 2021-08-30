@@ -134,25 +134,19 @@ const Vote = () => {
 
   const handleShare = () => {
     const title = document.title;
-    const url = document.querySelector("link[rel=canonical]")
+    const url = document.location.href;
+    /* document.querySelector("link[rel=canonical]")
       ? document.querySelector("link[rel=canonical]").href
-      : document.location.href;
+      : document.location.href; */
     const text = "Please check out my TasteBuds poll!";
     if (!navigator.share) {
       //shareDialog.classList.add("is-open");
       setShowModal2(true);
     } else {
       navigator
-        .share(
-          url,
-          title,
-          text
-          /* url: "",
-          title: "Sharing Cool things",
-          text: "Checkout my really cool website.", */
-        )
+        .share(url, title, text)
         .then(() => {
-          console.log("Shared YEEEE!!!!!");
+          console.log("Shared");
         })
         .catch((error) => {
           console.log("Sharing Failed");
