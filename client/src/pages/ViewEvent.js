@@ -109,19 +109,23 @@ const ViewEvent = () => {
       ? document.querySelector("link[rel=canonical]").href
       : document.location.href; */
     const text = "Please check out my TasteBuds poll!";
-    /* if (!navigator.share) {
+    if (!navigator.share) {
       //shareDialog.classList.add("is-open");
       setShowModal2(true);
-    } else { */
-    navigator
-      .share(url, title, text)
-      .then(() => {
-        console.log("Shared");
-      })
-      .catch((error) => {
-        console.log("Sharing Failed");
-      });
-    //}
+    } else {
+      navigator
+        .share({
+          url: `https://whereyouwannaeat.herokuapp.com/vote/${eventId}`,
+          title: "TasteBuds - the restaurant polling app",
+          text: "Checkout my TasteBuds poll",
+        })
+        .then(() => {
+          console.log("Shared");
+        })
+        .catch((error) => {
+          console.log("Sharing Failed");
+        });
+    }
   };
   return (
     <>
