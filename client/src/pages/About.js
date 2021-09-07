@@ -84,7 +84,7 @@ const About = () => {
   });
   return (
     <Carousel>
-      <Carousel.Item interval={0}>
+      <Carousel.Item interval={2500}>
         <div id="slide">
           <Carousel.Caption>
             <h3 id="iconText">Get more of this</h3>
@@ -93,7 +93,7 @@ const About = () => {
         </div>
       </Carousel.Item>
 
-      <Carousel.Item interval={0}>
+      <Carousel.Item interval={2500}>
         {/*  <img
           className="d-block w-100"
           src="holder.js/800x400?text=Second slide&bg=282c34"
@@ -114,7 +114,7 @@ const About = () => {
         </div>
       </Carousel.Item>
 
-      <Carousel.Item interval={0}>
+      <Carousel.Item interval={4000}>
         <div id="icons">
           {/* <Container className="justify-content-md-center"> */}
           {/* <Row className="justify-content-md-center"> */}
@@ -149,7 +149,7 @@ const About = () => {
         </Carousel.Caption>
       </Carousel.Item>
 
-      <Carousel.Item interval={100000}>
+      <Carousel.Item interval={2500}>
         {/* <Container className="justify-content-md-center"> */}
         {/* <Row className="justify-content-md-center"> */}
         <div className="start">
