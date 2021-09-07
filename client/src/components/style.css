@@ -42,13 +42,6 @@
   margin-bottom: 5%;
 }
 
-.iconText {
-  color: #343a40;
-  margin-right: 10%;
-  margin-left: 10%;
-  font-family: "Amatic SC";
-  font-size: 25pt;
-}
 /* Share modal */
 .Demo__container {
   display: flex;

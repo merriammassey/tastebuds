@@ -19,7 +19,6 @@ export const searchYelp = (locationInput, termInput) => {
         //required authorization format from API
         headers: {
           //to get the API from the .env file use process.env.{variable name}
-
           Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`,
         },
         //option params passed to API call to retrieve only breakfast and lunch spots

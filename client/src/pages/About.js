@@ -1,17 +1,18 @@
 import React from "react";
-import ReactDOM from "react-dom";
-//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//import { faUtensils } from "@fortawesome/free-solid-svg-icons";
-import { Col, Container, Row } from "react-bootstrap";
-//import { faUsers } from "@fortawesome/free-solid-svg-icons";
-//import { faPoll } from "@fortawesome/free-solid-svg-icons";
+import { Col, Container, Row, Carousel } from "react-bootstrap";
 import logo from "../assets/images/tblogo.png";
 import utensils from "../assets/images/utensils.png";
 import friends from "../assets/images/friends.png";
 import poll from "../assets/images/poll.png";
 import { useSpring, animated, set, config, flip } from "react-spring";
 import "../App.css";
-
+import Typing from "../components/Typing";
+import brunch from "../assets/images/brunch.jpg";
+import text1 from "../assets/images/text1.png";
+import text2b from "../assets/images/text2b.png";
+import texts from "../assets/images/texts.png";
+import { Button } from "react-bootstrap";
+import { Link, useHistory } from "react-router-dom";
 //import { makeStyles } from "@material-ui/core/styles";
 /* const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,8 +23,6 @@ import "../App.css";
 })); */
 
 const About = () => {
-  //const utensils = <FontAwesomeIcon icon={faUtensils} />;
-  //const classes = useStyles();
   const intro = useSpring({
     to: { opacity: 0, paddingRight: 1 },
     from: { opacity: 1, paddingRight: 0 },
@@ -83,64 +82,97 @@ const About = () => {
     //config: config.molasses,
     onRest: () => set(!flip),
   });
-  //ReactDOM.render(utensils, document.body);
   return (
-    <div id="aboutBox">
-      {/* INTRO */}
-      <animated.div style={intro}>
-        {/* <img src={logo} id="logo" alt="logo" className="logoLarge" /> */}
-        <br />
-        <h1 id="b" className="steps">
-          In three steps...
-        </h1>
-      </animated.div>
+    <Carousel>
+      <Carousel.Item interval={0}>
+        <div id="slide">
+          <Carousel.Caption>
+            <h3 id="iconText">Get more of this</h3>
+          </Carousel.Caption>
+          <img className="d-block w-100" id="brunchdate" />
+        </div>
+      </Carousel.Item>
 
-      <animated.div style={intro}>
-        {/* <animated.div style={close}>
-        <img src={logo} id="logo" alt="logo" className="logoLarge" />
-        <h1 id="b">TasteBuds gives you more of this...</h1>
-      </animated.div> */}
+      <Carousel.Item interval={0}>
+        {/*  <img
+          className="d-block w-100"
+          src="holder.js/800x400?text=Second slide&bg=282c34"
+          alt="Second slide"
+        /> */}
+        <div id="slide">
+          <Carousel.Caption>
+            <h3>with less of this</h3>
+            {/* <p>Where do you want to eat?</p>
+          <p>I don't know, what about you?</p> */}
+          </Carousel.Caption>
+          <img
+            className="d-block w-100"
+            id="textimage"
+            src={text2b}
+            alt="text asking where you want to eat"
+          />
+        </div>
+      </Carousel.Item>
 
+      <Carousel.Item interval={0}>
         <div id="icons">
           {/* <Container className="justify-content-md-center"> */}
           {/* <Row className="justify-content-md-center"> */}
           <div className="icon">
-            <animated.div style={select}>
-              <img src={utensils} id="icon" alt="logo" className="icon" />{" "}
-              <h4 className="iconText">
-                Select <br /> restaurants
-              </h4>{" "}
-            </animated.div>
+            {/* <animated.div style={select}> */}
+            <img src={utensils} id="icon1" alt="logo" className="icon" />
+            <h4 className="iconText">
+              Select <br /> restaurants
+            </h4>{" "}
+            {/* </animated.div> */}
           </div>
           <div className="icon">
-            <animated.div style={invite}>
-              <img src={friends} id="icon" alt="logo" className="icon" />
-              <h4 className="iconText">
-                Invite friends <br /> to vote
-              </h4>{" "}
-            </animated.div>
+            {/* <animated.div style={invite}> */}
+            <img src={friends} id="icon" alt="logo" className="icon" />
+            <h4 className="iconText">Invite friends to vote</h4>{" "}
+            {/* </animated.div> */}
           </div>
           <div className="icon">
-            <animated.div style={results}>
-              <img src={poll} id="icon" alt="logo" className="icon" />
+            {/* <animated.div style={results}> */}
+            <img src={poll} id="icon" alt="logo" className="icon" />
 
-              <h4 className="iconText">
-                See poll
-                <br /> results
-              </h4>
-            </animated.div>
+            <h4 className="iconText">See poll results</h4>
+            {/* </animated.div> */}
           </div>
         </div>
-      </animated.div>
-      <animated.div style={close}>
-        <div id="brunch" alt="brunch date" />
 
-        <br />
-        <h1 id="b" className="steps">
-          TasteBuds gives you more of this...
-        </h1>
-      </animated.div>
-    </div>
+        <Carousel.Caption>
+          <h3>in just 3 steps</h3>
+          {/*  <p>
+            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+          </p> */}
+        </Carousel.Caption>
+      </Carousel.Item>
+
+      <Carousel.Item interval={100000}>
+        {/* <Container className="justify-content-md-center"> */}
+        {/* <Row className="justify-content-md-center"> */}
+        <div className="start">
+          <Link to="/">
+            <Button
+              id="startbutton"
+              type="submit"
+              variant="success"
+              size="lg"
+              style={invite}
+            >
+              Get started now
+            </Button>
+          </Link>
+        </div>
+        <Carousel.Caption>
+          {/* <h3>in just 3 steps</h3> */}
+          {/*  <p>
+            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+          </p> */}
+        </Carousel.Caption>
+      </Carousel.Item>
+    </Carousel>
   );
 };
 

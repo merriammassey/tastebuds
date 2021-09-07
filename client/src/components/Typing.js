@@ -4,12 +4,12 @@ import ReactTypingEffect from "react-typing-effect";
 const Typing = () => {
   return (
     <>
-      <ReactTypingEffect text={["Hello.", "World!"]} />
+      {/* <ReactTypingEffect text={["Hello.", "World!"]} /> */}
 
       <br />
 
       <ReactTypingEffect
-        text={["coffee", "Mexican", "ice cream", "Thai"]}
+        text={["Where do you wanna eat?"]}
         cursorRenderer={(cursor) => <h1>{cursor}</h1>}
         displayTextRenderer={(text, i) => {
           return (

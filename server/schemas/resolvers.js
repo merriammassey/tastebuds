@@ -10,9 +10,12 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id })
-          .select("-__v -password")
-          .populate("events");
+        const userData = await User.findOne({ _id: context.user._id });
+        //.select("-__v -password")
+        //.populate("events")
+        //.populate("restaurants");
+        //.populate("votes");
+
         //.sort({ createdAt: -1 });
         //.sort({ createdAt: -1 });
         //.populate("restaurants");
@@ -21,7 +24,7 @@ const resolvers = {
         //.sort({ createdAt: -1 });
         //userData.events.sort({ createdAt: -1 });
         userData.events.sort((a, b) => b.createdAt - a.createdAt);
-        //console.log(userData);
+        console.log(userData);
         return userData;
         //return userData.events.sort((a, b) => b.createdAt - a.createdAt);
       }
