@@ -100,7 +100,7 @@
 }
 #slide {
   background-color: #343a40;
-  height: 75vh;
+  height: 85vh;
 }
 
 .btn-success {
@@ -129,6 +129,11 @@
 }
 
 @media screen and (max-width: 575px) {
+  #slide {
+    background-color: #343a40;
+    height: 75vh;
+  }
+
   #icons {
     flex-direction: row;
     display: flex;

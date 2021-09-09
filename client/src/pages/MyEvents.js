@@ -82,7 +82,7 @@ const MyEvents = () => {
                 // console.log(event.restaurants[0]);
                 return (
                   <Card key={event._id}>
-                    <Card.Header as="h5">{event.title}</Card.Header>
+                    <Card.Header as="h4">{event.title}</Card.Header>
                     <Card.Body>
                       <Card.Title></Card.Title>
 
@@ -90,23 +90,6 @@ const MyEvents = () => {
                       <Card.Text>{event.note}</Card.Text>
                       {/* <Card.Text>{event.restaurants}</Card.Text> */}
 
-                      {/* <Card.Text>
-                        Current Vote Count:{" "}
-                        {() => {
-                          let i = 0;
-                          let tempArr = [];
-                          while (i < event.restaurants.length) {
-                            tempArr.push(event.restaurants[i].votes);
-                            //console.log(tempArr);
-                            const flat = tempArr.flat(Infinity);
-                            //sum += eventData.restaurants[i].votes.length;
-                            //let array = eventData.restaurants[i].votes;
-                            //var reduce = tempArr.reduce((sum, array) => sum + array.length, 0);
-                            i++;
-                            return flat.length;
-                          }
-                        }} 
-                      </Card.Text>*/}
                       <Link to={`/viewevent/${event._id}`}>
                         <Button id="myEventButtons" variant="success">
                           View Event
