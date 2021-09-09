@@ -1,5 +1,14 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Anton&display=swap"); */
 @import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap");
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Amatic SC";
+}
 #tb {
   font-family: "Amatic SC";
   font-size: 50pt;

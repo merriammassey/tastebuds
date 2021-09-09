@@ -79,7 +79,7 @@
   padding-top: 10%;
   background-color: #343a40;
   background-size: cover;
-  height: 85vh;
+  height: 75vh;
 }
 
 #textimage {
@@ -100,7 +100,7 @@
 }
 #slide {
   background-color: #343a40;
-  height: 85vh;
+  height: 75vh;
 }
 
 .btn-success {
@@ -152,7 +152,7 @@
   }
   #brunchdate {
     background-image: url("./assets/images/brunchvertical.png");
-    height: 65vh;
+    height: 60vh;
     background-color: #343a40;
     border-color: #343a40;
   }
