@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SearchRestaurants from "./SearchRestaurants";
 import "../App.css";
 import logo from "../assets/images/tblogo.png";
+import { Link, useHistory } from "react-router-dom";
 
 const Home = () => {
   const [selectedRestaurants, setSelectedRestaurants] = useState([]);
@@ -18,6 +19,9 @@ const Home = () => {
               Welcome to <br /> <span id="t">Taste</span>
               <span id="b">Buds</span>{" "}
             </h3>
+            <Link to="/about">
+              <h3 style={{ color: "#00a7c7" }}>New here? Check this out.</h3>
+            </Link>
             <SearchRestaurants
               selectedRestaurants={selectedRestaurants}
               setSelectedRestaurants={setSelectedRestaurants}
