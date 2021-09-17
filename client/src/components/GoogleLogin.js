@@ -2,7 +2,7 @@ import React from "react";
 
 import { GoogleLogin } from "react-google-login";
 // refresh token
-import { refreshTokenSetup } from "../utils/refreshToken";
+//import { refreshTokenSetup } from "../utils/refreshToken";
 
 const clientId =
   "707788443358-u05p46nssla3l8tmn58tpo9r5sommgks.apps.googleusercontent.com";
@@ -13,7 +13,7 @@ function Login() {
     alert(
       `Logged in successfully welcome ${res.profileObj.name} 😍. \n See console for full profile object.`
     );
-    refreshTokenSetup(res);
+    //refreshTokenSetup(res);
     //Send the tokenId from client to server
   };
 
