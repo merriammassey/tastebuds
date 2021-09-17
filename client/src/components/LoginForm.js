@@ -121,7 +121,7 @@ const LoginForm = () => {
           Submit
         </Button>
       </Form>
-      <GoogleLogin />
+      {/* <GoogleLogin /> */}
     </>
   );
 };

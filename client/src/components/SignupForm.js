@@ -159,7 +159,7 @@ const SignupForm = () => {
           Return to your Event{" "}
         </Button> */}
       </Form>
-      <GoogleLogin />
+      {/* <GoogleLogin /> */}
     </>
   );
 };
