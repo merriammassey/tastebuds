@@ -1,6 +1,8 @@
 // see SignupForm.js for comments
 import React, { useState, useEffect } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
+import GoogleLogin from "./GoogleLogin";
+import GoogleLogout from "./GoogleLogout";
 
 //import { loginUser } from "../utils/API";
 import Auth from "../utils/auth";
@@ -119,6 +121,7 @@ const LoginForm = () => {
           Submit
         </Button>
       </Form>
+      <GoogleLogin />
     </>
   );
 };

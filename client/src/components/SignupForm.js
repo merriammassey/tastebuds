@@ -6,6 +6,8 @@ import Auth from "../utils/auth";
 //add useMutation
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
+import GoogleLogin from "./GoogleLogin";
+import GoogleLogout from "./GoogleLogout";
 
 const SignupForm = () => {
   const [addUser, { error }] = useMutation(ADD_USER);
@@ -157,6 +159,7 @@ const SignupForm = () => {
           Return to your Event{" "}
         </Button> */}
       </Form>
+      <GoogleLogin />
     </>
   );
 };
