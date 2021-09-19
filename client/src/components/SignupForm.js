@@ -184,10 +184,11 @@ const SignupForm = () => {
         render={(renderProps) => (
           <GoogleButton
             // className={classes.googleButton}
+            clientId={process.env.GOOGLE_CLIENT_ID}
             color="primary"
             fullWidth
             onClick={renderProps.onClick}
-            disabled={renderProps.disabled}
+            //disabled={renderProps.disabled}
             startIcon={<Icon />}
             variant="contained"
             style={{ width: "100%" }}

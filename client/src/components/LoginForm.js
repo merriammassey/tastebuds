@@ -171,6 +171,7 @@ const LoginForm = () => {
         render={(renderProps) => (
           <GoogleButton
             // className={classes.googleButton}
+            clientId={process.env.GOOGLE_CLIENT_ID}
             color="primary"
             fullWidth
             onClick={renderProps.onClick}
