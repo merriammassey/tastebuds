@@ -167,14 +167,14 @@ const LoginForm = () => {
         </Button>
       </Form>
       <GoogleLogin
-        clientId={`${process.env.GOOGLE_CLIENT_ID}`}
+        clientId={process.env.GOOGLE_CLIENT_ID}
         render={(renderProps) => (
           <GoogleButton
             // className={classes.googleButton}
             color="primary"
             fullWidth
             onClick={renderProps.onClick}
-            disabled={renderProps.disabled}
+            //disabled={renderProps.disabled}
             startIcon={<Icon />}
             variant="contained"
             style={{ width: "100%" }}

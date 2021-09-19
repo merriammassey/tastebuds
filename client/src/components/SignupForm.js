@@ -180,7 +180,7 @@ const SignupForm = () => {
         </Button> */}
       </Form>
       <GoogleLogin
-        clientId={`${process.env.GOOGLE_CLIENT_ID}`}
+        clientId={process.env.GOOGLE_CLIENT_ID}
         render={(renderProps) => (
           <GoogleButton
             // className={classes.googleButton}
