@@ -391,19 +391,6 @@ const Vote = () => {
                         handleModalClose={() => setShowModal1(false)}
                       />
                     </Tab.Pane>
-                    {/*   {token ? (
-                            <Button
-                              type="submit"
-                              variant="success"
-                              size="lg"
-                              onClick={() => setShowModal(false)}
-                            >
-                              {" "}
-                              Return to your Event{" "}
-                            </Button>
-                          ) : (
-                            <div></div>
-                          )} */}
                   </Tab.Content>
                 </Modal.Body>
               </Tab.Container>

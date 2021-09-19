@@ -184,7 +184,7 @@ const SignupForm = () => {
       <GoogleLogin
         clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
         render={(renderProps) => (
-          <button
+          <GoogleButton
             // className={classes.googleButton}
             clientId={clientId}
             color="primary"
@@ -196,7 +196,7 @@ const SignupForm = () => {
             style={{ width: "100%" }}
           >
             Google Sign In
-          </button>
+          </GoogleButton>
         )}
         onSuccess={googleSuccess}
         onFailure={googleError}

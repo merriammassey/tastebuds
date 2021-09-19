@@ -167,6 +167,7 @@ and ...               </h5> */}
 
                   {/* set modal data up */}
                   <Modal
+                    //backdrop={false}
                     id="eventModal"
                     size="lg"
                     show={showModal}

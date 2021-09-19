@@ -37,6 +37,7 @@ class AuthService {
     localStorage.setItem("id_token", idToken);
     if (window.location.toString().includes("event")) {
       document.getElementById("eventModal").style.display = "none";
+      //document.getElementById("backdrop").style.display = "none"; //event.js line 175
     } else {
       window.location.reload();
     }
