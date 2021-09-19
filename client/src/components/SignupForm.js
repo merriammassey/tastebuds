@@ -11,7 +11,8 @@ import Icon from "./Icon";
 //import { useDispatch} from
 import { useStoreContext } from "../utils/GlobalState";
 import { useHistory } from "react-router-dom";
-
+import GoogleButton from "react-google-button";
+require("dotenv").config();
 const SignupForm = () => {
   const [addUser, { error }] = useMutation(ADD_USER);
   //const [showModal, setShowModal] = useState();
@@ -163,6 +164,7 @@ const SignupForm = () => {
           }
           type="submit"
           variant="success"
+          style={{ marginBottom: "10px" }}
         >
           Submit
         </Button>
@@ -177,29 +179,10 @@ const SignupForm = () => {
           Return to your Event{" "}
         </Button> */}
       </Form>
-      {/* <div
-        id="g_id_onload"
-        data-client_id="207623744067-jagjg8vmgcnql470f7qgit4hq3c1pe9o.apps.googleusercontent.com"
-        data-context="signin"
-        data-ux_mode="popup"
-        data-login_uri="http://localhost:3000/"
-        data-auto_prompt="false"
-      ></div>
-
-      <div
-        class="g_id_signin"
-        data-type="standard"
-        data-shape="rectangular"
-        data-theme="outline"
-        data-text="signin_with"
-        data-size="large"
-        data-logo_alignment="left"
-      ></div>
- */}
       <GoogleLogin
-        //client id here
+        clientId={`${process.env.GOOGLE_CLIENT_ID}`}
         render={(renderProps) => (
-          <Button
+          <GoogleButton
             // className={classes.googleButton}
             color="primary"
             fullWidth
@@ -207,9 +190,10 @@ const SignupForm = () => {
             disabled={renderProps.disabled}
             startIcon={<Icon />}
             variant="contained"
+            style={{ width: "100%" }}
           >
             Google Sign In
-          </Button>
+          </GoogleButton>
         )}
         onSuccess={googleSuccess}
         onFailure={googleError}

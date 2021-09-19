@@ -1,16 +1,24 @@
 // see SignupForm.js for comments
 import React, { useState, useEffect } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
-import GoogleLogin from "./GoogleLogin";
-import GoogleLogout from "./GoogleLogout";
+
+import GoogleButton from "react-google-button";
+import { GoogleLogin } from "react-google-login";
 
 //import { loginUser } from "../utils/API";
 import Auth from "../utils/auth";
 //add useMutation
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../utils/mutations";
+import { ADD_USER } from "../utils/mutations";
+import Icon from "./Icon";
+
 const axios = require("axios").default;
+require("dotenv").config();
+
 const LoginForm = () => {
+  const [addUser] = useMutation(ADD_USER);
+
   //const [showModal, setShowModal] = useState();
 
   //const [userFormData, setUserFormData] = useState(variant ? true : false);
@@ -84,7 +92,31 @@ const LoginForm = () => {
       password: "",
     });
   };
+  const googleSuccess = async (res) => {
+    console.log("success", res);
+    const result = res?.profileObj;
+    const token = res?.tokenId;
+    //get a username and email
+    const username = res?.profileObj.givenName;
+    const email = res?.profileObj.email;
+    const password = res?.profileObj.googleId;
+    try {
+      //dispatch({ type: "AUTH", data: { result, token } });
+      //make a
+      //history.push("/");
+      const { data } = await addUser({
+        variables: { username, email, password },
+      });
 
+      //added
+      Auth.login(data.addUser.token);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const googleError = (error) =>
+    console.log(error, "Google Sign In was unsuccessful. Try again later");
   return (
     <>
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
@@ -129,19 +161,31 @@ const LoginForm = () => {
           disabled={!(userFormData.email && userFormData.password)}
           type="submit"
           variant="success"
+          style={{ marginBottom: "10px" }}
         >
           Submit
         </Button>
       </Form>
-      <button
-        //disabled={!googleOauthUrl}
-        onClick={() => {
-          window.location.href = googleOauthUrl;
-        }}
-      >
-        Log in with Google
-      </button>
-      {/* <GoogleLogin /> */}
+      <GoogleLogin
+        clientId={`${process.env.GOOGLE_CLIENT_ID}`}
+        render={(renderProps) => (
+          <GoogleButton
+            // className={classes.googleButton}
+            color="primary"
+            fullWidth
+            onClick={renderProps.onClick}
+            disabled={renderProps.disabled}
+            startIcon={<Icon />}
+            variant="contained"
+            style={{ width: "100%" }}
+          >
+            Google Sign In
+          </GoogleButton>
+        )}
+        onSuccess={googleSuccess}
+        onFailure={googleError}
+        cookiePolicy="single_host_origin"
+      />{" "}
     </>
   );
 };
