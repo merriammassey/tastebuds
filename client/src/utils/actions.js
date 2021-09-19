@@ -8,3 +8,4 @@ export const UPDATE_EVENT_ID = "UPDATE_EVENT_ID";
 export const UPDATE_EVENTDATA = "UPDATE_EVENTDATA";
 export const UPDATE_NAV = "UPDATE_NAV";
 export const SAVE_USERDATA = "SAVE_USERDATA";
+export const AUTH = "AUTH";

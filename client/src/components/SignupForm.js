@@ -6,14 +6,18 @@ import Auth from "../utils/auth";
 //add useMutation
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
-import GoogleLogin from "./GoogleLogin";
-import GoogleLogout from "./GoogleLogout";
+import { GoogleLogin } from "react-google-login";
+import Icon from "./Icon";
+//import { useDispatch} from
+import { useStoreContext } from "../utils/GlobalState";
+import { useHistory } from "react-router-dom";
 
 const SignupForm = () => {
   const [addUser, { error }] = useMutation(ADD_USER);
   //const [showModal, setShowModal] = useState();
   //const [showReturn, setShowReturn] = useState(false);
-
+  const [state, dispatch] = useStoreContext();
+  const history = useHistory();
   // set initial form state
   const [userFormData, setUserFormData] = useState({
     username: "",
@@ -56,17 +60,6 @@ const SignupForm = () => {
       const { data } = await addUser({
         variables: { ...userFormData },
       });
-      /* if (!response.ok) {
-        throw new Error("something went wrong!");
-      }
-
-      const { token, user } = await response.json();
-      console.log(user);
-      Auth.login(token);
-    } catch (err) {
-      console.error(err);
-      setShowAlert(true);
-    } */
 
       //added
       Auth.login(data.addUser.token);
@@ -80,6 +73,31 @@ const SignupForm = () => {
     });
   };
 
+  const googleSuccess = async (res) => {
+    console.log("success", res);
+    const result = res?.profileObj;
+    const token = res?.tokenId;
+    //get a username and email
+    const username = res?.profileObj.givenName;
+    const email = res?.profileObj.email;
+    const password = res?.profileObj.googleId;
+    try {
+      //dispatch({ type: "AUTH", data: { result, token } });
+      //make a
+      //history.push("/");
+      const { data } = await addUser({
+        variables: { username, email, password },
+      });
+
+      //added
+      Auth.login(data.addUser.token);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const googleError = (error) =>
+    console.log(error, "Google Sign In was unsuccessful. Try again later");
   return (
     <>
       {/* This is needed for the validation functionality above */}
@@ -159,7 +177,44 @@ const SignupForm = () => {
           Return to your Event{" "}
         </Button> */}
       </Form>
-      {/* <GoogleLogin /> */}
+      {/* <div
+        id="g_id_onload"
+        data-client_id="207623744067-jagjg8vmgcnql470f7qgit4hq3c1pe9o.apps.googleusercontent.com"
+        data-context="signin"
+        data-ux_mode="popup"
+        data-login_uri="http://localhost:3000/"
+        data-auto_prompt="false"
+      ></div>
+
+      <div
+        class="g_id_signin"
+        data-type="standard"
+        data-shape="rectangular"
+        data-theme="outline"
+        data-text="signin_with"
+        data-size="large"
+        data-logo_alignment="left"
+      ></div>
+ */}
+      <GoogleLogin
+        //client id here
+        render={(renderProps) => (
+          <Button
+            // className={classes.googleButton}
+            color="primary"
+            fullWidth
+            onClick={renderProps.onClick}
+            disabled={renderProps.disabled}
+            startIcon={<Icon />}
+            variant="contained"
+          >
+            Google Sign In
+          </Button>
+        )}
+        onSuccess={googleSuccess}
+        onFailure={googleError}
+        cookiePolicy="single_host_origin"
+      />{" "}
     </>
   );
 };

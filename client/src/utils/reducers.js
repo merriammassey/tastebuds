@@ -8,6 +8,7 @@ import {
   UPDATE_EVENTDATA,
   UPDATE_NAV,
   SAVE_USERDATA,
+  AUTH,
 } from "./actions";
 import { useReducer } from "react";
 
@@ -62,6 +63,10 @@ export const reducer = (state, action) => {
         ...state,
         token: action.token,
       };
+    case AUTH:
+      //console.log(action?.data);
+      localStorage.setItem("profile", JSON.stringify({ ...action?.data }));
+      return { ...state, authData: action?.data };
     //if it's none of these actions, do not update state
     default:
       return state;

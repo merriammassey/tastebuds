@@ -44,15 +44,33 @@ const resolvers = {
     },
   },
   Mutation: {
-    addUser: async (parent, args) => {
-      const user = await User.create(args);
+    addUser: async (parent, { email, password, username }) => {
+      //check to see if user exists
+      const existingUser = await User.findOne({ email });
+      console.log(existingUser);
+      if (existingUser) {
+        /* throw new AuthenticationError(
+          "Account already exists. Please sign in."
+        ); */
+        //login
+        const correctPw = await existingUser.isCorrectPassword(password);
+        if (!correctPw) {
+          throw new AuthenticationError("Incorrect credentials");
+        }
+        const token = signToken(existingUser);
+        return { token, existingUser };
+      }
+      //if not, create one
+      const user = await User.create({ email, password, username });
       const token = signToken(user);
       return { token, user };
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
       if (!user) {
-        throw new AuthenticationError("Incorrect credentials");
+        throw new AuthenticationError(
+          "No account exists for this email. Please sign up."
+        );
       }
       const correctPw = await user.isCorrectPassword(password);
       if (!correctPw) {

@@ -83,6 +83,8 @@ function App() {
               <Route exact path="/vote/:id" component={Vote} />
               <Route exact path="/viewevent/:id" component={ViewEvent} />
               <Route exact path="/thankyou" component={ThankYou} />
+              {/* <Route exact path="/auth/google/url" /> */}
+              <Route path="/auth" exact component={Signup} />
               <Route exact path="/about" component={About} />
             </Switch>
           </StoreProvider>

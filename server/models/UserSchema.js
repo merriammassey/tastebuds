@@ -18,7 +18,6 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      required: true,
     },
     events: [eventSchema],
     /* // set to be an array of data that adheres to the bookSchema

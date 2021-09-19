@@ -9,7 +9,7 @@ import Auth from "../utils/auth";
 //add useMutation
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../utils/mutations";
-
+const axios = require("axios").default;
 const LoginForm = () => {
   //const [showModal, setShowModal] = useState();
 
@@ -18,7 +18,19 @@ const LoginForm = () => {
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   //const [showReturn, setShowReturn] = useState(false);
-
+  const [googleOauthUrl, setGoogleOauthUrl] = useState("");
+  useEffect(() => {
+    const loadOauthUrl = async () => {
+      try {
+        const response = await axios.get("/auth/google/url");
+        const { url } = response.data;
+        setGoogleOauthUrl(url);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    loadOauthUrl();
+  }, []);
   const [login, { error }] = useMutation(LOGIN);
 
   useEffect(() => {
@@ -121,6 +133,14 @@ const LoginForm = () => {
           Submit
         </Button>
       </Form>
+      <button
+        //disabled={!googleOauthUrl}
+        onClick={() => {
+          window.location.href = googleOauthUrl;
+        }}
+      >
+        Log in with Google
+      </button>
       {/* <GoogleLogin /> */}
     </>
   );
