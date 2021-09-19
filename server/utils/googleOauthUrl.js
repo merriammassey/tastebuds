@@ -1,4 +1,4 @@
-import { oauthClient } from "./oauthClient";
+/* import { oauthClient } from "./oauthClient";
 export const googleOauthUrl = () => {
   const scopes = [
     "https://www.googleapis.com/auth/userinfo.email",
@@ -11,3 +11,4 @@ export const googleOauthUrl = () => {
     scope: scopes,
   });
 };
+ */

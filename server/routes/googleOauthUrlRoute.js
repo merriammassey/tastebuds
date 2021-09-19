@@ -1,4 +1,4 @@
-import { googleOauthUrl } from "../utils/googleOauthUrl";
+/* import { googleOauthUrl } from "../utils/googleOauthUrl";
 
 export const googleOauthUrlRoute = {
   path: "/auth/google/url",
@@ -9,4 +9,4 @@ export const googleOauthUrlRoute = {
     const url = googleOauthUrl();
     res.status(200).json({ url });
   },
-};
+}; */

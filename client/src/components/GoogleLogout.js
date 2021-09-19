@@ -1,4 +1,4 @@
-import React from "react";
+/* import React from "react";
 import { GoogleLogout } from "react-google-login";
 
 const clientId = "";
@@ -20,3 +20,4 @@ function Logout() {
 }
 
 export default Logout;
+ */

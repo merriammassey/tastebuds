@@ -13,7 +13,9 @@ import { useStoreContext } from "../utils/GlobalState";
 import { useHistory } from "react-router-dom";
 import GoogleButton from "react-google-button";
 require("dotenv").config();
+
 const SignupForm = () => {
+  const clientId = process.env.GOOGLE_CLIENT_ID;
   const [addUser, { error }] = useMutation(ADD_USER);
   //const [showModal, setShowModal] = useState();
   //const [showReturn, setShowReturn] = useState(false);
@@ -184,7 +186,7 @@ const SignupForm = () => {
         render={(renderProps) => (
           <GoogleButton
             // className={classes.googleButton}
-            clientId={process.env.GOOGLE_CLIENT_ID}
+            clientId={clientId}
             color="primary"
             fullWidth
             onClick={renderProps.onClick}
