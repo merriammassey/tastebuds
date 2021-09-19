@@ -2,7 +2,15 @@
 <html lang="en">
   <head>
     <!-- <script src="https://accounts.google.com/gsi/client" async defer></script> -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      window.onload = function () {
+        google.accounts.id.initialize({
+          client_id: `${process.env.GOOGLE_CLIENT_ID}`,
+          callback: handleCredentialResponse
+        });
+        google.accounts.id.prompt();
+      };
+    </script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <meta name="google-site-verification" content="522x_OvvgbKa5kcDy74HV-fQYwqy5IwJaFL2giLBPLY" />
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
