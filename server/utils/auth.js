@@ -24,43 +24,36 @@ module.exports = {
   authMiddleware: function ({ req }) {
     //allows token to be sent via req.body, req.query or headers
     let token = req.body.token || req.query.token || req.headers.authorization;
-
+    if (!token) {
+      return req;
+    }
     //seperate "Bearer" from "<tokenvalue>"
     if (req.headers.authorization) {
       token = token.split(" ").pop().trim();
     }
-    //determine if token is ours or 3rd party
-    const isCustomAuth = token.length < 500; //added
 
-    // if no token, return request oject as is
-    if (!token) {
-      return req;
-    }
-    //We don't want an error thrown on every request, though. Users with an invalid token should still be able to ....
-    //Thus, we wrapped the verify() method in a try...catch statement to mute the
-    try {
-      //if it's custom token - added
-      if (token && isCustomAuth) {
-        //decode
+    if (token.length < 500) {
+      try {
         const { data } = jwt.verify(token, secret, { maxAge: expiration });
         //attach user data to request object
         req.user = data;
-      } else {
-        //added
-        //store id if it's google token
+      } catch {
+        console.log("Invalid token");
+        return res.status(400).json({ message: "invalid token!" });
+      }
+    } else {
+      try {
         let decodedData;
         decodedData = jwt.decode(token);
         console.log("decodedData", decodedData);
-        //const { data } = jwt.verify(token, secret, { maxAge: expiration });
 
         //get user id (sub is google's name for id)
         console.log(decodedData);
-        req.user = decodedData?.sub; //or req.userId
-        //req.user = data;
+        req.user = decodedData?.sub;
+      } catch {
+        console.log("Invalid token");
+        return res.status(400).json({ message: "invalid token!" });
       }
-    } catch {
-      console.log("Invalid token");
-      return res.status(400).json({ message: "invalid token!" });
     }
 
     // return updated request object
