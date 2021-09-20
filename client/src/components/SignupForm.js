@@ -15,7 +15,7 @@ import GoogleButton from "react-google-button";
 require("dotenv").config();
 
 const SignupForm = () => {
-  const clientId = process.env.GOOGLE_CLIENT_ID;
+  const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
   const [addUser, { error }] = useMutation(ADD_USER);
   //const [showModal, setShowModal] = useState();
   //const [showReturn, setShowReturn] = useState(false);
