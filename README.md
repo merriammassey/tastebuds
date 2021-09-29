@@ -83,7 +83,7 @@ $ npm run develop
 
 ### Voting
 
-#### Invitees who access the poll via the URL shared by the event author can vote for one or more venues.
+#### Invitees can access the poll via the URL shared by the event author and vote for one or more venues.
 
 ![image](https://user-images.githubusercontent.com/77468612/135193923-5f069974-98d1-4874-bbfa-a9df9ecf66d8.png)
 
@@ -93,7 +93,7 @@ $ npm run develop
 
 ![image](https://user-images.githubusercontent.com/77468612/135192378-6c45ebc7-8faf-4b8f-b919-0ad26f715600.png)
 
-#### When they click "View Event", they will be presented with a bar chart with poll results.
+#### When they click "View Event", they will be presented with a bar chart with poll results. If no one has voted yet, they will be prompted to share the poll again.
 
 ![image](https://user-images.githubusercontent.com/77468612/135192209-453f1ad1-a1e9-4245-b9c7-a9f7ebb0cfa6.png)
 
