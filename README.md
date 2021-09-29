@@ -6,6 +6,9 @@ A full stack web application that enables users to create a custom poll populate
 
 [Visit the deployed app.](https://whereyouwannaeat.herokuapp.com/)
 
+![image](https://user-images.githubusercontent.com/77468612/135192209-453f1ad1-a1e9-4245-b9c7-a9f7ebb0cfa6.png)
+
+
 ## Table of Contents
 
 - [Installation](#installation)
