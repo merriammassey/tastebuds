@@ -72,7 +72,7 @@ $ npm run develop
 
 ![image](https://user-images.githubusercontent.com/77468612/135192189-c4dd7bef-60cb-4901-91ff-6d75814d23f8.png)
 
-#### If not signed in, the user will be prompted to sign up or sign in. 
+#### If not signed in, the user will be prompted to sign up or sign in. They will be prompted to do so before creating an event, or they can do so at any time via the link in the navbar.
 
 ![image](https://user-images.githubusercontent.com/77468612/135192159-e83b1609-2e77-478c-8111-e068891e9b5e.png)
 
