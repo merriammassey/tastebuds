@@ -50,9 +50,9 @@ $ npm run develop
 
 #### The About page explains, with a carousel of three images, how users can use the app to enjoy dining out with friends and waste less time going back and forth   about where everyone prefers to meet.
 
-![image](https://user-images.githubusercontent.com/77468612/135192084-6ce07771-9977-4111-b0d9-bb24f15b8282.png)
-
 ![image](https://user-images.githubusercontent.com/77468612/135192080-74fc8a18-951a-4126-b150-af67d9d76955.png)
+
+![image](https://user-images.githubusercontent.com/77468612/135192084-6ce07771-9977-4111-b0d9-bb24f15b8282.png)
 
 ![image](https://user-images.githubusercontent.com/77468612/135192105-a560772a-63b3-454e-b9b1-9a55462db861.png)
 
@@ -70,9 +70,11 @@ $ npm run develop
 
 ![image](https://user-images.githubusercontent.com/77468612/135192189-c4dd7bef-60cb-4901-91ff-6d75814d23f8.png)
 
-#### If not signed in, the user will be prompted to sign up or sign in. From there, the user is presented with a URL to share with invitees so they can vote. If the user is accessing the app via a mobile device, they will be presented with a variety of options to share the poll via SMS, email, Messenger, etc.
+#### If not signed in, the user will be prompted to sign up or sign in. 
 
 ![image](https://user-images.githubusercontent.com/77468612/135192159-e83b1609-2e77-478c-8111-e068891e9b5e.png)
+
+#### From there, the user is presented with a URL to share with invitees so they can vote. If the user is accessing the app via a mobile device, they will be presented with a variety of options to share the poll via SMS, email, Messenger, etc.
 
 ### Voting
 
