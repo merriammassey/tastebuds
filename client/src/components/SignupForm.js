@@ -12,6 +12,8 @@ import Icon from "./Icon";
 import { useStoreContext } from "../utils/GlobalState";
 import { useHistory } from "react-router-dom";
 import GoogleButton from "react-google-button";
+import FacebookLogin from "react-facebook-login";
+
 require("dotenv").config();
 
 const SignupForm = () => {
@@ -168,8 +170,9 @@ const SignupForm = () => {
           variant="success"
           style={{ marginBottom: "10px" }}
         >
-          Submit
+          Sign up with email
         </Button>
+        <h3>OR</h3>
         {/* <Button
       
           type="submit"
@@ -181,6 +184,21 @@ const SignupForm = () => {
           Return to your Event{" "}
         </Button> */}
       </Form>
+      {/*  <div
+        class="fb-login-button"
+        data-width=""
+        data-size="large"
+        data-button-type="continue_with"
+        data-layout="default"
+        data-auto-logout-link="false"
+        data-use-continue-as="false"
+      ></div>
+      <FacebookLogin
+        appId="XXXXXXXXXX"
+        autoLoad={false}
+        fields="name,email,picture"
+        //callback={this.facebookResponse}
+      /> */}
       <GoogleLogin
         clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
         render={(renderProps) => (
