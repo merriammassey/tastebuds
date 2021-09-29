@@ -4,6 +4,8 @@
 
 A full stack web application that enables users to create a custom poll populated with restaurant data from the Yelp Fusion API so that they can survey friends, family, or coworkers and conveniently choose a place to eat based on majority vote.
 
+[Visit the deployed app.](https://whereyouwannaeat.herokuapp.com/)
+
 ## Table of Contents
 
 - [Installation](#installation)
@@ -46,11 +48,51 @@ $ npm run develop
 
 ## Usage
 
-Users enter keywords and location on the homepage and are presented with a list of relevant restaurants. Then, they select several and continue to add an event name and notes on the next page. From there, the user is presented with a url to share with invitees so they can vote. When the user selects "My Events" from the nav bar, they will be presented with a list of their events and will be able to view a bar chart with poll results for each.
+### How to use the app
 
-## Screenshot
+#### The About page explains, with a carousel of three images, how users can use the app to enjoy dining out with friends and waste less time going back and forth   about where everyone prefers to meet.
 
-![image](https://user-images.githubusercontent.com/77468612/124701548-a4273300-dea3-11eb-9531-fac227f44bc2.png)
+![image](https://user-images.githubusercontent.com/77468612/135192080-74fc8a18-951a-4126-b150-af67d9d76955.png)
+
+![image](https://user-images.githubusercontent.com/77468612/135192084-6ce07771-9977-4111-b0d9-bb24f15b8282.png)
+
+![image](https://user-images.githubusercontent.com/77468612/135192105-a560772a-63b3-454e-b9b1-9a55462db861.png)
+
+### Search for venues
+
+#### On the home page, users enter keywords and location and are presented with a list of relevant restaurants.
+
+![image](https://user-images.githubusercontent.com/77468612/135192131-1ac53c44-fca9-4013-a01f-d6755162b7f1.png)
+
+![image](https://user-images.githubusercontent.com/77468612/135192176-e254a4f0-f00a-4e83-a3f9-7314cb40d378.png)
+
+### Create an event
+
+#### The user selects several venues and continues to add an event name and notes on the next page. 
+
+![image](https://user-images.githubusercontent.com/77468612/135192189-c4dd7bef-60cb-4901-91ff-6d75814d23f8.png)
+
+#### If not signed in, the user will be prompted to sign up or sign in. 
+
+![image](https://user-images.githubusercontent.com/77468612/135192159-e83b1609-2e77-478c-8111-e068891e9b5e.png)
+
+#### From there, the user is presented with a URL to share with invitees so they can vote. If the user is accessing the app via a mobile device, they will be presented with a variety of options to share the poll via SMS, email, Messenger, etc.
+
+### Voting
+
+#### Invitees can vote for one or more venues.
+
+![image](https://user-images.githubusercontent.com/77468612/135193923-5f069974-98d1-4874-bbfa-a9df9ecf66d8.png)
+
+### Poll results
+
+#### Users can access poll results by selecting "My Events" from the nav bar. 
+
+![image](https://user-images.githubusercontent.com/77468612/135192378-6c45ebc7-8faf-4b8f-b919-0ad26f715600.png)
+
+#### When they click "View Event", they will be presented with a bar chart with poll results.
+
+![image](https://user-images.githubusercontent.com/77468612/135192209-453f1ad1-a1e9-4245-b9c7-a9f7ebb0cfa6.png)
 
 ## License
 
@@ -59,20 +101,17 @@ Users enter keywords and location on the homepage and are presented with a list 
 
 ## Technologies
 
-- JavaScript
-- Node.js
-- Express.js
 - MongoDB
-- Mongoose
-- Apollo
-- GraphQL
+- Apollo GraphQL
 - React
 - Context API
-- Heroku
+- Web Share API
 - Yelp Fusion API
+- Heroku
 - React Bootstrap
 - Axios
 - JWT
+- OAuth 2.0
 
 ## Contributions
 
