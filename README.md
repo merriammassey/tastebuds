@@ -99,17 +99,13 @@ $ npm run develop
 
 ## Technologies
 
-- JavaScript
-- Node.js
-- Express.js
 - MongoDB
-- Mongoose
-- Apollo
-- GraphQL
+- Apollo GraphQL
 - React
 - Context API
-- Heroku
+- Web Share API
 - Yelp Fusion API
+- Heroku
 - React Bootstrap
 - Axios
 - JWT
