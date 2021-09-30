@@ -237,9 +237,14 @@ const Vote = () => {
                               Read the reviews
                             </a>
                             <br />
-                            Price: {restaurant.price} <br />
-                            {restaurant.location}, {restaurant.city}
+                            Price:{" "}
+                            {restaurant.price ? restaurant.price : " n/a"}{" "}
                             <br />
+                            {restaurant.location
+                              ? restaurant.location
+                              : null}{" "}
+                            <br />
+                            {restaurant.city} <br />
                             <a href="tel:{restaurant.phone}">
                               {restaurant.phone}
                             </a>{" "}
