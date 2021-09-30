@@ -6,6 +6,9 @@ A full stack web application that enables users to create a custom poll populate
 
 [Visit the deployed app.](https://whereyouwannaeat.herokuapp.com/)
 
+![image](https://user-images.githubusercontent.com/77468612/135192209-453f1ad1-a1e9-4245-b9c7-a9f7ebb0cfa6.png)
+
+
 ## Table of Contents
 
 - [Installation](#installation)
@@ -60,7 +63,7 @@ $ npm run develop
 
 ### Search for venues
 
-#### On the home page, users enter keywords and location and are presented with a list of relevant restaurants.
+#### On the home page, a user can enter keywords and location and will be presented with a list of relevant restaurants.
 
 ![image](https://user-images.githubusercontent.com/77468612/135192131-1ac53c44-fca9-4013-a01f-d6755162b7f1.png)
 
@@ -68,29 +71,29 @@ $ npm run develop
 
 ### Create an event
 
-#### The user selects several venues and continues to add an event name and notes on the next page. 
+#### The user, now the "event author", selects several venues and continues to add an event name and notes on the next page. 
 
 ![image](https://user-images.githubusercontent.com/77468612/135192189-c4dd7bef-60cb-4901-91ff-6d75814d23f8.png)
 
-#### If not signed in, the user will be prompted to sign up or sign in. 
+#### If not signed in, the event author will be prompted to sign up or sign in. They will be prompted to do so before creating an event, or they can do so at any time via the link in the navbar.
 
 ![image](https://user-images.githubusercontent.com/77468612/135192159-e83b1609-2e77-478c-8111-e068891e9b5e.png)
 
-#### From there, the user is presented with a URL to share with invitees so they can vote. If the user is accessing the app via a mobile device, they will be presented with a variety of options to share the poll via SMS, email, Messenger, etc.
+#### From there, the event author is presented with a URL to share with invitees so they can vote. If the event author is accessing the app via a mobile device, they will be presented with a variety of options to share the poll via SMS, email, Messenger, etc.
 
 ### Voting
 
-#### Invitees can vote for one or more venues.
+#### Invitees can access the poll via the URL shared by the event author and vote for one or more venues.
 
 ![image](https://user-images.githubusercontent.com/77468612/135193923-5f069974-98d1-4874-bbfa-a9df9ecf66d8.png)
 
 ### Poll results
 
-#### Users can access poll results by selecting "My Events" from the nav bar. 
+#### The event author can access poll results by selecting "My Events" from the nav bar. 
 
 ![image](https://user-images.githubusercontent.com/77468612/135192378-6c45ebc7-8faf-4b8f-b919-0ad26f715600.png)
 
-#### When they click "View Event", they will be presented with a bar chart with poll results.
+#### When they click "View Event", they will be presented with a bar chart with poll results. If no one has voted yet, they will be prompted to share the poll again.
 
 ![image](https://user-images.githubusercontent.com/77468612/135192209-453f1ad1-a1e9-4245-b9c7-a9f7ebb0cfa6.png)
 
