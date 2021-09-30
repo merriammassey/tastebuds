@@ -108,7 +108,11 @@ const SearchRestaurants = () => {
         }}
       /> */}
       {searchedRestaurants.length ? (
-        <h3 style={{ color: "white" }}>Select a few venues</h3>
+        <h1 style={{ color: "white" }}>
+          Select a few venues
+          <br />
+          then click Create your Event
+        </h1>
       ) : (
         <div id="searchform">
           <div id="searchformelements">
