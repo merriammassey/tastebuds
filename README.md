@@ -6,9 +6,10 @@ A full stack web application that enables users to create a custom poll populate
 
 [Visit the deployed app.](https://whereyouwannaeat.herokuapp.com/)
 
+> Note: This is a work in progress with many future updates planned including better documentation and general cleanup. I am using the project to learn, and I can make a mess along the way.
+
 ![image](https://user-images.githubusercontent.com/77468612/135192209-453f1ad1-a1e9-4245-b9c7-a9f7ebb0cfa6.png)
 
-> Note: This is a work in progress with many future updates planned including better documentation and general cleanup. I am using the project to learn, and I can make a mess along the way.
 
 ## Table of Contents
 
